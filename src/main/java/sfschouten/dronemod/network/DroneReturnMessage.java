@@ -1,0 +1,133 @@
+package sfschouten.dronemod.network;
+
+import io.netty.buffer.ByteBuf;
+import sfschouten.dronemod.Logger;
+import sfschouten.dronemod.tileentity.TileEntityDroneBase;
+import sfschouten.dronemod.tileentity.TileEntityMarker;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.WorldServer;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.relauncher.Side;
+
+public class DroneReturnMessage implements IExecutableMessage {
+	/**
+	 * Coordinates of the tile entity that is the drone base of the drone that needs to return to this base.
+	 */
+	private int x, y, z;
+	/**
+	 * The ID of the world in which the dronebase is that needs to have its drone return.
+	 */
+	private int worldID;
+	
+	public DroneReturnMessage(){
+		
+	}
+	
+	public DroneReturnMessage(int x, int y, int z, int worldID){
+		this.worldID = worldID;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		JsonParser parser = new JsonParser();
+		JsonObject obj =  (JsonObject) parser.parse(buf.toString());
+		fromJsonObject(obj);
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		JsonObject obj = toJsonObject();
+		buf.writeBytes(obj.toString().getBytes());
+	}
+
+	@Override
+	public void executeClient(EntityPlayer player) {
+		Logger.logOut("Can't execute this packet on the client side.");
+	}
+
+	@Override
+	public void executeServer(EntityPlayer player) {
+		WorldServer[] servers = MinecraftServer.getServer().worldServers;
+        
+        WorldServer server = null;
+        for(WorldServer s : servers){
+        	if(s.provider.dimensionId == worldID){
+        		server = s;
+        	}
+        }
+        
+        TileEntityDroneBase base = (TileEntityDroneBase) server.getTileEntity(x, y, z);
+        if(base == null){
+        	//TODO throw exception
+        }else if(base.getDrone() == null){
+        	Logger.logChat(server, "Base does not have a drone to return!");
+        }else{
+        	base.getDrone().goToBase();
+        }
+	}	
+	
+	/**
+	 * used create a byte[] representation from this packets specific properties. 
+	 */
+	private JsonObject toJsonObject() {
+		JsonObject json = new JsonObject();
+		
+		json.add("x", new JsonPrimitive(x));
+		json.add("y", new JsonPrimitive(y));
+		json.add("z", new JsonPrimitive(z));
+		
+		json.add("worldID", new JsonPrimitive(worldID));
+		
+		return json;
+	}
+
+	private void fromJsonObject(JsonObject object) {
+		this.x = object.get("x").getAsInt();
+		this.y = object.get("y").getAsInt();
+		this.z = object.get("z").getAsInt();
+		
+		this.worldID = object.get("worldID").getAsInt();
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getZ() {
+		return z;
+	}
+
+	public void setZ(int z) {
+		this.z = z;
+	}
+
+	public int getWorldID() {
+		return worldID;
+	}
+
+	public void setWorldID(int worldID) {
+		this.worldID = worldID;
+	}
+}
