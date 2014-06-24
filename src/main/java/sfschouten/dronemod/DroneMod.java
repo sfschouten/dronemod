@@ -82,7 +82,7 @@ public class DroneMod {
 	public final static ItemOctaWoodFrame octaWoodFrameItem = new ItemOctaWoodFrame();
 	public final static ItemQuadAluminiumFrame quadAluminiumFrameItem = new ItemQuadAluminiumFrame();
 	public final static ItemQuadCaneFrame quadCaneFrameItem = new ItemQuadCaneFrame();
-	public final static ItemQuadWoodFrame wuadWoodFrameItem = new ItemQuadWoodFrame();
+	public final static ItemQuadWoodFrame quadWoodFrameItem = new ItemQuadWoodFrame();
 	
 	public final static ItemWeakMotor weakMotorItem = new ItemWeakMotor();
 	public final static ItemMediumMotor mediumMotorItem = new ItemMediumMotor();
@@ -125,21 +125,15 @@ public class DroneMod {
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
+    	itemInit();
+    	blockInit();
+    	tileEntityInit();
     }
     
     @EventHandler
     public void load(FMLInitializationEvent event) {
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-    	
-        GameRegistry.registerBlock(droneBase, "droneBase");
-        GameRegistry.registerTileEntity(TileEntityDroneBase.class, "DroneBaseTileEntity");
-        
-        GameRegistry.registerBlock(marker, "marker");
-        GameRegistry.registerTileEntity(TileEntityMarker.class, "MarkerTileEntity");
-        
-        GameRegistry.registerBlock(markerBarrier, "markerBarrier");
-        
+
         int id = 0;
         EntityRegistry.registerModEntity(EntityCaneWeakQuadcopter.class, "EntityCaneWeakQuadcopter", id, this, 64, 10, true);
         id++;              
@@ -158,5 +152,50 @@ public class DroneMod {
     	networkWrapper = new SimpleNetworkWrapper("droneMod");
     	
     	networkWrapper.registerMessage(ExecutableMessageHandler.class, IExecutableMessage.class, 0, Side.SERVER);
+    }
+    
+    private void itemInit(){
+    	GameRegistry.registerItem(hexaAluminiumFrameItem, "hexaAluminiumFrameItem");
+    	GameRegistry.registerItem(hexaCaneFrameItem, "hexaCaneFrameItem");
+    	GameRegistry.registerItem(hexaWoodFrameItem, "hexaWoodFrameItem");
+    	GameRegistry.registerItem(octaAluminiumFrameItem, "octaAluminiumFrameItem");
+    	GameRegistry.registerItem(octaWoodFrameItem, "octaWoodFrameItem");
+    	GameRegistry.registerItem(quadAluminiumFrameItem, "quadAluminiumFrameItem");
+    	GameRegistry.registerItem(quadCaneFrameItem, "quadCaneFrameItem");
+    	GameRegistry.registerItem(quadWoodFrameItem, "quadWoodFrameItem");
+    	
+    	GameRegistry.registerItem(weakMotorItem, "weakMotorItem");
+    	GameRegistry.registerItem(mediumMotorItem, "mediumMotorItem");
+    	GameRegistry.registerItem(strongMotorItem, "strongMotorItem");
+    	
+    	GameRegistry.registerItem(fertilizeModuleItem, "fertilizeModuleItem");
+    	GameRegistry.registerItem(harvestModuleItem, "harvestModuleItem");
+    	GameRegistry.registerItem(plantModuleItem, "plantModuleItem");
+    	GameRegistry.registerItem(tillModuleItem, "tillModuleItem");
+    	GameRegistry.registerItem(mineModuleItem, "mineModuleItem");
+    	
+    	GameRegistry.registerItem(advancedBreedingModuleItem, "advancedBreedingModuleItem");
+    	
+    	GameRegistry.registerItem(smallDroneBatteryItem, "smallDroneBatteryItem");
+    	GameRegistry.registerItem(mediumDroneBatteryItem, "mediumDroneBatteryItem");
+    	GameRegistry.registerItem(largeDroneBatteryItem, "largeDroneBatteryItem");
+    	
+    	GameRegistry.registerItem(aluminiumIngotItem, "aluminiumIngotItem");
+    	GameRegistry.registerItem(basicElectronicsItem, "basicElectronicsItem");
+    	
+    	GameRegistry.registerItem(caneWeakQuadcopterItem, "caneWeakQuadcopterItem");
+    	GameRegistry.registerItem(caneWeakHexacopterItem, "caneWeakHexacopterItem");
+    	GameRegistry.registerItem(woodMediumQuadcopterItem, "woodMediumQuadcopterItem");
+    }
+    
+    private void blockInit(){
+    	GameRegistry.registerBlock(droneBase, "droneBase");
+    	GameRegistry.registerBlock(marker, "marker");
+    	GameRegistry.registerBlock(markerBarrier, "markerBarrier");
+    }
+    
+    private void tileEntityInit(){
+    	GameRegistry.registerTileEntity(TileEntityDroneBase.class, "DroneBaseTileEntity");
+        GameRegistry.registerTileEntity(TileEntityMarker.class, "MarkerTileEntity");
     }
 }

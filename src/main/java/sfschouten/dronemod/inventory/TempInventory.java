@@ -1,25 +1,11 @@
 package sfschouten.dronemod.inventory;
 
-import java.util.List;
-
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyStorage;
-import sfschouten.dronemod.MarkerRegistry;
-import sfschouten.dronemod.MarkerRegistry.Registration;
-import sfschouten.dronemod.TempInventoryType;
-import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
-import sfschouten.dronemod.item.copter.ItemDrone;
-import sfschouten.dronemod.item.module.ItemTaskModule;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import sfschouten.dronemod.TempInventoryType;
 
 public class TempInventory implements IInventory{
 	private TempInventoryType type;
@@ -49,13 +35,10 @@ public class TempInventory implements IInventory{
 	
 	public void writeToNBT(NBTTagCompound tagCompound)
 	{
-		System.out.println("Start Writing");
         NBTTagList itemList = new NBTTagList();
         for (int i = 0; i < inv.length; i++) {
-        	System.out.println("#"+i);
             ItemStack stack = inv[i];
             if (stack != null) {
-            	System.out.println("stack is not null");
                 NBTTagCompound tag = new NBTTagCompound();
                 tag.setByte("Slot", (byte) i);
                 stack.writeToNBT(tag);
@@ -65,15 +48,12 @@ public class TempInventory implements IInventory{
         tagCompound.setTag("Inventory", itemList);
 	}
 	
-	public void readFromNBT(NBTTagCompound tagCompound)
-	{        
-        NBTTagList tagList = tagCompound.getTagList("Inventory");
-        System.out.println(tagCompound.getName()+": "+tagCompound.hasKey("Inventory")+", "+tagList.tagCount());
-        //System.out.println("tagcount: " + tagList.tagCount());
+	public void readFromNBT(NBTTagCompound tagCompound){        
+        NBTTagList tagList = tagCompound.getTagList("Inventory", tagCompound.getId());
+
         for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
             byte slot = tag.getByte("Slot");
-            //System.out.println("id: " + ItemStack.loadItemStackFromNBT(tag).itemID);
             if (slot >= 0 && slot < inv.length) {
                 inv[slot] = ItemStack.loadItemStackFromNBT(tag);
             }

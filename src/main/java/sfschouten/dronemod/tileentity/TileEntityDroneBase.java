@@ -74,13 +74,13 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 	{
 		super.readFromNBT(tagCompound);
         
-        NBTTagList tagList = tagCompound.getTagList("Inventory");
+        NBTTagList tagList = tagCompound.getTagList("Inventory", tagCompound.getId());
         for (int i = 0; i < tagList.tagCount(); i++) {
-                NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
-                byte slot = tag.getByte("Slot");
-                if (slot >= 0 && slot < inv.length) {
-                        inv[slot] = ItemStack.loadItemStackFromNBT(tag);
-                }
+            NBTTagCompound tag = (NBTTagCompound) tagList.getCompoundTagAt(i);
+            byte slot = tag.getByte("Slot");
+            if (slot >= 0 && slot < inv.length) {
+                    inv[slot] = ItemStack.loadItemStackFromNBT(tag);
+            }
         }
         
         powerHandler.readFromNBT(tagCompound);
@@ -274,11 +274,6 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 	}
 
 	@Override
-	public void onInventoryChanged() {
-		worldObj.markBlockForRenderUpdate(this.xCoord,this.yCoord,this.zCoord);
-	}
-
-	@Override
 	public PowerReceiver getPowerReceiver(ForgeDirection side) {
 		return powerHandler.getPowerReceiver();
 	}
@@ -289,7 +284,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		if(stack != null && stack.getItem() instanceof ItemDrone){
 			ItemDrone droneItem = (ItemDrone)stack.getItem();
 			
-			float used = workProvider.useEnergy(250, 250, true);
+			double used = workProvider.useEnergy(250, 250, true);
 			int received = droneItem.receiveEnergy(stack, (int) used*10, false);
 			
 			System.out.println("received: " + received);
@@ -357,6 +352,17 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 			return false;
 		}
 	}
-	
-	
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return true;
+	}
+
+	@Override
+	public void openInventory() {
+	}
+
+	@Override
+	public void closeInventory() {
+	}
 }

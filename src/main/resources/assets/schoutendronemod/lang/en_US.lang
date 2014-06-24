@@ -31,8 +31,8 @@ item.aluminiumQuadFrameItem.name=Aluminium Quadcopter Frame
 item.caneQuadFrameItem.name=Cane Quadcopter Frame
 item.woodQuadFrameItem.name=Wood Quadcopter Frame
 
-item.ingotAluminum.name=Aluminium Ingot
-item.basicElectronics.name=Basic Electronics
+item.aluminiumIngotItem.name=Aluminium Ingot
+item.basicElectronicsItem.name=Basic Electronics
 
 entity.EntityCaneWeakQuadcopter.name=Weak Cane Quadcopter
 

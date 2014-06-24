@@ -13,6 +13,6 @@ public class ItemAluminiumIngot extends Item{
 		this.setTextureName("dronemod:ingot_aluminium");
 		this.setCreativeTab(DroneMod.tabDroneMod);
         this.setMaxStackSize(64);
-        this.setUnlocalizedName("aluminiumIngot");
+        this.setUnlocalizedName("aluminiumIngotItem");
 	}
 }
