@@ -12,9 +12,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 
-public class ChangeMarkerPacket implements IPacket {
+public class ChangeMarkerMessage implements IExecutableMessage {
 	private int x, y, z;
 	private int worldID;
 	
@@ -22,24 +23,23 @@ public class ChangeMarkerPacket implements IPacket {
 	private int radius;
 	private boolean barrier;
 	
-	/**
-	 * Use Packet.constructPacket()
-	 */
-	protected ChangeMarkerPacket(){
-		
+	public ChangeMarkerMessage(int x, int y, int z, int worldID, String name, int radius, boolean barrier){
+	}
+	
+	public ChangeMarkerMessage(){
 	}
 
 	@Override
-	public void readBytes(ByteBuf bytes) {
+	public void fromBytes(ByteBuf buf) {
 		JsonParser parser = new JsonParser();
-		JsonObject obj =  (JsonObject) parser.parse(bytes.toString());
+		JsonObject obj =  (JsonObject) parser.parse(buf.toString());
 		fromJsonObject(obj);
 	}
 
 	@Override
-	public void writeBytes(ByteBuf bytes) {
+	public void toBytes(ByteBuf buf) {
 		JsonObject obj = toJsonObject();
-		bytes.writeBytes(obj.toString().getBytes());
+		buf.writeBytes(obj.toString().getBytes());
 	}
 
 	@Override
@@ -151,5 +151,4 @@ public class ChangeMarkerPacket implements IPacket {
 	public void setBarrier(boolean barrier) {
 		this.barrier = barrier;
 	}
-
 }

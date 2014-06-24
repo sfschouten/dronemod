@@ -82,7 +82,7 @@ public class ContainerDroneItem extends Container {
 		for(TempInventoryType type : TempInventoryType.values()){
 			NBTTagCompound comp = new NBTTagCompound();
 			inventories.get(type).writeToNBT(comp);
-			stackNBT.setCompoundTag(type.name(), comp);
+			stackNBT.setTag(type.name(), comp);
 		}
 		
 		TempInventory inv = inventories.get(TempInventoryType.battery);

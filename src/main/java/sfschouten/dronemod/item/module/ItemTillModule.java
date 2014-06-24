@@ -22,10 +22,10 @@ public class ItemTillModule extends ItemTaskModule {
 	public DroneTaskResult performTask(EntityDrone d, DroneTaskSubject s) {
 		DroneTaskResult result;
 		TileEntityMarker m = d.getCurrentWork();
-		int yID = d.worldObj.getBlockId((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ));
+		Block yBlock = d.worldObj.getBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ));
 		
-		if (yID == Blocks.dirt.blockID || yID == Blocks.grass.blockID){
-			d.worldObj.setBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ), Block.tilledField.blockID);
+		if (yBlock == Blocks.dirt || yBlock == Blocks.grass){
+			d.worldObj.setBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ), Blocks.farmland);
 			result = DroneTaskResult.success;
 		}else{
 			result = DroneTaskResult.wrongEnvironment;

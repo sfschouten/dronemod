@@ -33,6 +33,8 @@ import sfschouten.dronemod.item.module.ItemTillModule;
 import sfschouten.dronemod.item.motor.ItemMediumMotor;
 import sfschouten.dronemod.item.motor.ItemStrongMotor;
 import sfschouten.dronemod.item.motor.ItemWeakMotor;
+import sfschouten.dronemod.network.ExecutableMessageHandler;
+import sfschouten.dronemod.network.IExecutableMessage;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.block.Block;
@@ -55,9 +57,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid="schoutendronemod", name="DroneMod", version="dev")
 public class DroneMod {
@@ -117,6 +121,7 @@ public class DroneMod {
     // Says where the client and server 'proxy' code is loaded.
     @SidedProxy(clientSide="sfschouten.dronemod.client.ClientProxy", serverSide="sfschouten.dronemod.CommonProxy")
     public static CommonProxy proxy;
+    public static SimpleNetworkWrapper networkWrapper;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -141,9 +146,17 @@ public class DroneMod {
         EntityRegistry.registerModEntity(EntityDroneFX.class, "EntityDroneFX", id, this, 64, 10, true);
         
     	proxy.registerRenderers();
+    	
+    	this.packetInit();
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    }
+    
+    private void packetInit(){
+    	networkWrapper = new SimpleNetworkWrapper("droneMod");
+    	
+    	networkWrapper.registerMessage(ExecutableMessageHandler.class, IExecutableMessage.class, 0, Side.SERVER);
     }
 }

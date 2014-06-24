@@ -6,17 +6,18 @@ import java.io.DataOutputStream;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.inventory.ContainerDroneBase;
 import sfschouten.dronemod.item.copter.ItemDrone;
+import sfschouten.dronemod.network.DroneReturnMessage;
+import sfschouten.dronemod.network.LaunchDroneMessage;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiDroneBase extends GuiContainer {
 	TileEntityDroneBase tileEntity;
@@ -59,47 +60,33 @@ public class GuiDroneBase extends GuiContainer {
 
 		tileEntity.setInventorySlotContents(0, null);
 		
-		sendPacket("MakeWorkQuadcopterAt" + 
-				tileEntity.xCoord + ";" + 
-				tileEntity.yCoord + ";" + 
-				tileEntity.zCoord + "In" + 
-				world.provider.dimensionId);
+		LaunchDroneMessage message = new LaunchDroneMessage();
+		message.setWorldID(world.provider.dimensionId);
+		message.setX(tileEntity.xCoord);
+		message.setY(tileEntity.yCoord);
+		message.setZ(tileEntity.zCoord);
+		DroneMod.networkWrapper.sendToServer(message);
 	}
 	
 	private void returnHome(){
 		World world = tileEntity.getWorldObj();
 		
-		sendPacket("ReturnHomeAt"+
-				tileEntity.xCoord+";"+
-				tileEntity.yCoord+";"+
-				tileEntity.zCoord+"In"+ 
-				world.provider.dimensionId);
-	}
-	
-	private void sendPacket(String message){
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-		DataOutputStream outputStream = new DataOutputStream(bos);
-		try {
-	        outputStream.writeUTF(message);
-		} catch (Exception ex) {
-	        ex.printStackTrace();
-		}
-
-		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "DroneMod";
-		packet.data = bos.toByteArray();
-		packet.length = bos.size();
-		
-		PacketDispatcher.sendPacketToServer(packet);
+		DroneReturnMessage message = new DroneReturnMessage();
+		message.setWorldID(world.provider.dimensionId);
+		message.setX(tileEntity.xCoord);
+		message.setY(tileEntity.yCoord);
+		message.setZ(tileEntity.zCoord);
+		DroneMod.networkWrapper.sendToServer(message);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		// draw text and stuff here
 		// the parameters for drawString are: string, x, y, color
-		fontRenderer.drawString("Drone Base", 8, 6, 4210752);
+		this.
+		fontRendererObj.drawString("Drone Base", 8, 6, 4210752);
 		// draws "Inventory" or your regional equivalent
-		fontRenderer.drawString(
+		fontRendererObj.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
 				ySize - 96 + 2, 4210752);
 	}

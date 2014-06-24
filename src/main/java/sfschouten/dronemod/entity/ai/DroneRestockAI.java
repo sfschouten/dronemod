@@ -15,7 +15,7 @@ public class DroneRestockAI extends DroneAI {
 			e.posY = e.getBase().yCoord+1;
 			e.posZ = e.getBase().zCoord;
 			
-			int restockItemId = e.getModules().get(0).getRestockItem().itemID;
+			Item restockItem = e.getModules().get(0).getRestockItem();
 			int restockItemDamage = e.getModules().get(0).getRestockItemDamageValue();
 			
 			IInventory adjInv = e.getBase().getAdjacentInventory();
@@ -27,7 +27,7 @@ public class DroneRestockAI extends DroneAI {
 			for(int slot = 0; slot < adjInv.getSizeInventory(); slot++){
 				ItemStack stack = adjInv.getStackInSlot(slot);
 				if(stack != null){	
-    				if(stack.getItem().itemID == restockItemId && stack.getItem().getDamage(stack) == restockItemDamage){
+    				if(stack.getItem() == restockItem && stack.getItem().getDamage(stack) == restockItemDamage){
     					int residualIncrease = 0;
     					
     					//If stack is smaller then what can be transferred then use that amount.
@@ -42,7 +42,7 @@ public class DroneRestockAI extends DroneAI {
 						for(int localSlot = 0; localSlot < e.getActualInventory().getSizeInventory(); localSlot++){
 							ItemStack localStack = e.getActualInventory().getStackInSlot(localSlot);
 							if(localStack == null){
-								ItemStack newStack = new ItemStack(Item.itemsList[restockItemId]);
+								ItemStack newStack = new ItemStack(restockItem);
 								newStack.stackSize = residualIncrease;
 								stack.stackSize -= residualIncrease;
 								if(stack.stackSize == 0){
@@ -50,7 +50,7 @@ public class DroneRestockAI extends DroneAI {
 								}
 								e.getActualInventory().setInventorySlotContents(localSlot, newStack);
 								return false;
-							}else if(localStack.getItem().itemID == restockItemId && localStack.getItem().getDamage(stack) == restockItemDamage){
+							}else if(localStack.getItem() == restockItem && localStack.getItem().getDamage(stack) == restockItemDamage){
 								if(localStack.stackSize + residualIncrease > localStack.getMaxStackSize()){
 									int difference = localStack.getMaxStackSize() - localStack.stackSize;
 									localStack.stackSize += difference;

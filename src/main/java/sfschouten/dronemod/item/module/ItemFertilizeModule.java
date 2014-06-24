@@ -19,9 +19,9 @@ public class ItemFertilizeModule extends ItemTaskModule {
 	public DroneTaskResult performTask(EntityDrone d, DroneTaskSubject s) {
 		DroneTaskResult result;
 		TileEntityMarker m = d.getCurrentWork();
-		int slot = d.getFirstSlotForItemIDAndDamage(this.restockItem.itemID, this.restockItemDamageValue);
+		int slot = d.getFirstSlotForItemAndDamage(this.restockItem, this.restockItemDamageValue);
 		if(slot > -1){	
-			ItemDye.func_96604_a(d.getActualInventory().getStackInSlot(slot), d.worldObj, (int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ));
+			ItemDye.func_150919_a(d.getActualInventory().getStackInSlot(slot), d.worldObj, (int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ));
 			result = DroneTaskResult.success;
 		}else{
 			result = DroneTaskResult.resourcelow;

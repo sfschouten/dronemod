@@ -20,7 +20,7 @@ public class ItemMineModule extends ItemTaskModule {
 	
 	@Override
 	public DroneTaskResult performTask(EntityDrone d, DroneTaskSubject s) {
-		if(d.worldObj.destroyBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ), true)){
+		if(d.worldObj.func_147480_a((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ), true)){
 			return DroneTaskResult.success;
 		}
 		else{

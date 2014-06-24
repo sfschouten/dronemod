@@ -71,7 +71,7 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 						e.addModule((ItemTaskModule) currentStack.getItem());
 						break;
 					}else if(false/*TODO implement battery stuffs*/){
-					}else if(currentStack.itemID == Blocks.chest.blockID ){
+					}else if(currentStack.getItem() == Item.getItemFromBlock(Blocks.chest)){
 						e.setActualInventory(new TempInventory(e.getActualInventory().getSizeInventory()+1));
 					}
 				}

@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -21,14 +22,14 @@ public class ItemPlantModule extends ItemTaskModule {
 	public DroneTaskResult performTask(EntityDrone d, DroneTaskSubject s) {
 		DroneTaskResult result;
 		TileEntityMarker m = d.getCurrentWork();
-		int yID = d.worldObj.getBlockId((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ));
-		int y1ID = d.worldObj.getBlockId((int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ));
+		Block yBlock = d.worldObj.getBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY-1), (int)Math.floor(d.posZ));
+		Block y1Block = d.worldObj.getBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ));
 		
-		if(yID == Block.tilledField.blockID && y1ID == 0){
-			int slot = d.getFirstSlotForItemID(Item.seeds.itemID);
+		if(yBlock == Blocks.farmland && y1Block == Blocks.air){
+			int slot = d.getFirstSlotForItem(Items.wheat_seeds);
 			if(slot > -1){
 				d.getActualInventory().decrStackSize(slot, 1);
-				d.worldObj.setBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ), Block.crops.blockID);
+				d.worldObj.setBlock((int)Math.floor(d.posX), (int)Math.floor(d.posY), (int)Math.floor(d.posZ), Blocks.wheat);
 				result = DroneTaskResult.success;
 			}else{
 				result = DroneTaskResult.resourcelow;
@@ -42,8 +43,6 @@ public class ItemPlantModule extends ItemTaskModule {
 
 	@Override
 	public void applyProperties(EntityDrone e) {
-		// TODO Auto-generated method stub
-		
+
 	}
-	
 }

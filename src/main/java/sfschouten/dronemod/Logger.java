@@ -1,6 +1,8 @@
 package sfschouten.dronemod;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class Logger {
@@ -24,7 +26,9 @@ public class Logger {
 			if(instance == null){
 				init(w);
 			}
-			instance.dev.addChatMessage(message);
+			
+			IChatComponent comp = new ChatComponentText(message);
+			instance.dev.addChatMessage(comp);
 		}
 	}
 	
