@@ -8,7 +8,7 @@ public class ItemBasicElectronics extends Item{
 
 	public ItemBasicElectronics() {
 		super();
-		this.setTextureName("dronemod:basic_electronics");
+		this.setTextureName(DroneMod.modID + ":basic_electronics");
 		this.setCreativeTab(DroneMod.tabDroneMod);
 		this.setMaxStackSize(64);
 		this.setUnlocalizedName("basicElectronicsItem");

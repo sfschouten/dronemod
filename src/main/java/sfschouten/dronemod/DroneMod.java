@@ -63,8 +63,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="schoutendronemod", name="DroneMod", version="dev")
+@Mod(modid=DroneMod.modID, name="DroneMod", version="dev")
 public class DroneMod {
+	
+	public static final String modID = "SchoutenDroneMod";
 	
 	//CreativeTabs
 	public static CreativeTabs tabDroneMod = new CreativeTabs("tabDroneMod") {

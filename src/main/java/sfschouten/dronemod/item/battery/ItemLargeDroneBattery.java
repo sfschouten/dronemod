@@ -1,5 +1,6 @@
 package sfschouten.dronemod.item.battery;
 
+import sfschouten.dronemod.DroneMod;
 import cofh.api.energy.IEnergyContainerItem;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.Item;
@@ -11,7 +12,7 @@ public class ItemLargeDroneBattery extends ItemDroneBattery {
 	public ItemLargeDroneBattery() {
 		super();
 		this.setUnlocalizedName("largeDroneBatteryItem");
-		this.setTextureName("dronemod:large_battery");
+		this.setTextureName(DroneMod.modID + ":large_battery");
 		this.capacity = 1000000;
 		this.maxExtract = 2000;
 		this.maxReceive = 2000;

@@ -1,5 +1,6 @@
 package sfschouten.dronemod.item.frame;
 
+import sfschouten.dronemod.DroneMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
@@ -14,7 +15,7 @@ public class ItemQuadCaneFrame extends ItemDroneFrame {
 		super();
 		this.setUnlocalizedName("caneQuadFrameItem");
 
-		this.setTextureName("dronemod:cane_quad_copter_frame_icon");
+		this.setTextureName(DroneMod.modID + ":cane_quad_copter_frame_icon");
 		ItemStack cane = new ItemStack(Items.reeds);
 		ItemStack lily = new ItemStack(Blocks.waterlily);
 		

@@ -97,9 +97,9 @@ public class GuiDroneBase extends GuiContainer {
 		// draw your Gui here, only thing you need to change is the path
 		ResourceLocation guiTrap = null;
 		if(tileEntity.getDrone() == null){
-			guiTrap = new ResourceLocation("dronemod:textures/gui/dronebase_nodrone.png");
+			guiTrap = new ResourceLocation(DroneMod.modID + ":textures/gui/dronebase_nodrone.png");
 		}else{
-			guiTrap = new ResourceLocation("dronemod:textures/gui/dronebase.png"); 
+			guiTrap = new ResourceLocation(DroneMod.modID + ":textures/gui/dronebase.png"); 
 		}
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(guiTrap);

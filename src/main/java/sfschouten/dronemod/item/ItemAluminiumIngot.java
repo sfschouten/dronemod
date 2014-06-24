@@ -10,7 +10,7 @@ public class ItemAluminiumIngot extends Item{
 	public ItemAluminiumIngot() {
 		super();
 		OreDictionary.registerOre("ingotAluminum", this);
-		this.setTextureName("dronemod:ingot_aluminium");
+		this.setTextureName(DroneMod.modID + ":ingot_aluminium");
 		this.setCreativeTab(DroneMod.tabDroneMod);
         this.setMaxStackSize(64);
         this.setUnlocalizedName("aluminiumIngotItem");

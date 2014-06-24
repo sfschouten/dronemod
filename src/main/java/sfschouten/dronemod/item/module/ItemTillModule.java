@@ -15,7 +15,7 @@ public class ItemTillModule extends ItemTaskModule {
 	public ItemTillModule(){
 		super();
 		this.setUnlocalizedName("tillModuleItem");
-		this.setTextureName("dronemod:basic_hoe_icon");
+		this.setTextureName(DroneMod.modID + ":basic_hoe_icon");
 	}
 	
 	@Override

@@ -43,15 +43,17 @@ public class BlockDroneBase extends BlockContainer{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		topIcon = icon.registerIcon("dronemod:dronebase_top");
-		topTakenIcon = icon.registerIcon("dronemod:dronebase_top_taken");
-		otherIcon = icon.registerIcon("dronemod:dronebase");
+		topIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top");
+		topTakenIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top_taken");
+		otherIcon = icon.registerIcon(DroneMod.modID + ":dronebase");
 	}
 
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		super.getIcon(world, x, y, z, side);
-		TileEntityDroneBase base = (TileEntityDroneBase) world.getTileEntity(x, y, z);
+		TileEntityDroneBase base = null;
+		if(world != null){
+			base = (TileEntityDroneBase) world.getTileEntity(x, y, z);
+		}
 		
 		IIcon returnIcon = null;
 		switch (side) {

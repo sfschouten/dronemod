@@ -51,8 +51,8 @@ public class BlockMarker extends Block implements ITileEntityProvider{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		topIcon = icon.registerIcon("dronemod:marker_top");
-		otherIcon = icon.registerIcon("dronemod:dronebase");
+		topIcon = icon.registerIcon(DroneMod.modID + ":marker_top");
+		otherIcon = icon.registerIcon(DroneMod.modID + ":dronebase");
 	}
 	
 	@Override
