@@ -1,0 +1,39 @@
+tile.droneBase.name=Drone Base
+tile.marker.name=Work Marker
+tile.markerBarrier.name=Marker Barrier
+
+item.advancedBreedingModuleItem.name=Breeding Module (Advanced)
+item.fertilizeModuleItem.name=Fertilize Module
+item.harvestModuleItem.name=Harvest Module
+item.mineModuleItem.name=Mining Module
+item.plantModuleItem.name=Planting Module
+item.tillModuleItem.name=Tilling Module
+
+item.mediumMotorItem.name=Medium Motor
+item.strongMotorItem.name=Strong Motor
+item.weakMotorItem.name=Weak Motor
+
+item.largeDroneBatteryItem.name=Large Battery
+item.mediumDroneBatteryItem.name=Medium Battery
+item.smallDroneBatteryItem.name=Small Battery
+
+item.caneWeakHexacopterItem.name=Weak Cane Hexacopter
+item.caneWeakQuadcopterItem.name=Weak Cane Quadcopter
+item.woodMediumHexacopterItem.name=Medium Wood Hexacopter
+item.woodMediumQuadcopterItem.name=Medium Wood Quadcopter
+
+item.aluminiumHexaFrameItem.name=Aluminium Hexacopter Frame
+item.caneHexaFrameItem.name=Cane Hexacopter Frame
+item.woodHexaFrameItem.name=Wooden Hexacopter Frame
+item.aluminiumOctaFrameItem.name=Aluminium Octacopter Frame
+item.woodOctaFrameItem.name=Wooden Octacopter Frame
+item.aluminiumQuadFrameItem.name=Aluminium Quadcopter Frame
+item.caneQuadFrameItem.name=Cane Quadcopter Frame
+item.woodQuadFrameItem.name=Wood Quadcopter Frame
+
+item.ingotAluminum.name=Aluminium Ingot
+item.basicElectronics.name=Basic Electronics
+
+entity.EntityCaneWeakQuadcopter.name=Weak Cane Quadcopter
+
+itemGroup.tabDroneMod=DroneMod Tab

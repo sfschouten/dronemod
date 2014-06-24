@@ -1,0 +1,21 @@
+[
+{
+  "modid": "schoutendronemod",
+  "name": "Drone Mod",
+  "description": "Build drones to do your work for you!",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "url": "http://www.minecraftforum.net/topic/2569978-164forge-drone-mod/",
+  "updateUrl": "",
+  "authorList": [
+    "Stefanof93"
+  ],
+  "credits": "Stefanof93",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
