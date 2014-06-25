@@ -1,11 +1,12 @@
 package sfschouten.dronemod;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import sfschouten.dronemod.block.BlockDroneBase;
 import sfschouten.dronemod.block.BlockMarker;
 import sfschouten.dronemod.block.BlockMarkerBarrier;
 import sfschouten.dronemod.client.gui.GuiHandler;
 import sfschouten.dronemod.client.particle.EntityDroneFX;
-import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
 import sfschouten.dronemod.item.ItemAluminiumIngot;
 import sfschouten.dronemod.item.ItemBasicElectronics;
@@ -14,7 +15,6 @@ import sfschouten.dronemod.item.battery.ItemMediumDroneBattery;
 import sfschouten.dronemod.item.battery.ItemSmallDroneBattery;
 import sfschouten.dronemod.item.copter.ItemCaneWeakHexacopter;
 import sfschouten.dronemod.item.copter.ItemCaneWeakQuadcopter;
-import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.item.copter.ItemWoodMediumQuadcopter;
 import sfschouten.dronemod.item.frame.ItemHexaAluminiumFrame;
 import sfschouten.dronemod.item.frame.ItemHexaCaneFrame;
@@ -33,19 +33,14 @@ import sfschouten.dronemod.item.module.ItemTillModule;
 import sfschouten.dronemod.item.motor.ItemMediumMotor;
 import sfschouten.dronemod.item.motor.ItemStrongMotor;
 import sfschouten.dronemod.item.motor.ItemWeakMotor;
-import sfschouten.dronemod.network.ExecutableMessageHandler;
-import sfschouten.dronemod.network.IExecutableMessage;
+import sfschouten.dronemod.network.ChangeMarkerMessage;
+import sfschouten.dronemod.network.ChangeMarkerMessageHandler;
+import sfschouten.dronemod.network.DroneReturnMessage;
+import sfschouten.dronemod.network.DroneReturnMessageHandler;
+import sfschouten.dronemod.network.LaunchDroneMessage;
+import sfschouten.dronemod.network.LaunchDroneMessageHandler;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
 //import cpw.mods.fml.common.Mod.PreInit;    // used in 1.5.2
@@ -60,7 +55,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid=DroneMod.modID, name="DroneMod", version="dev")
@@ -143,7 +137,7 @@ public class DroneMod {
         
     	proxy.registerRenderers();
     	
-    	this.packetInit();
+    	packetInit();
     }
     
     @EventHandler
@@ -152,8 +146,10 @@ public class DroneMod {
     
     private void packetInit(){
     	networkWrapper = new SimpleNetworkWrapper("droneMod");
+    	networkWrapper.registerMessage(ChangeMarkerMessageHandler.class, ChangeMarkerMessage.class, 0, Side.SERVER);
+    	networkWrapper.registerMessage(DroneReturnMessageHandler.class, DroneReturnMessage.class, 1, Side.SERVER);
+    	networkWrapper.registerMessage(LaunchDroneMessageHandler.class, LaunchDroneMessage.class, 2, Side.SERVER);
     	
-    	networkWrapper.registerMessage(ExecutableMessageHandler.class, IExecutableMessage.class, 0, Side.SERVER);
     }
     
     private void itemInit(){

@@ -9,10 +9,9 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class ExecutableMessageHandler implements IMessageHandler<IExecutableMessage, IMessage> {
-
+public class DroneReturnMessageHandler implements IMessageHandler<DroneReturnMessage, IMessage> {
 	@Override
-	public IMessage onMessage(IExecutableMessage message, MessageContext ctx) {
+	public IMessage onMessage(DroneReturnMessage message, MessageContext ctx) {
 		switch (ctx.side) {
         case CLIENT:
             message.executeClient(Minecraft.getMinecraft().thePlayer);

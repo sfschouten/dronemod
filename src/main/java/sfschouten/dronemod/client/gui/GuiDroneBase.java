@@ -35,7 +35,7 @@ public class GuiDroneBase extends GuiContainer {
 		buttonList.add(new GuiButton(1, posX+168, posY+5, 75, 20, "Launch"));
 		buttonList.add(new GuiButton(2, posX+168, posY+25, 75, 20, "Come Home"));
 	}
-
+ 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		super.actionPerformed(par1GuiButton);

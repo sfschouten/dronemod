@@ -28,8 +28,8 @@ import net.minecraft.world.World;
 public class BlockDroneBase extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public static IIcon topIcon;
-	@SideOnly(Side.CLIENT)
-	public static IIcon topTakenIcon;
+	/*@SideOnly(Side.CLIENT)
+	public static IIcon topTakenIcon;*/
 	@SideOnly(Side.CLIENT)
 	public static IIcon otherIcon;
 
@@ -44,25 +44,16 @@ public class BlockDroneBase extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
 		topIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top");
-		topTakenIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top_taken");
+		//topTakenIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top_taken");
 		otherIcon = icon.registerIcon(DroneMod.modID + ":dronebase");
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		TileEntityDroneBase base = null;
-		if(world != null){
-			base = (TileEntityDroneBase) world.getTileEntity(x, y, z);
-		}
-		
+	public IIcon getIcon(int side, int meta) {
 		IIcon returnIcon = null;
 		switch (side) {
 		case 1:
-			if(base == null || base.getStackInSlot(0) == null){
-				returnIcon = topIcon;
-			}else{
-				returnIcon = topTakenIcon;
-			}
+			returnIcon = topIcon;
 			break;
 		default:
 			returnIcon = otherIcon;
