@@ -2,6 +2,7 @@ package sfschouten.dronemod.entity.ai;
 
 import java.text.DecimalFormat;
 
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.nbt.NBTTagCompound;
 import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
@@ -11,7 +12,7 @@ import sfschouten.dronemod.item.module.ItemAdvancedTaskModule;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class DroneAdvancedTaskAI extends DroneAI {
+public class DroneAdvancedTaskAI extends EntityAIBase {
 	private int currentRadius = -1;
 	
 	@Override
@@ -81,4 +82,24 @@ public class DroneAdvancedTaskAI extends DroneAI {
 			return true;
 		}
 	}
+
+	@Override
+	public boolean shouldExecute() {
+		// TODO check if this drone has a advanced module in its inventory
+		return false;
+	}
+
+	@Override
+	public boolean continueExecuting() {
+		// TODO Maybe not necessary
+		return super.continueExecuting();
+	}
+
+	@Override
+	public void startExecuting() {
+		// TODO Auto-generated method stub
+		super.startExecuting();
+	}
+	
+	
 }

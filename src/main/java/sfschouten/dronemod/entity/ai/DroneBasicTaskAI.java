@@ -2,6 +2,7 @@ package sfschouten.dronemod.entity.ai;
 
 import java.text.DecimalFormat;
 
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.nbt.NBTTagCompound;
 import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
@@ -11,7 +12,7 @@ import sfschouten.dronemod.item.module.ItemAdvancedTaskModule;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class DroneBasicTaskAI extends DroneAI {
+public class DroneBasicTaskAI extends EntityAIBase {
 	private int currentRadius = -1;
 	private int currentBlock = 0;
 	private int currentDepth = 0;
@@ -140,4 +141,17 @@ public class DroneBasicTaskAI extends DroneAI {
 	public void setCurrentBlock(int currentBlock) {
 		this.currentBlock = currentBlock;
 	}
+
+	@Override
+	public boolean shouldExecute() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void startExecuting() {
+		// TODO Auto-generated method stub
+		super.startExecuting();
+	}
+	
 }

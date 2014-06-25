@@ -27,6 +27,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -54,11 +55,6 @@ public abstract class EntityDrone extends EntityFlying{
 	 * The current marker being worked.
 	 */
 	private TileEntityMarker currentWork;
-	
-	/**
-	 * List of AI's that this drone has. 
-	 */
-	private ArrayList<DroneAI> droneAI;
 	
 	/**
 	 * The Inventory of this drone containing the items it picks up from the world etc.
@@ -90,9 +86,9 @@ public abstract class EntityDrone extends EntityFlying{
         modules = new ArrayList<ItemTaskModule>();
         
         //TODO move task AI's to individual drones.
-        droneAI = new ArrayList<DroneAI>();
-        droneAI.add(new DroneBasicTaskAI());
-        //droneAI.add(new DroneAdvancedTaskAI());
+        this.tasks.addTask(0, new DroneAdvancedTaskAI());
+        this.tasks.addTask(0, new DroneBasicTaskAI());
+        this.tasks.addTask(7, new EntityAILookIdle(this));
         
         currentWork = null;
         //TODO move line below to each individual drone because size of actualInventory should be based upon type of drone.
