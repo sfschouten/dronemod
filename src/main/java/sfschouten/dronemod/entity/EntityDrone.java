@@ -91,8 +91,8 @@ public abstract class EntityDrone extends EntityFlying{
         
         //TODO move task AI's to individual drones.
         droneAI = new ArrayList<DroneAI>();
-        //droneAI.add(new DroneBasicTaskAI());
-        droneAI.add(new DroneAdvancedTaskAI());
+        droneAI.add(new DroneBasicTaskAI());
+        //droneAI.add(new DroneAdvancedTaskAI());
         
         currentWork = null;
         //TODO move line below to each individual drone because size of actualInventory should be based upon type of drone.
@@ -239,7 +239,7 @@ public abstract class EntityDrone extends EntityFlying{
 		}
 		
 		if(!enoughEnergyForReturnHome() && !containsRecharge){
-    		droneAI.add(new DroneRechargeAI());
+    		//droneAI.add(new DroneRechargeAI());
     	}
     }
     

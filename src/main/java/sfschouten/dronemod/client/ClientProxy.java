@@ -7,11 +7,11 @@ import net.minecraft.client.particle.EntityRainFX;
 import net.minecraftforge.client.MinecraftForgeClient;
 import sfschouten.dronemod.CommonProxy;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
-import sfschouten.dronemod.client.particle.EntityDroneFX;
 import sfschouten.dronemod.client.renderer.entity.RenderQuadcopter;
 import sfschouten.dronemod.client.renderer.entity.RenderQuadcopterFX;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
+import sfschouten.dronemod.entity.EntityDroneFX;
 
 public class ClientProxy extends CommonProxy {  
     @Override

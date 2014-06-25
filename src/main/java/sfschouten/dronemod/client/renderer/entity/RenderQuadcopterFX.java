@@ -1,5 +1,6 @@
 package sfschouten.dronemod.client.renderer.entity;
 
+import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
 import cpw.mods.fml.relauncher.*;
 import net.minecraft.client.renderer.entity.RenderEntity;
@@ -10,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderQuadcopterFX extends RendererLivingEntity{
-    private static final ResourceLocation Your_Texture = new ResourceLocation("dronemod:textures/entity/quadcopter.png"); 
+    private static final ResourceLocation Your_Texture = new ResourceLocation(DroneMod.modID + ":textures/entity/quadcopter.png"); 
 
     public RenderQuadcopterFX(ModelQuadcopter par1ModelBase , float par2)
     {

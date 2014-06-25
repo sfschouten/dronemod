@@ -1,4 +1,4 @@
-package sfschouten.dronemod.client.particle;
+package sfschouten.dronemod.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;

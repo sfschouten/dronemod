@@ -1,5 +1,13 @@
 package sfschouten.dronemod.network;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CoderResult;
+
 import io.netty.buffer.ByteBuf;
 import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
@@ -40,14 +48,35 @@ public class LaunchDroneMessage implements IExecutableMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		JsonParser parser = new JsonParser();
-		JsonObject obj =  (JsonObject) parser.parse(buf.toString());
+		Charset charset = Charset.forName("UTF-8");
+		
+		CharsetDecoder dec = charset.newDecoder();
+		CharBuffer charBuf = null;
+		try {
+			charBuf = dec.decode(buf.nioBuffer());
+		} catch (CharacterCodingException e) {
+			e.printStackTrace();
+			Logger.logOut("Failed decoding the bytebuffer");
+		}
+		
+		String json = charBuf.toString();
+		JsonObject obj =  (JsonObject) parser.parse(json);
 		fromJsonObject(obj);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
 		JsonObject obj = toJsonObject();
-		buf.writeBytes(obj.toString().getBytes());
+		Charset charset = Charset.forName("UTF-8");
+		CharsetEncoder enc = charset.newEncoder();
+		ByteBuffer buffer = null;
+		try {
+			buffer = enc.encode(CharBuffer.wrap(obj.toString().toCharArray()));
+		} catch (CharacterCodingException e) {
+			e.printStackTrace();
+			Logger.logOut("Wrote null to buffer 0_0");
+		}
+		buf.writeBytes(buffer);
 	}
 
 	@Override

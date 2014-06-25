@@ -3,7 +3,7 @@ package sfschouten.dronemod.tileentity;
 import java.util.Random;
 
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.client.particle.EntityDroneFX;
+import sfschouten.dronemod.entity.EntityDroneFX;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

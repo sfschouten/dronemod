@@ -53,7 +53,7 @@ public class DroneBasicTaskAI extends DroneAI {
 				!(currentZ + 0.2 < e.posZ && currentZ + 0.8 > e.posZ)|| 
 				!(currentY + 1.2 < e.posY && currentY + 1.8 > e.posY)){
 				//Drone has not arrived where he needs to be so move towards it.
-				Logger.logOut("startmovingtowards x:"+currentX + "y:"+currentY+1 + "z:" + currentZ);
+				Logger.logOut("startmovingtowards x:"+currentX + "y:"+(currentY+1) + "z:" + currentZ);
 				e.startMovingTowards(currentX, currentY+1, currentZ);
 			}else{
 				Logger.logOut("perform task at x:"+currentX + "y:"+currentY + "z:" + currentZ);
