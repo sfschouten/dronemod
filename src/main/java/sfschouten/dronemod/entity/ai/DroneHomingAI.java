@@ -5,31 +5,21 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.entity.ai.DroneAI;
-
 public class DroneHomingAI extends EntityAIBase {
-
-	@Override
-	public boolean executeAI(EntityDrone e) {
-		if(e.goToBase()){
-			e.getBase().storeDrone(e);
-			return true;
-		}else{
-			return false;
-		}
+	private EntityDrone drone;
+	
+	public DroneHomingAI(EntityDrone drone){
+		this.drone = drone;
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.drone.isGoingHome();
 	}
 
 	@Override
 	public void startExecuting() {
-		// TODO Auto-generated method stub
+		
 		super.startExecuting();
 	}
-	
-	
 }

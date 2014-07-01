@@ -100,7 +100,7 @@ public class DroneReturnMessage implements IExecutableMessage {
         }else if(base.getDrone() == null){
         	Logger.logChat(server, "Base does not have a drone to return!");
         }else{
-        	base.getDrone().goToBase();
+        	base.getDrone().setGoingHome(true);
         }
 	}	
 	

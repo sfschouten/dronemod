@@ -7,10 +7,17 @@
 package sfschouten.dronemod.client.model;
 
 import sfschouten.dronemod.entity.EntityDrone;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+/**
+ * This entire class is temporary until I get around to making actual models in wavefront format.
+ * 
+ * @author Stefan
+ *
+ */
 public class ModelQuadcopter extends ModelBase {
 	// fields
 	ModelRenderer Body;
@@ -111,6 +118,7 @@ public class ModelQuadcopter extends ModelBase {
 		RL.render(scale);
 		RR.render(scale);
 		FL.render(scale);
+		
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

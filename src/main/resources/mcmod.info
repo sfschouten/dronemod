@@ -1,7 +1,7 @@
 [
 {
   "modid": "schoutendronemod",
-  "name": "Drone Mod",
+  "name": "Modular Multicopter Drones",
   "description": "Build drones to do your work for you!",
   "version": "${mod_version}",
   "mcversion": "${minecraft_version}",
