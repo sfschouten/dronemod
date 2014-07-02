@@ -102,12 +102,8 @@ public abstract class EntityDrone extends EntityCreature {
 			expansions.put(type, new ItemStack[getItem().getExpSize(type)]);
 		}
 
-		ReflectionHelper.setPrivateValue(EntityLiving.class, this,
-				new PathNavigateDrone(this, worldObj), new String[] {
-						"navigator", "field_70699_by" });
-		ReflectionHelper.setPrivateValue(EntityLiving.class, this,
-				new DroneMoveHelper(this), new String[] { "moveHelper",
-						"field_70765_h" });
+		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigateDrone(this, worldObj), new String[] { "navigator", "field_70699_by" });
+		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DroneMoveHelper(this), new String[] { "moveHelper", "field_70765_h" });
 
 		this.dataWatcher.addObject(13, Byte.valueOf((byte) 0));
 	}
@@ -121,10 +117,8 @@ public abstract class EntityDrone extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(0.3D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
 	}
 
 	@Override
@@ -142,8 +136,7 @@ public abstract class EntityDrone extends EntityCreature {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		// Loop through each type of inventory: batteries, modules, chests, free
 		// slots.
-		for (Entry<TempInventoryType, ItemStack[]> entry : expansions
-				.entrySet()) {
+		for (Entry<TempInventoryType, ItemStack[]> entry : expansions.entrySet()) {
 			TempInventoryType type = entry.getKey();
 			ItemStack[] items = entry.getValue();
 
@@ -177,10 +170,8 @@ public abstract class EntityDrone extends EntityCreature {
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		for (TempInventoryType type : TempInventoryType.values()) {
-			NBTTagCompound typeComp = par1nbtTagCompound.getCompoundTag(type
-					.name());
-			TempInventory inv = new TempInventory(
-					typeComp.getInteger("InventoryLength"));
+			NBTTagCompound typeComp = par1nbtTagCompound.getCompoundTag(type.name());
+			TempInventory inv = new TempInventory(typeComp.getInteger("InventoryLength"));
 			inv.readFromNBT(typeComp);
 			expansions.put(type, inv.getInv());
 		}
@@ -193,8 +184,7 @@ public abstract class EntityDrone extends EntityCreature {
 		// baseY, baseZ);
 
 		currentWork = new TileEntityMarker();
-		currentWork.readFromNBT(par1nbtTagCompound
-				.getCompoundTag("CurrentWork"));
+		currentWork.readFromNBT(par1nbtTagCompound.getCompoundTag("CurrentWork"));
 
 		super.readFromNBT(par1nbtTagCompound);
 	}
@@ -246,8 +236,7 @@ public abstract class EntityDrone extends EntityCreature {
 			Logger.logOut("drone does not have a base.");
 			return false;
 		}
-		double distanceFromBase = this.getDistance(base.xCoord, base.yCoord,
-				base.zCoord);
+		double distanceFromBase = this.getDistance(base.xCoord, base.yCoord, base.zCoord);
 
 		if ((getEnergyUse() * distanceFromBase) > energy) {
 			return false;
@@ -295,8 +284,7 @@ public abstract class EntityDrone extends EntityCreature {
 		int intPosY = (int) Math.floor(this.posY);
 		int intPosZ = (int) Math.floor(this.posZ);
 
-		if (intPosX != base.xCoord || intPosY != base.yCoord + 1
-				|| intPosZ != base.zCoord) {
+		if (intPosX != base.xCoord || intPosY != base.yCoord + 1 || intPosZ != base.zCoord) {
 			startMovingTowards(base.xCoord, base.yCoord + 1, base.zCoord);
 			return false;
 		}
@@ -326,8 +314,7 @@ public abstract class EntityDrone extends EntityCreature {
 	public int getFirstSlotForItemAndDamage(Item item, int damage) {
 		int slot = -1;
 		for (int i = 0; i < actualInventory.getSizeInventory(); i++) {
-			if (actualInventory.getStackInSlot(i) != null
-					&& actualInventory.getStackInSlot(i).getItem() == item
+			if (actualInventory.getStackInSlot(i) != null && actualInventory.getStackInSlot(i).getItem() == item
 					&& actualInventory.getStackInSlot(i).getItemDamage() == damage) {
 				slot = i;
 			}
@@ -379,10 +366,6 @@ public abstract class EntityDrone extends EntityCreature {
 
 	public void setBase(TileEntityDroneBase base) {
 		this.base = base;
-	}
-
-	public void addWorkMarker(TileEntityMarker m) {
-		this.workMarkers.add(m);
 	}
 
 	public void addWorkMarker(TileEntityMarker m) {
@@ -443,7 +426,6 @@ public abstract class EntityDrone extends EntityCreature {
 	}
 
 	public void setAccelerating(boolean accelerating) {
-		this.dataWatcher.updateObject(13,
-				Byte.valueOf((byte) (accelerating ? 1 : 0)));
+		this.dataWatcher.updateObject(13, Byte.valueOf((byte) (accelerating ? 1 : 0)));
 	}
 }
