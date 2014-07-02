@@ -1,5 +1,6 @@
 package sfschouten.dronemod.client.model;
 
+import sfschouten.dronemod.Logger;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -26,11 +27,12 @@ public class ModelOctaCopter extends ModelBase {
 	ModelRenderer Blade7;
 	ModelRenderer Wing8;
 	ModelRenderer Blade8;
+	float scale;
 
-	public ModelOctaCopter() {
+	public ModelOctaCopter(float scale) {
 		textureWidth = 64;
 		textureHeight = 64;
-
+		this.scale = scale;
 		Base = new ModelRenderer(this, 0, 0);
 		Base.addBox(-8F, 0F, -8F, 16, 1, 16);
 		Base.setRotationPoint(0F, 15F, 0F);
@@ -68,7 +70,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing1.mirror = true;
 		setRotation(Wing1, 0F, 0F, 0F);
 		Blade1 = new ModelRenderer(this, 0, 20);
-		Blade1.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade1.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade1.setRotationPoint(-17.5F, 14F, 7.5F);
 		Blade1.setTextureSize(64, 64);
 		Blade1.mirror = true;
@@ -80,7 +82,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing2.mirror = true;
 		setRotation(Wing2, 0F, 0F, 0F);
 		Blade2 = new ModelRenderer(this, 0, 26);
-		Blade2.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade2.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade2.setRotationPoint(-17.5F, 14F, -7.5F);
 		Blade2.setTextureSize(64, 64);
 		Blade2.mirror = true;
@@ -92,7 +94,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing3.mirror = true;
 		setRotation(Wing3, 0F, 1.570796F, 0F);
 		Blade3 = new ModelRenderer(this, 0, 32);
-		Blade3.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade3.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade3.setRotationPoint(-7.5F, 14F, -17.5F);
 		Blade3.setTextureSize(64, 64);
 		Blade3.mirror = true;
@@ -104,7 +106,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing4.mirror = true;
 		setRotation(Wing4, 0F, 1.570796F, 0F);
 		Blade4 = new ModelRenderer(this, 0, 38);
-		Blade4.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade4.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade4.setRotationPoint(-7.5F, 14F, 17.5F);
 		Blade4.setTextureSize(64, 64);
 		Blade4.mirror = true;
@@ -116,7 +118,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing5.mirror = true;
 		setRotation(Wing5, 0F, 1.570796F, 0F);
 		Blade5 = new ModelRenderer(this, 0, 44);
-		Blade5.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade5.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade5.setRotationPoint(7.5F, 14F, 17.5F);
 		Blade5.setTextureSize(64, 64);
 		Blade5.mirror = true;
@@ -128,7 +130,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing6.mirror = true;
 		setRotation(Wing6, 0F, 0F, 0F);
 		Blade6 = new ModelRenderer(this, 0, 50);
-		Blade6.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade6.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade6.setRotationPoint(17.5F, 14F, 7.5F);
 		Blade6.setTextureSize(64, 64);
 		Blade6.mirror = true;
@@ -140,7 +142,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing7.mirror = true;
 		setRotation(Wing7, 0F, 0F, 0F);
 		Blade7 = new ModelRenderer(this, 0, 56);
-		Blade7.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade7.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade7.setRotationPoint(17.5F, 14F, -7.5F);
 		Blade7.setTextureSize(64, 64);
 		Blade7.mirror = true;
@@ -152,7 +154,7 @@ public class ModelOctaCopter extends ModelBase {
 		Wing8.mirror = true;
 		setRotation(Wing8, 0F, 1.570796F, 0F);
 		Blade8 = new ModelRenderer(this, 0, 62);
-		Blade8.addBox(-1.5F, 0F, -0.5F, 3, 1, 1);
+		Blade8.addBox(-2.5F, 0F, -0.5F, 5, 1, 1);
 		Blade8.setRotationPoint(7.5F, 14F, -17.5F);
 		Blade8.setTextureSize(64, 64);
 		Blade8.mirror = true;
@@ -162,27 +164,29 @@ public class ModelOctaCopter extends ModelBase {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(entity, f, f1, f2, f3, f4, f5);
-		Base.render(f5);
-		Head1.render(f5);
-		Head2.render(f5);
-		Camera.render(f5);
-		CameraLens.render(f5);
-		Wing1.render(f5);
-		Blade1.render(f5);
-		Wing2.render(f5);
-		Blade2.render(f5);
-		Wing3.render(f5);
-		Blade3.render(f5);
-		Wing4.render(f5);
-		Blade4.render(f5);
-		Wing5.render(f5);
-		Blade5.render(f5);
-		Wing6.render(f5);
-		Blade6.render(f5);
-		Wing7.render(f5);
-		Blade7.render(f5);
-		Wing8.render(f5);
-		Blade8.render(f5);
+		float scale = f5 * this.scale;
+		rotateBlades(12);
+		Base.render(scale);
+		Head1.render(scale);
+		Head2.render(scale);
+		Camera.render(scale);
+		CameraLens.render(scale);
+		Wing1.render(scale);
+		Blade1.render(scale);
+		Wing2.render(scale);
+		Blade2.render(scale);
+		Wing3.render(scale);
+		Blade3.render(scale);
+		Wing4.render(scale);
+		Blade4.render(scale);
+		Wing5.render(scale);
+		Blade5.render(scale);
+		Wing6.render(scale);
+		Blade6.render(scale);
+		Wing7.render(scale);
+		Blade7.render(scale);
+		Wing8.render(scale);
+		Blade8.render(scale);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -191,6 +195,17 @@ public class ModelOctaCopter extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
+	private void rotateBlades(float amount){
+		Blade1.rotateAngleY += amount;
+		Blade2.rotateAngleY += amount;
+		Blade3.rotateAngleY += amount;
+		Blade4.rotateAngleY += amount;
+		Blade5.rotateAngleY += amount;
+		Blade6.rotateAngleY += amount;
+		Blade7.rotateAngleY += amount;
+		Blade8.rotateAngleY += amount;
+	}
+	
 	public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
 	}

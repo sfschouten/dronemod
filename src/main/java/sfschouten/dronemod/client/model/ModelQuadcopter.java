@@ -6,6 +6,7 @@
 
 package sfschouten.dronemod.client.model;
 
+import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

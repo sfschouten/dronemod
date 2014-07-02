@@ -2,6 +2,7 @@ package sfschouten.dronemod.client.renderer.entity;
 
 import ch.epfl.lamp.compiler.msil.ICustomAttributeProvider;
 import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.client.model.ModelOctaCopter;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
 import cpw.mods.fml.relauncher.*;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -13,9 +14,9 @@ import net.minecraftforge.client.model.IModelCustom;
 
 @SideOnly(Side.CLIENT)
 public class RenderQuadcopterTemp extends RenderLiving{
-    private static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID + ":textures/entity/quadcopter.png"); 
+    private static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID + ":textures/entity/OctaCopter.png"); 
 
-    public RenderQuadcopterTemp(ModelQuadcopter par1ModelBase , float par2){
+    public RenderQuadcopterTemp(ModelOctaCopter par1ModelBase , float par2){
         super(par1ModelBase, par2);
     }
 
