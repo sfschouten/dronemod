@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import cofh.api.energy.IEnergyContainerItem;
 import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.inventory.TempInventory;

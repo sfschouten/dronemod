@@ -21,10 +21,10 @@ public class ItemCaneWeakHexacopter extends ItemDrone {
 		this.setUnlocalizedName("caneWeakHexacopterItem");
 		entityClass = EntityCaneWeakHexacopter.class;
 		
-		ItemStack quadCaneFrame = new ItemStack(DroneMod.quadCaneFrameItem);
+		ItemStack hexaCaneFrame = new ItemStack(DroneMod.hexaCaneFrameItem);
 		ItemStack weakMotor = new ItemStack(DroneMod.weakMotorItem);
 		
-		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', quadCaneFrame, 'y', weakMotor);
+		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaCaneFrame, 'y', weakMotor);
 	}
 
 	@Override

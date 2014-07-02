@@ -20,22 +20,18 @@ public class ItemWoodMediumHexacopter extends ItemDrone {
 	public ItemWoodMediumHexacopter() {
 		super();
 		this.setUnlocalizedName("woodMediumHexacopterItem");
-		entityClass = EntityCaneWeakHexacopter.class;
+		entityClass = EntityWoodMediumHexacopter.class;
 		
-		ItemStack hexaCaneFrame = new ItemStack(DroneMod.hexaCaneFrameItem);
+		ItemStack hexaWoodFrame = new ItemStack(DroneMod.hexaWoodFrameItem);
 		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);
 		
-		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaCaneFrame, 'y', mediumMotor);
+		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaWoodFrame, 'y', mediumMotor);
 	}
 
 	@Override
 	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		//TODO create new entity and make it here.
 		EntityWoodMediumHexacopter newEntity = new EntityWoodMediumHexacopter(world);
-
-		applySizes(newEntity, droneItemNBTdata);
-		
-		return newEntity;
+		return applySizes(newEntity, droneItemNBTdata);
 	}
 	
 	@Override

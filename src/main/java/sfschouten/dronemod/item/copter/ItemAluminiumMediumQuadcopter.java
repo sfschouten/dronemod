@@ -10,27 +10,28 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.TempInventoryType;
+import sfschouten.dronemod.entity.EntityAluminiumMediumQuadcopter;
 import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
 import sfschouten.dronemod.entity.EntityWoodMediumQuadcopter;
 
-public class ItemWoodMediumQuadcopter extends ItemDrone {
+public class ItemAluminiumMediumQuadcopter extends ItemDrone {
 	
-	public ItemWoodMediumQuadcopter() {
+	public ItemAluminiumMediumQuadcopter() {
 		super();
-		this.setUnlocalizedName("woodMediumQuadcopterItem");
-		entityClass = EntityWoodMediumQuadcopter.class;
+		this.setUnlocalizedName("aluminiumMediumQuadcopterItem");
+		entityClass = EntityAluminiumMediumQuadcopter.class;
 		
-		ItemStack quadWoodFrame = new ItemStack(DroneMod.quadWoodFrameItem);
+		ItemStack quadAluminiumFrame = new ItemStack(DroneMod.quadAluminiumFrameItem);
 		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);
 		
-		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadWoodFrame, 'y', mediumMotor);
+		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadAluminiumFrame, 'y', mediumMotor);
 	}
 
 	@Override
 	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		EntityWoodMediumQuadcopter newEntity = new EntityWoodMediumQuadcopter(world);
+		EntityAluminiumMediumQuadcopter newEntity = new EntityAluminiumMediumQuadcopter(world);
 		return applySizes(newEntity, droneItemNBTdata);
 	}
 	
@@ -42,10 +43,10 @@ public class ItemWoodMediumQuadcopter extends ItemDrone {
 			result = 1;
 			break;
 		case chest:
-			result = 1;
+			result = 0;
 			break;
 		case free:
-			result = 0;
+			result = 1;
 			break;
 		case module:
 			result = 1;

@@ -32,7 +32,7 @@ public class ItemCaneWeakQuadcopter extends ItemDrone {
 	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
 		EntityCaneWeakQuadcopter newEntity = new EntityCaneWeakQuadcopter(world);
 
-		return (EntityCaneWeakQuadcopter) applySizes(newEntity, droneItemNBTdata);
+		return applySizes(newEntity, droneItemNBTdata);
 	}
 
 	@Override
