@@ -16,7 +16,7 @@ public class EntityWoodStrongQuadcopter extends EntityDrone {
 	}
 	
 	public ItemDrone getItem(){
-		return DroneMod.caneWeakQuadcopterItem;
+		return DroneMod.woodStrongQuadcopterItem;
 	}
 
 	@Override
