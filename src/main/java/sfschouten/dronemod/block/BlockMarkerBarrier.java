@@ -43,7 +43,7 @@ public class BlockMarkerBarrier extends Block{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		this.icon = icon.registerIcon("dronemod:markerbarrier");
+		this.icon = icon.registerIcon(DroneMod.modID + ":markerbarrier");
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 tile.droneBase.name=Drone Base
 tile.marker.name=Work Marker
 tile.markerBarrier.name=Marker Barrier
+tile.miller.name=Milling Machine
 
 item.advancedBreedingModuleItem.name=Breeding Module (Advanced)
 item.fertilizeModuleItem.name=Fertilize Module
@@ -17,10 +18,24 @@ item.largeDroneBatteryItem.name=Large Battery
 item.mediumDroneBatteryItem.name=Medium Battery
 item.smallDroneBatteryItem.name=Small Battery
 
+item.aluminiumMediumHexacopterItem.name=Medium Aluminium Hexacopter
+item.aluminiumMediumQuadcopterItem.name=Medium Aluminium Quadcopter
+item.aluminiumMediumOctacopterItem.name=Medium Aluminium Octacopter
+
+item.aluminiumStrongHexacopterItem.name=Strong Aluminium Hexacopter
+item.aluminiumStrongQuadcopterItem.name=Strong Aluminium Quadcopter
+item.aluminiumStrongOctacopterItem.name=Strong Aluminium Octacopter
+
 item.caneWeakHexacopterItem.name=Weak Cane Hexacopter
 item.caneWeakQuadcopterItem.name=Weak Cane Quadcopter
+
 item.woodMediumHexacopterItem.name=Medium Wood Hexacopter
 item.woodMediumQuadcopterItem.name=Medium Wood Quadcopter
+item.woodMediumOctacopterItem.name=Medium Wood Octacopter
+
+item.woodStrongHexacopterItem.name=Strong Wood Hexacopter
+item.woodStrongQuadcopterItem.name=Strong Wood Quadcopter
+item.woodStrongOctacopterItem.name=Strong Wood Octacopter
 
 item.aluminiumHexaFrameItem.name=Aluminium Hexacopter Frame
 item.caneHexaFrameItem.name=Cane Hexacopter Frame
@@ -34,6 +49,23 @@ item.woodQuadFrameItem.name=Wood Quadcopter Frame
 item.aluminiumIngotItem.name=Aluminium Ingot
 item.basicElectronicsItem.name=Basic Electronics
 
+entity.EntityAluminiumMediumQuadcopter.name=Medium Aluminium Quadcopter
+entity.EntityAluminiumMediumHexacopter.name=Medium Aluminium Hexacopter
+entity.EntityAluminiumMediumOctacopter.name=Medium Aluminium Octacopter
+
+entity.EntityAluminiumStrongQuadcopter.name=Strong Aluminium Quadcopter
+entity.EntityAluminiumStrongHexacopter.name=Strong Aluminium Hexacopter
+entity.EntityAluminiumStrongOctacopter.name=Strong Aluminium Octacopter
+
 entity.EntityCaneWeakQuadcopter.name=Weak Cane Quadcopter
+entity.EntityCaneWeakHexacopter.name=Weak Cane Hexacopter
+
+entity.EntityWoodMediumQuadcopter.name=Medium Wood Quadcopter
+entity.EntityWoodMediumHexacopter.name=Medium Wood Hexacopter
+entity.EntityWoodMediumOctacopter.name=Medium Wood Octacopter
+
+entity.EntityWoodStrongQuadcopter.name=Strong Wood Quadcopter
+entity.EntityWoodStrongHexacopter.name=Strong Wood Hexacopter
+entity.EntityWoodStrongOctacopter.name=Strong Wood Octacopter
 
 itemGroup.tabDroneMod=DroneMod Tab
