@@ -13,10 +13,8 @@ public class EntityWanderFlyingAI extends EntityAIBase{
     private double yPosition;
     private double zPosition;
     private double speed;
-    //private static final String __OBFID = "CL_00001608";
 
-    public EntityWanderFlyingAI(EntityDrone drone, double par2)
-    {
+    public EntityWanderFlyingAI(EntityDrone drone, double par2){
         this.entity = drone;
         this.speed = par2;
         this.setMutexBits(1);
@@ -25,40 +23,36 @@ public class EntityWanderFlyingAI extends EntityAIBase{
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute(){
     	
         if (this.entity.getRNG().nextInt(2) != 0) {
             return false;
         } else {
         	Logger.logOut("Wandering");
-            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 10);
+            //Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 10);
 
-            if (vec3 == null) {
-                return false;
-            } else {
-                this.xPosition = vec3.xCoord;
-                this.yPosition = vec3.yCoord;
-                this.zPosition = vec3.zCoord;
+            //if (vec3 == null) {
+            //    return false;
+            //} else {
+                this.xPosition = 120;
+                this.yPosition = 100;
+                this.zPosition = 295;
                 return true;
-            }
+            //}
         }
     }
 
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting(){
         return !this.entity.getNavigator().noPath();
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
-    	Logger.logOut("try to fly to: "+this.xPosition+","+this.yPosition+","+this.zPosition);
+    public void startExecuting(){
         this.entity.getNavigator().tryMoveToXYZ(this.xPosition, this.yPosition, this.zPosition, this.speed);
     }
 }

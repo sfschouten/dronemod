@@ -16,9 +16,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderOctacopter extends RenderLiving{
-	//private static final ResourceLocation caneOctaTextureLocation = new ResourceLocation(DroneMod.modID + ":textures/entity/caneOcta.png");
-	//private static final ResourceLocation woodOctaTextureLocation = new ResourceLocation(DroneMod.modID + ":textures/entity/woodOcta.png");
-	//private static final ResourceLocation aluminiumOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/test.png");
+	private static final ResourceLocation caneOctaTextureLocation = new ResourceLocation(DroneMod.modID + ":textures/entity/caneocta.png");
+	private static final ResourceLocation woodOctaTextureLocation = new ResourceLocation(DroneMod.modID + ":textures/entity/woodocta.png");
+	private static final ResourceLocation aluminiumOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/aluminiumocta.png");
 	
 	public RenderOctacopter(ModelOctaCopter par1ModelBase, float par2) {
 		super(par1ModelBase, par2);
@@ -36,10 +36,9 @@ public class RenderOctacopter extends RenderLiving{
 		}
 		
 		if(d instanceof EntityAluminiumMediumOctacopter || d instanceof EntityAluminiumStrongOctacopter) {
-			return new ResourceLocation(DroneMod.modID, "textures/entity/test.png");
+			return aluminiumOctaTextureLocation;
 		}else if(d instanceof EntityWoodMediumOctacopter || d instanceof EntityWoodStrongOctacopter ){
-			//Put back to wood once finished
-			return new ResourceLocation(DroneMod.modID.toLowerCase(), "textures/entity/test.png");
+			return woodOctaTextureLocation;
 		}else{
 			Logger.logOut("Wrong type of drone, not an Octa! No texture loaded.");
 			return null;

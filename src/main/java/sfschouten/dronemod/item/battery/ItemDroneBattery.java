@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class ItemDroneBattery extends Item implements IEnergyContainerItem {
-
 	protected int capacity;
 	protected int maxReceive;
 	protected int maxExtract;
@@ -19,31 +18,26 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 	}
 
 	public ItemDroneBattery setCapacity(int capacity) {
-
 		this.capacity = capacity;
 		return this;
 	}
 
 	public void setMaxTransfer(int maxTransfer) {
-
 		setMaxReceive(maxTransfer);
 		setMaxExtract(maxTransfer);
 	}
 
 	public void setMaxReceive(int maxReceive) {
-
 		this.maxReceive = maxReceive;
 	}
 
 	public void setMaxExtract(int maxExtract) {
-
 		this.maxExtract = maxExtract;
 	}
 
 	/* IEnergyContainerItem */
 	@Override
 	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-
 		if (container.stackTagCompound == null) {
 			container.stackTagCompound = new NBTTagCompound();
 		}
@@ -59,7 +53,6 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-
 		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy")) {
 			return 0;
 		}
@@ -75,7 +68,6 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 
 	@Override
 	public int getEnergyStored(ItemStack container) {
-
 		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Energy")) {
 			return 0;
 		}
@@ -84,7 +76,6 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 
 	@Override
 	public int getMaxEnergyStored(ItemStack container) {
-
 		return capacity;
 	}
 

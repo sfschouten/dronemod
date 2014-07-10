@@ -1,5 +1,7 @@
 package sfschouten.dronemod;
 
+import org.apache.logging.log4j.core.helpers.Loader;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import sfschouten.dronemod.block.BlockDroneBase;
@@ -85,10 +87,7 @@ import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = DroneMod.modID, name = "DroneMod", version = "dev")
 public class DroneMod {
-
 	public static final String modID = "schoutendronemod";
-
-	// CreativeTabs
 	public static CreativeTabs tabDroneMod = new CreativeTabs("tabDroneMod") {
 		@Override
 		public Item getTabIconItem() {
@@ -169,7 +168,7 @@ public class DroneMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-
+		
 		packetInit();
 		itemInit();
 		blockInit();

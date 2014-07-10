@@ -4,7 +4,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import sfschouten.dronemod.entity.EntityDrone;
 
 public class DroneRechargeAI extends EntityAIBase {
-
+/*
 	@Override
 	public boolean executeAI(EntityDrone e) {
 		if(e.goToBase()){
@@ -15,7 +15,7 @@ public class DroneRechargeAI extends EntityAIBase {
 			return false;
 		}
 	}
-
+*/
 	@Override
 	public boolean shouldExecute() {
 		// TODO Auto-generated method stub

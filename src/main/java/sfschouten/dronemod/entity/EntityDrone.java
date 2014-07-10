@@ -17,7 +17,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.TempInventoryType;
@@ -28,14 +31,14 @@ import sfschouten.dronemod.entity.ai.DroneMoveHelper;
 import sfschouten.dronemod.entity.ai.DroneRechargeAI;
 import sfschouten.dronemod.entity.ai.DroneRestockAI;
 import sfschouten.dronemod.entity.ai.EntityWanderFlyingAI;
-import sfschouten.dronemod.entity.ai.PathNavigateDrone;
 import sfschouten.dronemod.inventory.TempInventory;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.item.module.ItemTaskModule;
+import sfschouten.dronemod.pathfinding.PathNavigate3D;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public abstract class EntityDrone extends EntityCreature {
+public abstract class EntityDrone extends EntityFlying {
 	/**
 	 * The tile entity corresponding to the base of this drone.
 	 */
@@ -51,7 +54,7 @@ public abstract class EntityDrone extends EntityCreature {
 	 * The current marker being worked.
 	 */
 	private TileEntityMarker currentWork;
-
+	
 	/**
 	 * The Inventory of this drone containing the items it picks up from the
 	 * world etc.
@@ -69,9 +72,9 @@ public abstract class EntityDrone extends EntityCreature {
 	private List<ItemTaskModule> modules;
 
 	/**
-	 * A hashmap containing a different sets of items. For every type of
+	 * A HashMap containing a different sets of items. For every type of
 	 * expansion a drone can have there is an array. The array' size is
-	 * determened based upon the type of drone it is.
+	 * Determined based upon the type of drone it is.
 	 */
 	private HashMap<TempInventoryType, ItemStack[]> expansions;
 
@@ -79,20 +82,15 @@ public abstract class EntityDrone extends EntityCreature {
 
 	public EntityDrone(World par1World) {
 		super(par1World);
-		this.setSize(0.9F, 1.3F);
+		this.setSize(0.9F, 0.2F);
 		workMarkers = new ArrayList<TileEntityMarker>();
 		modules = new ArrayList<ItemTaskModule>();
 
 		// TODO move task AI's to individual drones.
-		this.tasks.addTask(0, new EntityWanderFlyingAI(this, 1.0D));
-		/*
-		 * this.tasks.addTask(0, new DroneHomingAI(this)); this.tasks.addTask(1,
-		 * new DroneAdvancedTaskAI()); this.tasks.addTask(2, new
-		 * DroneBasicTaskAI()); this.tasks.addTask(7, new
-		 * EntityAILookIdle(this));
-		 */
+		//this.tasks.addTask(0, new EntityWanderFlyingAI(this, 1.0D));
+		tasks.addTask(0, new DroneBasicTaskAI(this));
+		tasks.addTask(1, new DroneRestockAI(this));
 
-		currentWork = null;
 		// TODO move line below to each individual drone because size of
 		// actualInventory should be based upon type of drone.
 		actualInventory = new TempInventory(1);
@@ -102,12 +100,9 @@ public abstract class EntityDrone extends EntityCreature {
 			expansions.put(type, new ItemStack[getItem().getExpSize(type)]);
 		}
 
-		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigateDrone(this, worldObj), new String[] { "navigator", "field_70699_by" });
+		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigate3D(this, worldObj, 75), new String[] { "navigator", "field_70699_by" });
 		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DroneMoveHelper(this), new String[] { "moveHelper", "field_70765_h" });
-
-		this.dataWatcher.addObject(13, Byte.valueOf((byte) 0));
 	}
-
 	public abstract int getEnergyUse();
 
 	public abstract ItemDrone getItem();
@@ -118,15 +113,23 @@ public abstract class EntityDrone extends EntityCreature {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
 	}
 
 	@Override
 	public void onUpdate() {
-		if (!this.worldObj.isRemote) {
-			setAccelerating(true);
-			if (isAccelerating()) {
-				this.fallDistance = 0.0F;
+		this.fallDistance = 0.0F;
+		this.isAirBorne = true;
+
+		PathEntity path = getNavigator().getPath();
+		if(path != null){
+			if(!path.isFinished()){
+				Vec3 current = path.getPosition(this);
+				if((current.xCoord - 0.5 < posX && current.xCoord + 0.5 > posX) 
+				 &&(current.zCoord - 0.5 < posZ && current.zCoord + 0.5 > posZ) 
+				 &&(current.yCoord - 0.5 < posY && current.yCoord + 0.5 > posY)){
+					path.setCurrentPathIndex(path.getCurrentPathIndex() + 1);
+				}
 			}
 		}
 		super.onUpdate();
@@ -151,19 +154,19 @@ public abstract class EntityDrone extends EntityCreature {
 
 		par1nbtTagCompound.setInteger("Energy", energy);
 
+		if(currentWork != null){
+			NBTTagCompound currentWorkComp = new NBTTagCompound();
+			currentWorkComp.setInteger("x", currentWork.xCoord);
+			currentWorkComp.setInteger("y", currentWork.yCoord);
+			currentWorkComp.setInteger("z", currentWork.zCoord);
+			par1nbtTagCompound.setTag("currentWork", currentWorkComp);
+		}
 		// TODO implement the NBT storage of base.
 		// NBTTagCompound baseComp = new NBTTagCompound();
 		// baseComp.setInteger("baseX", base.xCoord);
 		// baseComp.setInteger("baseY", base.yCoord);
 		// baseComp.setInteger("baseZ", base.zCoord);
 		// par1nbtTagCompound.setCompoundTag("Base", baseComp);
-
-		NBTTagCompound currentWorkTagComp = new NBTTagCompound();
-		if (currentWork != null) {
-			currentWork.writeToNBT(currentWorkTagComp);
-		}
-		par1nbtTagCompound.setTag("CurrentWork", currentWorkTagComp);
-
 		super.writeToNBT(par1nbtTagCompound);
 	}
 
@@ -183,9 +186,15 @@ public abstract class EntityDrone extends EntityCreature {
 		// base = (TileEntityDroneBase) worldObj.getBlockTileEntity(baseX,
 		// baseY, baseZ);
 
-		currentWork = new TileEntityMarker();
-		currentWork.readFromNBT(par1nbtTagCompound.getCompoundTag("CurrentWork"));
-
+		NBTTagCompound cwTag = par1nbtTagCompound.getCompoundTag("currentWork");
+		int cqX = cwTag.getInteger("x");
+		int cqY = cwTag.getInteger("y");
+		int cqZ = cwTag.getInteger("z");
+		if(cqX == 0 && cqY == 0 && cqZ == 0){
+			
+		}else{
+			//currentWork = (TileEntityMarker) worldObj.getTileEntity(cqX, cqY, cqZ);
+		}
 		super.readFromNBT(par1nbtTagCompound);
 	}
 
@@ -195,7 +204,9 @@ public abstract class EntityDrone extends EntityCreature {
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) {
 		ItemStack is = par1EntityPlayer.inventory.getCurrentItem();
-
+		
+		Logger.logOut(this.boundingBox.toString());
+		
 		// Check if interaction is with an empty hand.
 		if (is == null || is.stackSize == 0) {
 			// Remove entity from world.
@@ -244,52 +255,7 @@ public abstract class EntityDrone extends EntityCreature {
 			return true;
 		}
 	}
-
-	/**
-	 * Inspired by bat flight, maybe not the best but it works. Adds motion in
-	 * direction of the supplied coordinate. Also pitches forward to simulate
-	 * typical multicopter flight.
-	 * 
-	 * @param x
-	 * @param y
-	 * @param z
-	 */
-	public void startMovingTowards(int x, int y, int z) {
-		double d0 = (double) x + 0.5D - this.posX;
-		double d1 = (double) y + 0.5D - this.posY;
-		double d2 = (double) z + 0.5D - this.posZ;
-		this.motionX += (Math.signum(d0) * 0.1D - this.motionX) * 0.10000000149011612D;
-		this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-		this.motionZ += (Math.signum(d2) * 0.1D - this.motionZ) * 0.10000000149011612D;
-		float f = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) - 90.0F;
-		float f1 = MathHelper.wrapAngleTo180_float(f - this.rotationYaw);
-		this.moveForward = 0.4F;
-		this.rotationYaw += f1;
-		float f2 = (float) (Math.abs(this.motionX) + Math.abs(this.motionZ));
-		f2 *= 80;
-		this.rotationPitch = f2;
-	}
-
-	/**
-	 * Uses startMovingTowards to move towards this drones base. Should only be
-	 * called in AI loop.
-	 * 
-	 * @return true if arrived
-	 */
-	public boolean goToBase() {
-		if (base == null) {
-			return false;
-		}
-		int intPosX = (int) Math.floor(this.posX);
-		int intPosY = (int) Math.floor(this.posY);
-		int intPosZ = (int) Math.floor(this.posZ);
-
-		if (intPosX != base.xCoord || intPosY != base.yCoord + 1 || intPosZ != base.zCoord) {
-			startMovingTowards(base.xCoord, base.yCoord + 1, base.zCoord);
-			return false;
-		}
-		return true;
-	}
+	
 
 	/**
 	 * Relies on getFirstSlotForItemIDAndDamage, just uses 0 for damage value.
@@ -298,6 +264,7 @@ public abstract class EntityDrone extends EntityCreature {
 	 *            the ID of an item.
 	 * @return the number of the first slot that can contain an item with the
 	 *         supplied itemID.
+	 *         Returns -1 if no slot with the specified item can be found.
 	 */
 	public int getFirstSlotForItem(Item item) {
 		return getFirstSlotForItemAndDamage(item, 0);
@@ -309,7 +276,8 @@ public abstract class EntityDrone extends EntityCreature {
 	 * @param damage
 	 *            the damage value of an item.
 	 * @return the number of the first slot that can contain an item with the
-	 *         supplied itemID and damage value.
+	 *         supplied itemID and damage value. 
+	 *         Returns -1 if no slot with the specified item can be found.
 	 */
 	public int getFirstSlotForItemAndDamage(Item item, int damage) {
 		int slot = -1;
@@ -360,6 +328,10 @@ public abstract class EntityDrone extends EntityCreature {
 		expansions.put(TempInventoryType.module, newItemStack);
 	}
 
+	public boolean isInBlockAt(int x, int y, int z){
+		return (posX >= x && posX < (x+1))&&(posY >= y && posY < (y+1))&&(posZ >= z && posZ < (z+1));
+	}
+	
 	public TileEntityDroneBase getBase() {
 		return base;
 	}
@@ -374,14 +346,6 @@ public abstract class EntityDrone extends EntityCreature {
 
 	public void addTaskModule(ItemTaskModule m) {
 		this.modules.add(m);
-	}
-
-	public TileEntityMarker getCurrentWork() {
-		return currentWork;
-	}
-
-	public void setCurrentWork(TileEntityMarker currentWork) {
-		this.currentWork = currentWork;
 	}
 
 	public int getEnergy() {
@@ -421,11 +385,14 @@ public abstract class EntityDrone extends EntityCreature {
 		this.goingHome = goingHome;
 	}
 
-	public boolean isAccelerating() {
-		return this.dataWatcher.getWatchableObjectByte(13) == 1;
+	@Override
+	protected void fall(float par1) {}
+	
+	public TileEntityMarker getCurrentWork() {
+		return currentWork;
 	}
-
-	public void setAccelerating(boolean accelerating) {
-		this.dataWatcher.updateObject(13, Byte.valueOf((byte) (accelerating ? 1 : 0)));
+	
+	public void setCurrentWork(TileEntityMarker currentWork) {
+		this.currentWork = currentWork;
 	}
 }

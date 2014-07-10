@@ -14,7 +14,7 @@ import sfschouten.dronemod.tileentity.TileEntityMarker;
 
 public class DroneAdvancedTaskAI extends EntityAIBase {
 	private int currentRadius = -1;
-	
+	/*
 	@Override
 	public boolean executeAI(EntityDrone e) {
 		
@@ -82,7 +82,7 @@ public class DroneAdvancedTaskAI extends EntityAIBase {
 			return true;
 		}
 	}
-
+*/
 	@Override
 	public boolean shouldExecute() {
 		// TODO check if this drone has a advanced module in its inventory

@@ -2,7 +2,9 @@ package sfschouten.dronemod.entity.ai;
 
 import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.util.MathHelper;
 
 public class DroneMoveHelper extends EntityMoveHelper {
 	private final EntityDrone entity;
@@ -21,29 +23,36 @@ public class DroneMoveHelper extends EntityMoveHelper {
 
 	public void setMoveTo(double x, double y, double z, double speed) {
 		this.x = x;
-		this.y = (y + 0.5D - 0.17D);
+		this.y = y;
 		this.z = z;
 		this.speed = speed;
 	}
 
 	public void onUpdateMoveHelper() {
-		if (this.entity.isAccelerating()) {
-			//Logger.logOut("is this it?");
-			if (this.x - 0.1D > this.entity.posX) {
-				this.entity.motionX = this.speed;
-			} else if (this.x + 0.1D < this.entity.posX) {
-				this.entity.motionX = (-this.speed);
-			}
-			if (this.y - 0.1D > this.entity.posY) {
-				this.entity.motionY = this.speed;
-			} else if (this.y + 0.1D < this.entity.posY) {
-				this.entity.motionY = (-this.speed);
-			}
-			if (this.z - 0.1D > this.entity.posZ) {
-				this.entity.motionZ = this.speed;
-			} else if (this.z + 0.1D < this.entity.posZ) {
-				this.entity.motionZ = (-this.speed);
-			}
+		double motionX = 0;
+		double motionY = 0;
+		double motionZ = 0;
+		
+		double speed = this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
+		//Logger.logOut("move" + x + "|" + y + "|" + z);
+		if (this.x - 0.1D > this.entity.posX) {
+			motionX = speed;
+		} else if (this.x + 0.1D < this.entity.posX) {
+			motionX = (speed * -1.0D);
 		}
+		
+		if (this.y - 0.1D > this.entity.posY) {
+			motionY = speed;
+		} else if (this.y + 0.1D < this.entity.posY) {
+			motionY = (speed * -1.0D);
+		}
+		
+		if (this.z - 0.1D > this.entity.posZ) {
+			motionZ = speed;
+		} else if (this.z + 0.1D < this.entity.posZ) {
+			motionZ = (speed * -1.0D);
+		}
+		
+		this.entity.setVelocity(motionX, motionY, motionZ);
 	}
 }

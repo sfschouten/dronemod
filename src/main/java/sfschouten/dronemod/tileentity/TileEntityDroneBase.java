@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -197,7 +198,6 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 	}
 	
 	public void spawnDrone(){
-		Logger.logChat(worldObj, "Drone Spawn");
 		if(!(inv[0].getItem() instanceof ItemDrone)){
 			return;
 		}
@@ -205,24 +205,30 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		//See which drone is in inventory
 		ItemDrone droneItem = (ItemDrone) inv[0].getItem();
 		
-   		//Spawn drone
+		//Make new drone
 		NBTTagCompound droneItemNBTdata = inv[0].getTagCompound();
    		EntityDrone e = droneItem.getNewEntity(worldObj, droneItemNBTdata);
-		e.setPosition(xCoord, yCoord+1, zCoord);
+   		e.setPosition(xCoord-0.5 + (e.width/2), yCoord+1, zCoord-0.5 + (e.width/2));
 		e.setBase(this);
 		e.setEnergy(droneItem.getEnergyStored(inv[0]));
 		worldObj.spawnEntityInWorld(e);
-		
-		setDrone(e);
-		lock();
-		
+				
 		//TEMP get first marker from MarkerRegistry to test.
 		MarkerRegistry m = MarkerRegistry.forWorld(worldObj);
 		List<Registration> markers = m.getRegisteredMarkers();
 		Registration r = markers.get(0);
 		
-		//Add marker to quadcopter with specified tast
+		//Add marker to drone
+   		if(r.marker == null){
+   			Logger.logOut("marker is nulllllll");
+   		}else{
+   			Logger.logOut("NOT NULL");
+   		}
+   		
 		e.addWorkMarker(r.marker);
+		
+		setDrone(e);
+		lock();
 		
 		setInventorySlotContents(0, null);
 		
@@ -326,7 +332,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 			return new Object[] {"You called method1!"};
 			//break;
 		case 1:
-			getDrone().goToBase();
+			//TODO getDrone().goToBase();
 			break;
 		}
 		

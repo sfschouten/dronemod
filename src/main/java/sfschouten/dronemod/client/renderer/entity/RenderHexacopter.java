@@ -16,7 +16,6 @@ import sfschouten.dronemod.entity.EntityWoodMediumHexacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongHexacopter;
 
 public class RenderHexacopter extends RenderLiving {
-
 	private static final ResourceLocation woodHexaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/woodHexa.png");
 	private static final ResourceLocation caneHexaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/caneHexa.png");
 	private static final ResourceLocation aluminiumHexaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/aluminiumHexa.png");
