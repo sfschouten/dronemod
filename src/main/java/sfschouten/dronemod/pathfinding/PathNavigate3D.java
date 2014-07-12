@@ -7,8 +7,8 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.World;
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.util.Logger;
 
 /**
  * Use instead of PathNavigate when you want to find a path using PathFinder3D 

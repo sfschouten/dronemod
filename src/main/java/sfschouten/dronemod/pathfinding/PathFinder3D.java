@@ -1,6 +1,6 @@
 package sfschouten.dronemod.pathfinding;
 
-import sfschouten.dronemod.Logger;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

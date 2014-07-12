@@ -4,13 +4,13 @@ import java.text.DecimalFormat;
 
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.nbt.NBTTagCompound;
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.item.module.DroneTaskResult;
 import sfschouten.dronemod.item.module.DroneTaskSubject;
 import sfschouten.dronemod.item.module.ItemAdvancedTaskModule;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
+import sfschouten.dronemod.util.Logger;
 
 public class DroneAdvancedTaskAI extends EntityAIBase {
 	private int currentRadius = -1;

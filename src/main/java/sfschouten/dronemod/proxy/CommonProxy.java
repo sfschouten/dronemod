@@ -1,4 +1,4 @@
-package sfschouten.dronemod;
+package sfschouten.dronemod.proxy;
 
 public class CommonProxy {
 

@@ -22,8 +22,6 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import sfschouten.dronemod.Logger;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.ai.DroneAdvancedTaskAI;
 import sfschouten.dronemod.entity.ai.DroneBasicTaskAI;
 import sfschouten.dronemod.entity.ai.DroneHomingAI;
@@ -31,77 +29,70 @@ import sfschouten.dronemod.entity.ai.DroneMoveHelper;
 import sfschouten.dronemod.entity.ai.DroneRechargeAI;
 import sfschouten.dronemod.entity.ai.DroneRestockAI;
 import sfschouten.dronemod.entity.ai.EntityWanderFlyingAI;
-import sfschouten.dronemod.inventory.TempInventory;
+import sfschouten.dronemod.inventory.InventoryType;
+import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.pathfinding.PathNavigate3D;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
+import sfschouten.dronemod.util.Logger;
 
 public abstract class EntityDrone extends EntityFlying {
-	/**
-	 * The tile entity corresponding to the base of this drone.
-	 */
+	/** The tile entity corresponding to the base of this drone. */
 	private TileEntityDroneBase base;
 
-	/**
-	 * A list of TileEntityMarkers corresponding to the work markers of this
-	 * drone.
-	 */
+	/** A list of TileEntityMarkers corresponding to the work markers of this drone. */
 	private List<TileEntityMarker> workMarkers;
 
-	/**
-	 * The current marker being worked.
-	 */
+	/** The current marker being worked. */
 	private TileEntityMarker currentWork;
 	
-	/**
-	 * The Inventory of this drone containing the items it picks up from the
-	 * world etc.
-	 */
-	private TempInventory actualInventory;
+	/** The Inventory of this drone containing the items it picks up from the world etc. */
+	private SimpleInventory actualInventory;
 
-	/**
-	 * TODO The amount of energy in ....
-	 */
+	/** TODO The amount of energy in .... */
 	private int energy;
 
-	/**
-	 * A list of modules with the tasks that this drone should do.
-	 */
+	/** A list of modules with the tasks that this drone should do. */
 	private List<ItemTaskModule> modules;
 
+	/** A sleep timer, the amount of ticks left to let the drone sleep.	 */
+	private int sleep;
+	
 	/**
 	 * A HashMap containing a different sets of items. For every type of
 	 * expansion a drone can have there is an array. The array' size is
 	 * Determined based upon the type of drone it is.
 	 */
-	private HashMap<TempInventoryType, ItemStack[]> expansions;
+	private HashMap<InventoryType, ItemStack[]> expansions;
 
 	private boolean goingHome;
+	private boolean restocking;
 
 	public EntityDrone(World par1World) {
 		super(par1World);
 		this.setSize(0.9F, 0.2F);
 		workMarkers = new ArrayList<TileEntityMarker>();
 		modules = new ArrayList<ItemTaskModule>();
-
+		sleep = -1;
+		
 		// TODO move task AI's to individual drones.
 		//this.tasks.addTask(0, new EntityWanderFlyingAI(this, 1.0D));
-		tasks.addTask(0, new DroneBasicTaskAI(this));
-		tasks.addTask(1, new DroneRestockAI(this));
+		tasks.addTask(0, new DroneRestockAI(this));
+		tasks.addTask(1, new DroneBasicTaskAI(this));
 
 		// TODO move line below to each individual drone because size of
 		// actualInventory should be based upon type of drone.
-		actualInventory = new TempInventory(1);
-		expansions = new HashMap<TempInventoryType, ItemStack[]>();
+		actualInventory = new SimpleInventory(1);
+		expansions = new HashMap<InventoryType, ItemStack[]>();
 
-		for (TempInventoryType type : TempInventoryType.values()) {
+		for (InventoryType type : InventoryType.values()) {
 			expansions.put(type, new ItemStack[getItem().getExpSize(type)]);
 		}
 
-		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigate3D(this, worldObj, 75), new String[] { "navigator", "field_70699_by" });
-		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DroneMoveHelper(this), new String[] { "moveHelper", "field_70765_h" });
+		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigate3D(this, worldObj, 75), new String[]{"navigator", "field_70699_by"});
+		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DroneMoveHelper(this), new String[]{"moveHelper", "field_70765_h"});
 	}
 	public abstract int getEnergyUse();
 
@@ -120,6 +111,9 @@ public abstract class EntityDrone extends EntityFlying {
 	public void onUpdate() {
 		this.fallDistance = 0.0F;
 		this.isAirBorne = true;
+		if(sleep > -1){
+			this.sleep--;
+		}
 
 		PathEntity path = getNavigator().getPath();
 		if(path != null){
@@ -139,16 +133,15 @@ public abstract class EntityDrone extends EntityFlying {
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		// Loop through each type of inventory: batteries, modules, chests, free
 		// slots.
-		for (Entry<TempInventoryType, ItemStack[]> entry : expansions.entrySet()) {
-			TempInventoryType type = entry.getKey();
+		for (Entry<InventoryType, ItemStack[]> entry : expansions.entrySet()) {
+			InventoryType type = entry.getKey();
 			ItemStack[] items = entry.getValue();
 
-			TempInventory t = new TempInventory(items.length);
+			SimpleInventory t = new SimpleInventory(items.length);
 			t.setInv(items);
 			NBTTagCompound tc = new NBTTagCompound();
 			t.writeToNBT(tc);
-			// tc.setInteger("InventoryLength", t.getSizeInventory());
-			System.out.println("type.name(): " + type.name());
+			tc.setInteger("InventoryLength", t.getSizeInventory());
 			par1nbtTagCompound.setTag(type.name(), tc);
 		}
 
@@ -161,6 +154,9 @@ public abstract class EntityDrone extends EntityFlying {
 			currentWorkComp.setInteger("z", currentWork.zCoord);
 			par1nbtTagCompound.setTag("currentWork", currentWorkComp);
 		}
+		
+		
+		
 		// TODO implement the NBT storage of base.
 		// NBTTagCompound baseComp = new NBTTagCompound();
 		// baseComp.setInteger("baseX", base.xCoord);
@@ -172,9 +168,9 @@ public abstract class EntityDrone extends EntityFlying {
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		for (TempInventoryType type : TempInventoryType.values()) {
+		for (InventoryType type : InventoryType.values()) {
 			NBTTagCompound typeComp = par1nbtTagCompound.getCompoundTag(type.name());
-			TempInventory inv = new TempInventory(typeComp.getInteger("InventoryLength"));
+			SimpleInventory inv = new SimpleInventory(typeComp.getInteger("InventoryLength"));
 			inv.readFromNBT(typeComp);
 			expansions.put(type, inv.getInv());
 		}
@@ -310,7 +306,7 @@ public abstract class EntityDrone extends EntityFlying {
 		ItemStack newStack = new ItemStack(m, 1, 0);
 
 		// Get current list of modules in entity.
-		ItemStack[] current = expansions.get(TempInventoryType.module);
+		ItemStack[] current = expansions.get(InventoryType.module);
 
 		// Temporary list to make adding another module easier.
 		List<ItemStack> temp = new ArrayList<ItemStack>(Arrays.asList(current));
@@ -325,7 +321,7 @@ public abstract class EntityDrone extends EntityFlying {
 
 		// Convert the list back to an array and add back to the inventory.
 		ItemStack[] newItemStack = temp.toArray(new ItemStack[temp.size()]);
-		expansions.put(TempInventoryType.module, newItemStack);
+		expansions.put(InventoryType.module, newItemStack);
 	}
 
 	public boolean isInBlockAt(int x, int y, int z){
@@ -356,11 +352,11 @@ public abstract class EntityDrone extends EntityFlying {
 		this.energy = energy;
 	}
 
-	public TempInventory getActualInventory() {
+	public SimpleInventory getActualInventory() {
 		return actualInventory;
 	}
 
-	public void setActualInventory(TempInventory actualInventory) {
+	public void setActualInventory(SimpleInventory actualInventory) {
 		this.actualInventory = actualInventory;
 	}
 
@@ -394,5 +390,25 @@ public abstract class EntityDrone extends EntityFlying {
 	
 	public void setCurrentWork(TileEntityMarker currentWork) {
 		this.currentWork = currentWork;
+	}
+	
+	public boolean isRestocking() {
+		return restocking;
+	}
+	
+	public void setRestocking(boolean restocking) {
+		this.restocking = restocking;
+	}	
+	
+	/**
+	 * Makes the drone do nothing for the specified amount of time in ticks.
+	 * 
+	 * @param sleepTime The amount of time to sleep in ticks.
+	 */
+	public void sleep(int sleepTime){
+		this.sleep = sleepTime;
+	}
+	public boolean isAwake() {
+		return sleep == -1;
 	}
 }

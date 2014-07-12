@@ -1,7 +1,5 @@
 package sfschouten.dronemod;
 
-import org.apache.logging.log4j.core.helpers.Loader;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import sfschouten.dronemod.block.BlockDroneBase;
@@ -66,14 +64,12 @@ import sfschouten.dronemod.network.DroneReturnMessage;
 import sfschouten.dronemod.network.DroneReturnMessageHandler;
 import sfschouten.dronemod.network.LaunchDroneMessage;
 import sfschouten.dronemod.network.LaunchDroneMessageHandler;
+import sfschouten.dronemod.proxy.CommonProxy;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import sfschouten.dronemod.tileentity.TileEntityMiller;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
-//import cpw.mods.fml.common.Mod.PreInit;    // used in 1.5.2
-//import cpw.mods.fml.common.Mod.Init;       // used in 1.5.2
-//import cpw.mods.fml.common.Mod.PostInit;   // used in 1.5.2
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -85,7 +81,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = DroneMod.modID, name = "DroneMod", version = "dev")
+@Mod(modid = DroneMod.modID, name = "Modular Multicopter Drones", version = "dev")
 public class DroneMod {
 	public static final String modID = "schoutendronemod";
 	public static CreativeTabs tabDroneMod = new CreativeTabs("tabDroneMod") {
@@ -168,7 +164,7 @@ public class DroneMod {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
+
 		packetInit();
 		itemInit();
 		blockInit();
@@ -185,7 +181,6 @@ public class DroneMod {
 		networkWrapper.registerMessage(ChangeMarkerMessageHandler.class, ChangeMarkerMessage.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(DroneReturnMessageHandler.class, DroneReturnMessage.class, 1, Side.SERVER);
 		networkWrapper.registerMessage(LaunchDroneMessageHandler.class, LaunchDroneMessage.class, 2, Side.SERVER);
-
 	}
 
 	private void itemInit() {
@@ -220,18 +215,18 @@ public class DroneMod {
 		GameRegistry.registerItem(aluminiumMediumHexacopterItem, "aluminiumMediumHexacopterItem");
 		GameRegistry.registerItem(aluminiumMediumOctacopterItem, "aluminiumMediumOctacopterItem");
 		GameRegistry.registerItem(aluminiumMediumQuadcopterItem, "aluminiumMediumQuadcopterItem");
-		
+
 		GameRegistry.registerItem(aluminiumStrongHexacopterItem, "aluminiumStrongHexacopterItem");
 		GameRegistry.registerItem(aluminiumStrongOctacopterItem, "aluminiumStrongOctacopterItem");
 		GameRegistry.registerItem(aluminiumStrongQuadcopterItem, "aluminiumStrongQuadcopterItem");
-		
+
 		GameRegistry.registerItem(caneWeakQuadcopterItem, "caneWeakQuadcopterItem");
 		GameRegistry.registerItem(caneWeakHexacopterItem, "caneWeakHexacopterItem");
-		
+
 		GameRegistry.registerItem(woodMediumQuadcopterItem, "woodMediumQuadcopterItem");
 		GameRegistry.registerItem(woodMediumHexacopterItem, "woodMediumHexacopterItem");
 		GameRegistry.registerItem(woodMediumOctacopterItem, "woodMediumOctacopterItem");
-		
+
 		GameRegistry.registerItem(woodStrongQuadcopterItem, "woodStrongQuadcopterItem");
 		GameRegistry.registerItem(woodStrongHexacopterItem, "woodStrongHexacopterItem");
 		GameRegistry.registerItem(woodStrongOctacopterItem, "woodStrongOctacopterItem");
@@ -258,26 +253,26 @@ public class DroneMod {
 		id++;
 		EntityRegistry.registerModEntity(EntityAluminiumMediumQuadcopter.class, "EntityAluminiumMediumQuadcopter", id, this, 64, 10, true);
 		id++;
-		
+
 		EntityRegistry.registerModEntity(EntityAluminiumStrongHexacopter.class, "EntityAluminiumStrongHexacopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityAluminiumStrongOctacopter.class, "EntityAluminiumStrongOctacopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityAluminiumStrongQuadcopter.class, "EntityAluminiumStrongQuadcopter", id, this, 64, 10, true);
 		id++;
-		
+
 		EntityRegistry.registerModEntity(EntityCaneWeakQuadcopter.class, "EntityCaneWeakQuadcopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityCaneWeakHexacopter.class, "EntityCaneWeakHexacopter", id, this, 64, 10, true);
 		id++;
-		
+
 		EntityRegistry.registerModEntity(EntityWoodMediumQuadcopter.class, "EntityWoodMediumQuadcopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityWoodMediumHexacopter.class, "EntityWoodMediumHexacopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityWoodMediumOctacopter.class, "EntityWoodMediumOctacopter", id, this, 64, 10, true);
 		id++;
-		
+
 		EntityRegistry.registerModEntity(EntityWoodStrongQuadcopter.class, "EntityWoodStrongQuadcopter", id, this, 64, 10, true);
 		id++;
 		EntityRegistry.registerModEntity(EntityWoodStrongHexacopter.class, "EntityWoodStrongHexacopter", id, this, 64, 10, true);

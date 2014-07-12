@@ -7,13 +7,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityAluminiumMediumHexacopter;
 import sfschouten.dronemod.entity.EntityAluminiumStrongHexacopter;
 import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodMediumHexacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongHexacopter;
+import sfschouten.dronemod.util.Logger;
 
 public class RenderHexacopter extends RenderLiving {
 	private static final ResourceLocation woodHexaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/woodHexa.png");

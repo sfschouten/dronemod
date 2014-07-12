@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import cofh.api.energy.IEnergyContainerItem;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.Logger;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.inventory.TempInventory;
+import sfschouten.dronemod.inventory.InventoryType;
+import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.item.module.ItemTaskModule;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,7 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public abstract class ItemDrone extends Item implements IEnergyContainerItem{
-	protected HashMap<TempInventoryType, Integer> amounts;
+	protected HashMap<InventoryType, Integer> amounts;
 	protected Class entityClass;
 	
     public ItemDrone() {
@@ -53,11 +53,11 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
     	return entityClass;
     }
     
-    public abstract int getExpSize(TempInventoryType type);
+    public abstract int getExpSize(InventoryType type);
     
     protected EntityDrone applySizes(EntityDrone e, NBTTagCompound droneItemNBTdata){
-		for(TempInventoryType it : TempInventoryType.values()){
-			TempInventory inv = new TempInventory(getExpSize(it));
+		for(InventoryType it : InventoryType.values()){
+			SimpleInventory inv = new SimpleInventory(getExpSize(it));
 			NBTTagCompound NBTTagComp = droneItemNBTdata.getCompoundTag(it.name());
 			if(NBTTagComp == null){
 				NBTTagComp = new NBTTagCompound();
@@ -73,7 +73,7 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 						break;
 					}else if(false/*TODO implement battery stuffs*/){
 					}else if(currentStack.getItem() == Item.getItemFromBlock(Blocks.chest)){
-						e.setActualInventory(new TempInventory(e.getActualInventory().getSizeInventory()+1));
+						e.setActualInventory(new SimpleInventory(e.getActualInventory().getSizeInventory()+1));
 					}
 				}
 			}

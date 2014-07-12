@@ -1,10 +1,10 @@
 package sfschouten.dronemod.item.battery;
 
-import sfschouten.dronemod.DroneMod;
-import cofh.api.energy.IEnergyContainerItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import sfschouten.dronemod.DroneMod;
+import cofh.api.energy.IEnergyContainerItem;
 
 public abstract class ItemDroneBattery extends Item implements IEnergyContainerItem {
 	protected int capacity;
@@ -14,12 +14,11 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 	public ItemDroneBattery() {
 		super();
 		this.setCreativeTab(DroneMod.tabDroneMod);
-        this.setMaxStackSize(16);
+		this.setMaxStackSize(16);
 	}
 
-	public ItemDroneBattery setCapacity(int capacity) {
+	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-		return this;
 	}
 
 	public void setMaxTransfer(int maxTransfer) {
@@ -78,5 +77,4 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 	public int getMaxEnergyStored(ItemStack container) {
 		return capacity;
 	}
-
 }

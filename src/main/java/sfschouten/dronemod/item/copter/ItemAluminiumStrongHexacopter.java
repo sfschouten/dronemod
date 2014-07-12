@@ -4,17 +4,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityAluminiumStrongOctacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
+import sfschouten.dronemod.inventory.InventoryType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemAluminiumStrongHexacopter extends ItemDrone {
 
 	public ItemAluminiumStrongHexacopter() {
 		super();
-		this.setUnlocalizedName("aluminiumStrongOctacopterItem");
+		this.setUnlocalizedName("aluminiumStrongHexacopterItem");
 		entityClass = EntityAluminiumStrongOctacopter.class;
 
 		ItemStack hexaAluminiumFrame = new ItemStack(DroneMod.hexaAluminiumFrameItem);
@@ -30,7 +30,7 @@ public class ItemAluminiumStrongHexacopter extends ItemDrone {
 	}
 
 	@Override
-	public int getExpSize(TempInventoryType type) {
+	public int getExpSize(InventoryType type) {
 		int result = 0;
 		switch (type) {
 		case battery:

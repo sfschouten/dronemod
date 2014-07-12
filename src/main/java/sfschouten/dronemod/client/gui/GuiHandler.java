@@ -2,9 +2,9 @@ package sfschouten.dronemod.client.gui;
 
 import java.util.List;
 
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.inventory.ContainerDroneBase;
 import sfschouten.dronemod.inventory.ContainerDroneItem;
+import sfschouten.dronemod.inventory.InventoryType;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.client.Minecraft;

@@ -5,10 +5,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import sfschouten.dronemod.TempInventoryType;
 
-public class TempInventory implements IInventory{
-	private TempInventoryType type;
+public class SimpleInventory implements IInventory{
+	private InventoryType type;
 	private ItemStack[] inv;
 	private int stackLimit = 1;
 	boolean locked;
@@ -21,15 +20,15 @@ public class TempInventory implements IInventory{
 		this.inv = inv;
 	}
 
-	public TempInventoryType getType() {
+	public InventoryType getType() {
 		return type;
 	}
 
-	public void setType(TempInventoryType type) {
+	public void setType(InventoryType type) {
 		this.type = type;
 	}
 
-	public TempInventory(int length){
+	public SimpleInventory(int length){
 		inv = new ItemStack[length];
 	}
 	

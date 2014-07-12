@@ -12,8 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.tileentity.TileEntityMiller;
+import sfschouten.dronemod.util.Logger;
 
 public class BlockMiller extends BlockContainer {
 

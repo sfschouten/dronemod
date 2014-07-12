@@ -1,4 +1,4 @@
-package sfschouten.dronemod;
+package sfschouten.dronemod.util;
 
 public class Pair<L,R> {
 	private L l;

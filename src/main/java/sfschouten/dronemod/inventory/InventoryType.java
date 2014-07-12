@@ -1,11 +1,11 @@
-package sfschouten.dronemod;
+package sfschouten.dronemod.inventory;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import cofh.api.energy.IEnergyStorage;
 
-public enum TempInventoryType {
+public enum InventoryType {
 	battery, module, chest, free;
 	
 	private Class item;

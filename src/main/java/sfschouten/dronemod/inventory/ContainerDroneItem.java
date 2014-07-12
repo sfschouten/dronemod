@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import cofh.api.energy.IEnergyContainerItem;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
 import sfschouten.dronemod.item.copter.ItemDrone;
@@ -21,7 +20,7 @@ import net.minecraft.nbt.NBTTagEnd;
 public class ContainerDroneItem extends Container {
 	//Stack with drone.
 	ItemStack stack;
-	HashMap<TempInventoryType, TempInventory> inventories = new HashMap<TempInventoryType, TempInventory>();
+	HashMap<InventoryType, SimpleInventory> inventories = new HashMap<InventoryType, SimpleInventory>();
 	
 	public ContainerDroneItem(InventoryPlayer inventoryPlayer, ItemStack stack) {
 		this.stack = stack;
@@ -34,9 +33,9 @@ public class ContainerDroneItem extends Container {
 			System.out.println("stacknbt is not null");
 		}
 		
-		for(TempInventoryType type : TempInventoryType.values()){
+		for(InventoryType type : InventoryType.values()){
 			ItemDrone drone = (ItemDrone)stack.getItem();
-			TempInventory temp = new TempInventory(drone.getExpSize(type));
+			SimpleInventory temp = new SimpleInventory(drone.getExpSize(type));
 			
 			//Get inventorytype specific compoundtag
 			NBTTagCompound comp = stackNBT.getCompoundTag(type.name());
@@ -79,13 +78,13 @@ public class ContainerDroneItem extends Container {
 			stackNBT = new NBTTagCompound();
 		}
 		
-		for(TempInventoryType type : TempInventoryType.values()){
+		for(InventoryType type : InventoryType.values()){
 			NBTTagCompound comp = new NBTTagCompound();
 			inventories.get(type).writeToNBT(comp);
 			stackNBT.setTag(type.name(), comp);
 		}
 		
-		TempInventory inv = inventories.get(TempInventoryType.battery);
+		SimpleInventory inv = inventories.get(InventoryType.battery);
 		int totalEnergyCapacity = 0;
 		int totalEnergy = 0;
 		

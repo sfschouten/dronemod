@@ -1,4 +1,4 @@
-package sfschouten.dronemod.client;
+package sfschouten.dronemod.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -6,7 +6,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityRainFX;
 import net.minecraftforge.client.MinecraftForgeClient;
-import sfschouten.dronemod.CommonProxy;
 import sfschouten.dronemod.client.model.ModelCaneOctaCopter;
 import sfschouten.dronemod.client.model.ModelOctaCopter;
 import sfschouten.dronemod.client.model.ModelQuadcopter;

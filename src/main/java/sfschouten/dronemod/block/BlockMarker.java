@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.MarkerRegistry;
+import sfschouten.dronemod.registry.MarkerRegistry;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

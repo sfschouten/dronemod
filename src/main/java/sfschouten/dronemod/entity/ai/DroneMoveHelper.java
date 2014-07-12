@@ -1,7 +1,7 @@
 package sfschouten.dronemod.entity.ai;
 
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.MathHelper;

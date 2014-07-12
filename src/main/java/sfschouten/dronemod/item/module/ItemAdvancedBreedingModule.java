@@ -10,10 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import sfschouten.dronemod.Logger;
 import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.inventory.TempInventory;
+import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
+import sfschouten.dronemod.util.Logger;
 
 public class ItemAdvancedBreedingModule extends ItemAdvancedTaskModule{
 
@@ -72,7 +72,7 @@ public class ItemAdvancedBreedingModule extends ItemAdvancedTaskModule{
 	@Override
 	public DroneTaskResult performTask(EntityDrone d, DroneTaskSubject s) {
 		EntityAnimal animal = (EntityAnimal) s.getEntity();
-		TempInventory inv = d.getActualInventory();
+		SimpleInventory inv = d.getActualInventory();
 		ItemStack breedingItem = null;
 		for(int i = 0; i < inv.getSizeInventory(); i++){
 			ItemStack stack = inv.getStackInSlot(i);

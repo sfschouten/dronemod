@@ -11,15 +11,15 @@ import cofh.api.energy.IEnergyStorage;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import sfschouten.dronemod.Logger;
-import sfschouten.dronemod.MarkerRegistry;
-import sfschouten.dronemod.MarkerRegistry.Registration;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
-import sfschouten.dronemod.inventory.TempInventory;
+import sfschouten.dronemod.inventory.InventoryType;
+import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.item.module.ItemTaskModule;
+import sfschouten.dronemod.registry.MarkerRegistry;
+import sfschouten.dronemod.registry.MarkerRegistry.Registration;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -208,7 +208,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		//Make new drone
 		NBTTagCompound droneItemNBTdata = inv[0].getTagCompound();
    		EntityDrone e = droneItem.getNewEntity(worldObj, droneItemNBTdata);
-   		e.setPosition(xCoord-0.5 + (e.width/2), yCoord+1, zCoord-0.5 + (e.width/2));
+   		e.setPosition(xCoord, yCoord+1, zCoord);
 		e.setBase(this);
 		e.setEnergy(droneItem.getEnergyStored(inv[0]));
 		worldObj.spawnEntityInWorld(e);
@@ -325,7 +325,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 	}
 
 	@Override
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception {
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) {
 		switch(method){
 		case 0:
 			spawnDrone();

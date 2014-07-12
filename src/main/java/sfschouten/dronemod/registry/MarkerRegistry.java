@@ -1,4 +1,4 @@
-package sfschouten.dronemod;
+package sfschouten.dronemod.registry;
 
 import java.util.ArrayList;
 import java.util.Collection;

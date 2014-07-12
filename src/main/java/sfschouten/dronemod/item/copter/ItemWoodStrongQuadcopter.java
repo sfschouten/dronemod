@@ -4,10 +4,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodMediumOctacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
+import sfschouten.dronemod.inventory.InventoryType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemWoodStrongQuadcopter extends ItemDrone {
@@ -30,7 +30,7 @@ public class ItemWoodStrongQuadcopter extends ItemDrone {
 	}
 
 	@Override
-	public int getExpSize(TempInventoryType type) {
+	public int getExpSize(InventoryType type) {
 		int result = 0;
 		switch (type) {
 		case battery:

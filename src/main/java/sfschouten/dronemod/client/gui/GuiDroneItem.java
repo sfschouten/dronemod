@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.TempInventoryType;
 import sfschouten.dronemod.inventory.ContainerDroneItem;
-import sfschouten.dronemod.inventory.TempInventory;
+import sfschouten.dronemod.inventory.InventoryType;
+import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.item.copter.ItemDrone;
 
 public class GuiDroneItem extends GuiContainer {
@@ -40,7 +40,7 @@ public class GuiDroneItem extends GuiContainer {
 		// the parameters for drawString are: string, x, y, color
 		fontRendererObj.drawString("Drone", 8, 6, 4210752);
 		
-		for(TempInventoryType type : TempInventoryType.values()){
+		for(InventoryType type : InventoryType.values()){
 			fontRendererObj.drawString(type.name(), 8, 16+(type.ordinal()*25), 4210752);
 		}
 	}
@@ -60,14 +60,14 @@ public class GuiDroneItem extends GuiContainer {
 		this.mc.renderEngine.bindTexture(guiSlot);
 		
 		NBTTagCompound stackNBT = stack.getTagCompound();
-		for(TempInventoryType type : TempInventoryType.values()){
+		for(InventoryType type : InventoryType.values()){
 			if(stackNBT == null){
 				stackNBT = new NBTTagCompound();
 			}
 			NBTTagCompound comp = stackNBT.getCompoundTag(type.name());
 			ItemDrone drone = (ItemDrone)stack.getItem();
 			int invLength = comp.getInteger("length");
-			TempInventory temp = new TempInventory(drone.getExpSize(type));
+			SimpleInventory temp = new SimpleInventory(drone.getExpSize(type));
 			temp.readFromNBT(comp);
 
 			for(int t = 0; t < temp.getSizeInventory(); t++){

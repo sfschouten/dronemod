@@ -1,11 +1,6 @@
 package sfschouten.dronemod.item.battery;
 
 import sfschouten.dronemod.DroneMod;
-import cofh.api.energy.IEnergyContainerItem;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemMediumDroneBattery extends ItemDroneBattery {
 

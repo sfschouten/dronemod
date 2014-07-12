@@ -65,34 +65,34 @@ public class PathPointWrapper {
 	}
 	
 	public float getTotalPathDistance(){
-		return ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, "totalPathDistance");
+		return (Float)ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, new String[]{"totalPathDistance", "field_75836_e"});
 	}
 	
 	public float getDistanceToNext(){
-		return ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, "distanceToNext");
+		return (Float)ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, new String[]{"distanceToNext", "field_75833_f"});
 	}
 	
 	public float getDistanceToTarget(){
-		return ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, "distanceToTarget");
+		return (Float)ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, new String[]{"distanceToTarget", "field_75834_g"});
 	}
 	
 	public PathPoint getPrevious(){
-		return ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, "previous");
+		return (PathPoint)ReflectionHelper.getPrivateValue(PATH_POINT, pathPoint, new String[]{"previous", "field_75841_h"});
 	}
 	
 	public void setTotalPathDistance(float totalPathDistance){
-		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, totalPathDistance, "totalPathDistance");
+		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, totalPathDistance, new String[]{"totalPathDistance", "field_75836_e"});
 	}
 	
 	public void setDistanceToNext(float distanceToNext){
-		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, distanceToNext, "distanceToNext");
+		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, distanceToNext, new String[]{"distanceToNext", "field_75833_f"});
 	}
 	
 	public void setDistanceToTarget(float distanceToTarget){
-		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, distanceToTarget, "distanceToTarget");
+		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, distanceToTarget, new String[]{"distanceToTarget", "field_75834_g"});
 	}
 	
 	public void setPrevious(PathPoint previous){
-		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, previous, "previous");
+		ReflectionHelper.setPrivateValue(PATH_POINT, pathPoint, previous, new String[]{"previous", "field_75841_h"});
 	}
 }

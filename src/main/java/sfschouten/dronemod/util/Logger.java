@@ -1,4 +1,4 @@
-package sfschouten.dronemod;
+package sfschouten.dronemod.util;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
