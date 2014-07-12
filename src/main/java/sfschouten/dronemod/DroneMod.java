@@ -147,12 +147,10 @@ public class DroneMod {
 	public final static BlockMarkerBarrier markerBarrier = new BlockMarkerBarrier();
 	public final static BlockMiller miller = new BlockMiller();
 
-	// The instance of your mod that Forge uses.
 	@Instance(value = DroneMod.modID)
 	public static DroneMod instance;
 
-	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = "sfschouten.dronemod.client.ClientProxy", serverSide = "sfschouten.dronemod.CommonProxy")
+	@SidedProxy(clientSide = "sfschouten.dronemod.proxy.ClientProxy", serverSide = "sfschouten.dronemod.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	public static SimpleNetworkWrapper networkWrapper;
 
