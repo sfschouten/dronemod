@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderQuadcopter extends RenderLiving {
-	private static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID, "textures/entity/quadcopter.png");
+	public static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID, "textures/entity/quadcopter.png");
 
 	public RenderQuadcopter(ModelQuadcopter par1ModelBase, float par2) {
 		super(par1ModelBase, par2);

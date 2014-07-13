@@ -29,7 +29,9 @@ public class DroneBasicTaskAI extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return drone.isAwake();
+		MarkerRegistry mr = MarkerRegistry.forWorld(drone.worldObj);
+		List<Registration> markers = mr.getRegisteredMarkers();
+		return drone.isAwake() && !markers.isEmpty();
 	}
 
 	@Override
@@ -63,11 +65,11 @@ public class DroneBasicTaskAI extends EntityAIBase {
 		} else {
 			currentZ -= ((2 * currentRadius) - (currentBlock % (2 * currentRadius)));
 		}
-		Logger.logOut("\nx:" + currentX + "y:" + currentY + "z:" + currentZ);
-		Logger.logOut("DroneLoc: x: " + drone.posX + "; y: " + drone.posY + "; z: " + drone.posZ);
+		Logger.log("\nx:" + currentX + "y:" + currentY + "z:" + currentZ);
+		Logger.log("DroneLoc: x: " + drone.posX + "; y: " + drone.posY + "; z: " + drone.posZ);
 		if (!drone.isInBlockAt(currentX, currentY + 1, currentZ)) {
 			// Drone has not arrived where he needs to be so move towards it.
-			Logger.logOut("tryMoveTo");
+			Logger.log("tryMoveTo");
 			drone.getNavigator().tryMoveToXYZ(currentX + 0.5D, currentY + 1.5D, currentZ + 0.5D, 1.0D);
 		} else {
 			ItemTaskModule firstNotAdvancedModule = null;
@@ -78,22 +80,22 @@ public class DroneBasicTaskAI extends EntityAIBase {
 			}
 
 			if (firstNotAdvancedModule == null) {
-				Logger.logOut("no basic modules!");
+				Logger.log("no basic modules!");
 				return;
 			}
 
 			DroneTaskResult result = firstNotAdvancedModule.performTask(drone, new DroneTaskSubject());
 			switch (result) {
 			case resourcelow:
-				Logger.logOut("Resource Low");
+				Logger.log("Resource Low");
 				drone.setRestocking(true);
 				break;
 			case success:
-				Logger.logOut("Success");
+				Logger.log("Success");
 				increment();
 				break;
 			case wrongEnvironment:
-				Logger.logOut("Wrong Environment");
+				Logger.log("Wrong Environment");
 				increment();
 				break;
 			case noModule:
@@ -136,7 +138,7 @@ public class DroneBasicTaskAI extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return !drone.getNavigator().noPath();
+		return !drone.getNavigator().noPath() && drone.isAwake();
 	}
 
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {

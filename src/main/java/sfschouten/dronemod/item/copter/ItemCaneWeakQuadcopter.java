@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.client.model.ModelQuadcopter;
 import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
@@ -21,6 +22,7 @@ public class ItemCaneWeakQuadcopter extends ItemDrone {
 		super();
 		this.setUnlocalizedName("caneWeakQuadcopterItem");
 		entityClass = EntityCaneWeakQuadcopter.class;
+		modelClass = ModelQuadcopter.class;
 		
 		ItemStack quadCaneFrame = new ItemStack(DroneMod.quadCaneFrameItem);
 		ItemStack weakMotor = new ItemStack(DroneMod.weakMotorItem);

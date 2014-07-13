@@ -12,7 +12,7 @@ import net.minecraft.entity.Entity;
 public abstract class ModelCopter extends ModelBase {
 	HashMap<String, ModelRenderer> parts;
 	float scale;
-
+	
 	public ModelCopter(float scale) {
 		this.parts = new HashMap<String, ModelRenderer>();
 		this.scale = scale;
@@ -23,14 +23,17 @@ public abstract class ModelCopter extends ModelBase {
 	
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		
+		render(entity, f, f1, f2, f3, f4, f5, true);
+	}
+	
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean rotate){
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		float scale = f5 * this.scale;
-		rotateBlades(12);
 		
+		if(rotate){
+			rotateBlades(12);
+		}
 		for (Entry<String, ModelRenderer> r : parts.entrySet()) {
-			r.getValue().render(scale);
+			r.getValue().render(f5);
 		}
 	}
 

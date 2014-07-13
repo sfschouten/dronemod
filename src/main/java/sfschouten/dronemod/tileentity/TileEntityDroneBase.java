@@ -220,9 +220,9 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		
 		//Add marker to drone
    		if(r.marker == null){
-   			Logger.logOut("marker is nulllllll");
+   			Logger.log("marker is nulllllll");
    		}else{
-   			Logger.logOut("NOT NULL");
+   			Logger.log("NOT NULL");
    		}
    		
 		e.addWorkMarker(r.marker);
@@ -341,7 +341,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 
 	@Override
 	public void attach(IComputerAccess computer) {
-		Logger.logChat(worldObj, "Drone Base Attached!");
+		Logger.chat(worldObj, "Drone Base Attached!");
 	}
 
 	@Override

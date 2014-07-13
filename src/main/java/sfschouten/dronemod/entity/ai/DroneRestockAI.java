@@ -24,21 +24,21 @@ public class DroneRestockAI extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		TileEntityDroneBase base = drone.getBase();
-		Logger.logOut("startExecutingRestock");
-		Logger.logOut("baseXYZ: " + base.xCoord +", "+ base.yCoord + ", " + base.zCoord);
-		Logger.logOut("droneXYZ: " + drone.posX +", "+ drone.posY + ", " + drone.posZ);
+		Logger.log("startExecutingRestock");
+		Logger.log("baseXYZ: " + base.xCoord +", "+ base.yCoord + ", " + base.zCoord);
+		Logger.log("droneXYZ: " + drone.posX +", "+ drone.posY + ", " + drone.posZ);
 		
 		if(!drone.isInBlockAt(base.xCoord, base.yCoord+1, base.zCoord)){
-			Logger.logOut("drone not at base, go there");
+			Logger.log("drone not at base, go there");
 			drone.getNavigator().tryMoveToXYZ(base.xCoord, base.yCoord+1, base.zCoord, 1.0D);
 		}else{
-			Logger.logOut("drone is at base");
+			Logger.log("drone is at base");
 			Item restockItem = drone.getModules().get(0).getRestockItem();
 			int restockItemDamage = drone.getModules().get(0).getRestockItemDamageValue();
 			
 			IInventory adjInv = drone.getBase().getAdjacentInventory();
 			if (adjInv == null){
-				Logger.logOut("No adjacent inventory found!");
+				Logger.log("No adjacent inventory found!");
 				return;
 			}
 			
@@ -71,6 +71,8 @@ public class DroneRestockAI extends EntityAIBase {
 									adjInv.setInventorySlotContents(slot, null);
 								}
 								drone.getActualInventory().setInventorySlotContents(localSlot, newStack);
+								drone.sleep(20);
+								return;
 							}else if(localStack.getItem() == restockItem && localStack.getItem().getDamage(stack) == restockItemDamage){
 								if(localStack.stackSize + residualIncrease > localStack.getMaxStackSize()){
 									int difference = localStack.getMaxStackSize() - localStack.stackSize;
@@ -83,6 +85,8 @@ public class DroneRestockAI extends EntityAIBase {
 									if(stack.stackSize == 0){
 										adjInv.setInventorySlotContents(slot, null);
 									}
+									drone.sleep(20);
+									return;
 								}
 							}
 						}
@@ -96,7 +100,7 @@ public class DroneRestockAI extends EntityAIBase {
 	
 	@Override
 	public boolean continueExecuting() {
-		return !drone.getNavigator().noPath() && drone.isRestocking();
+		return !drone.getNavigator().noPath() && drone.isRestocking() && drone.isAwake();
 	}
 	
 	@Override

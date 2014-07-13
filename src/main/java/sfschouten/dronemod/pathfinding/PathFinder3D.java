@@ -104,11 +104,11 @@ public class PathFinder3D {
 		PathEntity pathentity = addToPath(par1Entity, startPathpoint, endPathpoint, entityWidthPathpoint, range);
 
 		// Some logging, printing the created pathentity
-		Logger.logOut("FinalPoint: " + pathentity.getFinalPathPoint().toString());
-		Logger.logOut("PathLength: " + pathentity.getCurrentPathLength());
+		Logger.log("FinalPoint: " + pathentity.getFinalPathPoint().toString());
+		Logger.log("PathLength: " + pathentity.getCurrentPathLength());
 		for (int t = 0; t < pathentity.getCurrentPathLength(); t++) {
 			PathPoint p = pathentity.getPathPointFromIndex(t);
-			Logger.logOut(t + ": " + p.xCoord + ", " + p.yCoord + ", " + p.zCoord);
+			Logger.log(t + ": " + p.xCoord + ", " + p.yCoord + ", " + p.zCoord);
 		}
 
 		return pathentity;

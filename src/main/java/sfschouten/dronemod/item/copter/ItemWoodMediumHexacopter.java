@@ -21,6 +21,7 @@ public class ItemWoodMediumHexacopter extends ItemDrone {
 		super();
 		this.setUnlocalizedName("woodMediumHexacopterItem");
 		entityClass = EntityWoodMediumHexacopter.class;
+		modelClass = null; //TODO this
 		
 		ItemStack hexaWoodFrame = new ItemStack(DroneMod.hexaWoodFrameItem);
 		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);

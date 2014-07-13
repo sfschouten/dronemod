@@ -86,7 +86,7 @@ public class ItemAdvancedBreedingModule extends ItemAdvancedTaskModule{
 		}else{
 			breedingItem.stackSize--;
 			//TODO replace animal.func_110196_bT(); with animal.func_146082_f( --fakeplayer-- );
-			Logger.logChat(animal.worldObj, "Does not work need to update code");
+			Logger.chat(animal.worldObj, "Does not work need to update code");
 			return DroneTaskResult.success;
 		}
 	}

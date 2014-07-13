@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.client.model.ModelQuadcopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodMediumOctacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
@@ -16,11 +17,12 @@ public class ItemWoodStrongQuadcopter extends ItemDrone {
 		super();
 		this.setUnlocalizedName("woodStrongQuadcopterItem");
 		entityClass = EntityWoodStrongOctacopter.class;
-
-		ItemStack octaWoodFrame = new ItemStack(DroneMod.octaWoodFrameItem);
+		modelClass = ModelQuadcopter.class;
+		
+		ItemStack quadWoodFrame = new ItemStack(DroneMod.quadWoodFrameItem);
 		ItemStack mediumMotor = new ItemStack(DroneMod.strongMotorItem);
 
-		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', octaWoodFrame, 'y', mediumMotor);
+		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadWoodFrame, 'y', mediumMotor);
 	}
 
 	@Override

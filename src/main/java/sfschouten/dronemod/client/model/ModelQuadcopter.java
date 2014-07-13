@@ -13,25 +13,15 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-/**
- * This entire class is temporary until I get around to making actual models in wavefront format.
- * 
- * @author Stefan
- *
- */
-public class ModelQuadcopter extends ModelBase {
-	// fields
-	ModelRenderer Body;
-	ModelRenderer FR;
-	ModelRenderer RL;
-	ModelRenderer RR;
-	ModelRenderer FL;
+public class ModelQuadcopter extends ModelCopter {
 	float scale;
 
 	public ModelQuadcopter(float scale) {
-		this.scale = scale;
-		textureWidth = 64;
-		textureHeight = 32;
+		super(scale);
+	}
+	
+	@Override
+	protected void initParts(){
 		setTextureOffset("FR.FR6", 8, 0);
 		setTextureOffset("FR.FR5", 8, 0);
 		setTextureOffset("FR.FR4", 8, 0);
@@ -57,7 +47,7 @@ public class ModelQuadcopter extends ModelBase {
 		setTextureOffset("FL.FL2", 8, 0);
 		setTextureOffset("FL.FL1", 8, 0);
 		
-		FL = new ModelRenderer(this, "FL");
+		ModelRenderer FL = new ModelRenderer(this, "FL");
 		FL.setRotationPoint(0F, 0F, 0F);
 		setRotation(FL, 0F, 0F, 0F);
 		FL.mirror = true;
@@ -67,8 +57,9 @@ public class ModelQuadcopter extends ModelBase {
 		FL.addBox("FL4", 6F, 15F, -8F, 2, 1, 2);
 		FL.addBox("FL5", 7F, 15F, -9F, 2, 1, 2);
 		FL.addBox("FL6", 8F, 15F, -10F, 2, 1, 2);
+		parts.put("FL", FL);
 		
-		FR = new ModelRenderer(this, "FR");
+		ModelRenderer FR = new ModelRenderer(this, "FR");
 		FR.setRotationPoint(0F, 0F, 0F);
 		setRotation(FR, 0F, 0F, 0F);
 		FR.mirror = true;
@@ -78,15 +69,17 @@ public class ModelQuadcopter extends ModelBase {
 		FR.addBox("FR4", 6F, 15F, 6F, 2, 1, 2);
 		FR.addBox("FR5", 7F, 15F, 7F, 2, 1, 2);
 		FR.addBox("FR6", 8F, 15F, 8F, 2, 1, 2);
+		parts.put("FR", FR);
 		
-		Body = new ModelRenderer(this, 0, 3);
+		ModelRenderer Body = new ModelRenderer(this, 0, 3);
 		Body.addBox(-4F, 15F, -4F, 8, 1, 8);
 		Body.setRotationPoint(0F, 0F, 0F);
 		Body.setTextureSize(64, 32);
 		Body.mirror = true;
 		setRotation(Body, 0F, 0F, 0F);
+		parts.put("Body", Body);
 		
-		RL = new ModelRenderer(this, "RL");
+		ModelRenderer RL = new ModelRenderer(this, "RL");
 		RL.setRotationPoint(0F, 0F, 0F);
 		setRotation(RL, 0F, 0F, 0F);
 		RL.mirror = true;
@@ -96,8 +89,9 @@ public class ModelQuadcopter extends ModelBase {
 		RL.addBox("RL4", -8F, 15F, -8F, 2, 1, 2);
 		RL.addBox("RL5", -9F, 15F, -9F, 2, 1, 2);
 		RL.addBox("RL6", -10F, 15F, -10F, 2, 1, 2);
+		parts.put("RL", RL);
 		
-		RR = new ModelRenderer(this, "RR");
+		ModelRenderer RR = new ModelRenderer(this, "RR");
 		RR.setRotationPoint(0F, 0F, 0F);
 		setRotation(RR, 0F, 0F, 0F);
 		RR.mirror = true;
@@ -107,19 +101,7 @@ public class ModelQuadcopter extends ModelBase {
 		RR.addBox("RR4", -8F, 15F, 6F, 2, 1, 2);
 		RR.addBox("RR5", -9F, 15F, 7F, 2, 1, 2);
 		RR.addBox("RR6", -10F, 15F, 8F, 2, 1, 2);
-		
-	}
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		float scale = f5 * this.scale;
-		Body.render(scale);
-		FR.render(scale);
-		RL.render(scale);
-		RR.render(scale);
-		FL.render(scale);
-		
+		parts.put("RR", RR);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -128,12 +110,8 @@ public class ModelQuadcopter extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f1, float f2, float f3, float f4, float f5, float f6, Entity entity) {
-		super.setRotationAngles(f1, f2, f3, f4, f5, f6, entity);
-		Body.rotateAngleX = f5 / 57.29578F;
-		FR.rotateAngleX = f5 / 57.29578F;
-		RL.rotateAngleX = f5 / 57.29578F;
-		RR.rotateAngleX = f5 / 57.29578F;
-		FL.rotateAngleX = f5 / 57.29578F;
+	@Override
+	protected void rotateBlades(float speed) {
+		//TODO make new model with blades and rotate them
 	}
 }

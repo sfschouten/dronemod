@@ -201,7 +201,7 @@ public abstract class EntityDrone extends EntityFlying {
 	public boolean interact(EntityPlayer par1EntityPlayer) {
 		ItemStack is = par1EntityPlayer.inventory.getCurrentItem();
 		
-		Logger.logOut(this.boundingBox.toString());
+		Logger.log(this.boundingBox.toString());
 		
 		// Check if interaction is with an empty hand.
 		if (is == null || is.stackSize == 0) {
@@ -240,7 +240,7 @@ public abstract class EntityDrone extends EntityFlying {
 	 */
 	private boolean enoughEnergyForReturnHome() {
 		if (base == null) {
-			Logger.logOut("drone does not have a base.");
+			Logger.log("drone does not have a base.");
 			return false;
 		}
 		double distanceFromBase = this.getDistance(base.xCoord, base.yCoord, base.zCoord);

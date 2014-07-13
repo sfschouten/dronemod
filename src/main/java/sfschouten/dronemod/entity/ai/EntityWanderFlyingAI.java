@@ -28,7 +28,7 @@ public class EntityWanderFlyingAI extends EntityAIBase{
         if (this.entity.getRNG().nextInt(2) != 0) {
             return false;
         } else {
-        	Logger.logOut("Wandering");
+        	Logger.log("Wandering");
             //Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 10);
 
             //if (vec3 == null) {

@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 	protected HashMap<InventoryType, Integer> amounts;
 	protected Class entityClass;
+	protected Class modelClass;
 	
     public ItemDrone() {
         super();
@@ -48,6 +49,10 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
     }
     
     public abstract EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata);
+    
+    public Class getModelClass(){
+    	return modelClass;
+    }
     
     public Class getEntityClass(){
     	return entityClass;

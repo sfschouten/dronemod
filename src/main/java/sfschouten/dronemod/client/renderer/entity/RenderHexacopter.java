@@ -41,7 +41,7 @@ public class RenderHexacopter extends RenderLiving {
 		} else if (d instanceof EntityCaneWeakHexacopter) {
 			return caneHexaTextureLocation;
 		} else {
-			Logger.logOut("Wrong type of drone, not a Hexa! No texture loaded.");
+			Logger.log("Wrong type of drone, not a Hexa! No texture loaded.");
 			return null;
 		}
 	}

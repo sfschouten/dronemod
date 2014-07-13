@@ -16,11 +16,12 @@ public class ItemWoodStrongHexacopter extends ItemDrone {
 		super();
 		this.setUnlocalizedName("woodStrongHexacopterItem");
 		entityClass = EntityWoodStrongOctacopter.class;
-
-		ItemStack octaWoodFrame = new ItemStack(DroneMod.octaWoodFrameItem);
+		modelClass = null; //TODO this
+		
+		ItemStack hexaWoodFrame = new ItemStack(DroneMod.hexaWoodFrameItem);
 		ItemStack strongMotor = new ItemStack(DroneMod.strongMotorItem);
 
-		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', octaWoodFrame, 'y', strongMotor);
+		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaWoodFrame, 'y', strongMotor);
 	}
 
 	@Override

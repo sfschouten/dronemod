@@ -2,16 +2,19 @@ package sfschouten.dronemod.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityRainFX;
 import net.minecraftforge.client.MinecraftForgeClient;
+import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.client.model.ModelCaneOctaCopter;
 import sfschouten.dronemod.client.model.ModelOctaCopter;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
 import sfschouten.dronemod.client.renderer.block.TileEntityMillerRenderer;
 import sfschouten.dronemod.client.renderer.entity.RenderOctacopter;
 import sfschouten.dronemod.client.renderer.entity.RenderQuadcopter;
+import sfschouten.dronemod.client.renderer.item.DroneItemRenderer;
 import sfschouten.dronemod.entity.EntityAluminiumMediumOctacopter;
 import sfschouten.dronemod.entity.EntityAluminiumMediumQuadcopter;
 import sfschouten.dronemod.entity.EntityAluminiumStrongOctacopter;
@@ -23,6 +26,7 @@ import sfschouten.dronemod.entity.EntityWoodMediumOctacopter;
 import sfschouten.dronemod.entity.EntityWoodMediumQuadcopter;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongQuadcopter;
+import sfschouten.dronemod.item.copter.ItemAluminiumStrongOctacopter;
 import sfschouten.dronemod.tileentity.TileEntityMiller;
 
 public class ClientProxy extends CommonProxy {
@@ -59,5 +63,25 @@ public class ClientProxy extends CommonProxy {
 		
 		//Blocks
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMiller.class, new TileEntityMillerRenderer());
+		
+		//Items
+		//MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumHexacopterItem, new DroneItemRenderer( , ));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.aluminiumOctaTextureLocation));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+
+		//MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongHexacopterItem, new DroneItemRenderer( , ));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.aluminiumOctaTextureLocation));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+
+		MinecraftForgeClient.registerItemRenderer(DroneMod.caneWeakQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		//MinecraftForgeClient.registerItemRenderer(DroneMod.caneWeakHexacopterItem, new DroneItemRenderer( , ));
+
+		MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		//MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumHexacopterItem, new DroneItemRenderer( , ));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.woodOctaTextureLocation));
+
+		MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		//MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongHexacopterItem, new DroneItemRenderer( , ));
+		MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.woodOctaTextureLocation));
 	}
 }

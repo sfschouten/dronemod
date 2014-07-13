@@ -20,6 +20,7 @@ public class ItemCaneWeakHexacopter extends ItemDrone {
 		super();
 		this.setUnlocalizedName("caneWeakHexacopterItem");
 		entityClass = EntityCaneWeakHexacopter.class;
+		modelClass = null; //TODO this
 		
 		ItemStack hexaCaneFrame = new ItemStack(DroneMod.hexaCaneFrameItem);
 		ItemStack weakMotor = new ItemStack(DroneMod.weakMotorItem);

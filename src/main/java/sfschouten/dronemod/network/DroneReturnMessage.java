@@ -55,7 +55,7 @@ public class DroneReturnMessage implements IExecutableMessage {
 			charBuf = dec.decode(buf.nioBuffer());
 		} catch (CharacterCodingException e) {
 			e.printStackTrace();
-			Logger.logOut("Failed decoding the bytebuffer");
+			Logger.log("Failed decoding the bytebuffer");
 		}
 		
 		String json = charBuf.toString();
@@ -73,14 +73,14 @@ public class DroneReturnMessage implements IExecutableMessage {
 			buffer = enc.encode(CharBuffer.wrap(obj.toString().toCharArray()));
 		} catch (CharacterCodingException e) {
 			e.printStackTrace();
-			Logger.logOut("Wrote null to buffer 0_0");
+			Logger.log("Wrote null to buffer 0_0");
 		}
 		buf.writeBytes(buffer);
 	}
 
 	@Override
 	public void executeClient(EntityPlayer player) {
-		Logger.logOut("Can't execute this packet on the client side.");
+		Logger.log("Can't execute this packet on the client side.");
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class DroneReturnMessage implements IExecutableMessage {
         if(base == null){
         	//TODO throw exception
         }else if(base.getDrone() == null){
-        	Logger.logChat(server, "Base does not have a drone to return!");
+        	Logger.chat(server, "Base does not have a drone to return!");
         }else{
         	base.getDrone().setGoingHome(true);
         }
