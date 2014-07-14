@@ -27,6 +27,7 @@ import sfschouten.dronemod.entity.EntityWoodMediumQuadcopter;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
 import sfschouten.dronemod.entity.EntityWoodStrongQuadcopter;
 import sfschouten.dronemod.item.copter.ItemAluminiumStrongOctacopter;
+import sfschouten.dronemod.registry.RenderRegistry;
 import sfschouten.dronemod.tileentity.TileEntityMiller;
 
 public class ClientProxy extends CommonProxy {
@@ -44,44 +45,47 @@ public class ClientProxy extends CommonProxy {
 		RenderOctacopter octaRender = new RenderOctacopter(octa, 0.5F);
 
 		//Quadcopters
-		RenderingRegistry.registerEntityRenderingHandler(EntityAluminiumMediumQuadcopter.class, quadRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityAluminiumStrongQuadcopter.class, quadRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodMediumQuadcopter.class, quadRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodStrongQuadcopter.class, quadRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityCaneWeakQuadcopter.class, quadRender);
+		RenderRegistry.registerDroneEntityRender(EntityAluminiumMediumQuadcopter.class, quadRender);
+		RenderRegistry.registerDroneEntityRender(EntityAluminiumStrongQuadcopter.class, quadRender);
+		RenderRegistry.registerDroneEntityRender(EntityWoodMediumQuadcopter.class, quadRender);
+		RenderRegistry.registerDroneEntityRender(EntityWoodStrongQuadcopter.class, quadRender);
+		RenderRegistry.registerDroneEntityRender(EntityCaneWeakQuadcopter.class, quadRender);
 		
 		//Hexacopters
 
+		
 		//Octacopters
-		RenderingRegistry.registerEntityRenderingHandler(EntityAluminiumMediumOctacopter.class, octaRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityAluminiumStrongOctacopter.class, octaRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodMediumOctacopter.class, octaRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodStrongOctacopter.class, octaRender);
+		RenderRegistry.registerDroneEntityRender(EntityAluminiumMediumOctacopter.class, octaRender);
+		RenderRegistry.registerDroneEntityRender(EntityAluminiumStrongOctacopter.class, octaRender);
+		RenderRegistry.registerDroneEntityRender(EntityWoodMediumOctacopter.class, octaRender);
+		RenderRegistry.registerDroneEntityRender(EntityWoodStrongOctacopter.class, octaRender);
 
 		//Extra
-		RenderingRegistry.registerEntityRenderingHandler(EntityDroneFX.class, new RenderQuadcopter(quadSmall, 0.0F));
+		RenderRegistry.registerEntityRender(EntityDroneFX.class, new RenderQuadcopter(quadSmall, 0.0F));
 		
 		//Blocks
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMiller.class, new TileEntityMillerRenderer());
+		RenderRegistry.registerTileEntityRender(TileEntityMiller.class, new TileEntityMillerRenderer());
 		
 		//Items
 		//MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumHexacopterItem, new DroneItemRenderer( , ));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.aluminiumOctaTextureLocation));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumMediumQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		RenderRegistry.registerItemRender(DroneMod.aluminiumMediumOctacopterItem, new DroneItemRenderer(octa, ModelOctaCopter.aluminiumOctaTextureLocation));
+		RenderRegistry.registerItemRender(DroneMod.aluminiumMediumQuadcopterItem, new DroneItemRenderer(quad, ModelQuadcopter.quadCopterTexture));
 
 		//MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongHexacopterItem, new DroneItemRenderer( , ));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.aluminiumOctaTextureLocation));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.aluminiumStrongQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		RenderRegistry.registerItemRender(DroneMod.aluminiumStrongOctacopterItem, new DroneItemRenderer(octa, ModelOctaCopter.aluminiumOctaTextureLocation));
+		RenderRegistry.registerItemRender(DroneMod.aluminiumStrongQuadcopterItem, new DroneItemRenderer(quad, ModelQuadcopter.quadCopterTexture));
 
-		MinecraftForgeClient.registerItemRenderer(DroneMod.caneWeakQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		RenderRegistry.registerItemRender(DroneMod.caneWeakQuadcopterItem, new DroneItemRenderer(quad, ModelQuadcopter.quadCopterTexture));
 		//MinecraftForgeClient.registerItemRenderer(DroneMod.caneWeakHexacopterItem, new DroneItemRenderer( , ));
 
-		MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		RenderRegistry.registerItemRender(DroneMod.woodMediumQuadcopterItem, new DroneItemRenderer(quad, ModelQuadcopter.quadCopterTexture));
 		//MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumHexacopterItem, new DroneItemRenderer( , ));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.woodMediumOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.woodOctaTextureLocation));
+		RenderRegistry.registerItemRender(DroneMod.woodMediumOctacopterItem, new DroneItemRenderer(octa, ModelOctaCopter.woodOctaTextureLocation));
 
-		MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongQuadcopterItem, new DroneItemRenderer(quad, RenderQuadcopter.quadCopterTexture));
+		RenderRegistry.registerItemRender(DroneMod.woodStrongQuadcopterItem, new DroneItemRenderer(quad, ModelQuadcopter.quadCopterTexture));
 		//MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongHexacopterItem, new DroneItemRenderer( , ));
-		MinecraftForgeClient.registerItemRenderer(DroneMod.woodStrongOctacopterItem, new DroneItemRenderer(octa, RenderOctacopter.woodOctaTextureLocation));
+		RenderRegistry.registerItemRender(DroneMod.woodStrongOctacopterItem, new DroneItemRenderer(octa, ModelOctaCopter.woodOctaTextureLocation));
+	
+		RenderRegistry.registerAll();
 	}
 }

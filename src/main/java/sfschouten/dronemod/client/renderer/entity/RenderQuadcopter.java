@@ -9,8 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderQuadcopter extends RenderLiving {
-	public static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID, "textures/entity/quadcopter.png");
+public class RenderQuadcopter extends RenderCopter{
 
 	public RenderQuadcopter(ModelQuadcopter par1ModelBase, float par2) {
 		super(par1ModelBase, par2);
@@ -18,6 +17,6 @@ public class RenderQuadcopter extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return quadCopterTexture;
+		return ModelQuadcopter.quadCopterTexture;
 	}
 }

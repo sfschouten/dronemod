@@ -1,16 +1,51 @@
 package sfschouten.dronemod.client.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.util.Logger;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 public class ModelOctaCopter extends ModelCopter {
-
+	public static final ResourceLocation woodOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/woodocta.png");
+	public static final ResourceLocation aluminiumOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/aluminiumocta.png");
+	
+	@Override
+	protected void initPositions(){
+		defaultPosition = new float[]{-0.125F, 1.9F, -0.125F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F};
+		
+		chestPositions = new float[][]{
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F}
+		};
+		
+		batteryPositions = new float[][]{
+			new float[]{0.0F, 0.0F, 0.375F, 0.0F, 90.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{0.0F, 0.0F, -0.375F, 0.0F, 90.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{-0.5F, 0.0F, 0.25F, 0.0F, 90.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{-0.5F, 0.0F, -0.25F, 0.0F, 90.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{-0.5F, 0.0F, 0.0F, 0.0F, 90.0F, 0.0F, 1.0F, 1.0F, 1.0F}
+		};
+		
+		modulePositions = new float[][]{
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F},
+			new float[]{1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F}
+		};
+	};
+	
 	public ModelOctaCopter(float scale) {
 		super(scale);
 	}
-
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

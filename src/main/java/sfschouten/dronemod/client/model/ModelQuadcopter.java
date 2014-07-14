@@ -6,14 +6,21 @@
 
 package sfschouten.dronemod.client.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.util.Logger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 public class ModelQuadcopter extends ModelCopter {
+	public static final ResourceLocation quadCopterTexture = new ResourceLocation(DroneMod.modID, "textures/entity/quadcopter.png");
+	
 	float scale;
 
 	public ModelQuadcopter(float scale) {
@@ -112,6 +119,11 @@ public class ModelQuadcopter extends ModelCopter {
 
 	@Override
 	protected void rotateBlades(float speed) {
-		//TODO make new model with blades and rotate them
+		//TODO make new model with blades and rotate them.
+	}
+
+	@Override
+	protected void initPositions() {
+		// TODO Add some positions.
 	}
 }

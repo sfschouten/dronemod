@@ -87,7 +87,7 @@ public class DroneMod {
 	public static CreativeTabs tabDroneMod = new CreativeTabs("tabDroneMod") {
 		@Override
 		public Item getTabIconItem() {
-			return caneWeakQuadcopterItem;
+			return aluminiumStrongOctacopterItem;
 		}
 	};
 

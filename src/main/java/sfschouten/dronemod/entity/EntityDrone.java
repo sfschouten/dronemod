@@ -72,7 +72,7 @@ public abstract class EntityDrone extends EntityFlying {
 
 	public EntityDrone(World par1World) {
 		super(par1World);
-		this.setSize(0.9F, 0.2F);
+		this.setSize(0.9F, 0.3F);
 		workMarkers = new ArrayList<TileEntityMarker>();
 		modules = new ArrayList<ItemTaskModule>();
 		sleep = -1;
@@ -411,4 +411,9 @@ public abstract class EntityDrone extends EntityFlying {
 	public boolean isAwake() {
 		return sleep == -1;
 	}
+	public HashMap<InventoryType, ItemStack[]> getExpansions() {
+		return expansions;
+	}
+	
+	
 }
