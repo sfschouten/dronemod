@@ -36,6 +36,8 @@ public class ExpansionHelper {
 				case module:
 					addToStack(module, s);
 					break;
+				default:
+					break;
 				}
 			}
 		}

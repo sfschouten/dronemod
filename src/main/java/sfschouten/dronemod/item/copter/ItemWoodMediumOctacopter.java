@@ -3,10 +3,10 @@ package sfschouten.dronemod.item.copter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.client.model.ModelOctaCopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodMediumOctacopter;
+import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.inventory.InventoryType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -18,8 +18,8 @@ public class ItemWoodMediumOctacopter extends ItemDrone {
 		entityClass = EntityWoodMediumOctacopter.class;
 		modelClass = ModelOctaCopter.class;
 		
-		ItemStack octaWoodFrame = new ItemStack(DroneMod.octaWoodFrameItem);
-		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);
+		ItemStack octaWoodFrame = new ItemStack(MMDItems.octaWoodFrameItem);
+		ItemStack mediumMotor = new ItemStack(MMDItems.mediumMotorItem);
 		
 		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', octaWoodFrame, 'y', mediumMotor);
 	}

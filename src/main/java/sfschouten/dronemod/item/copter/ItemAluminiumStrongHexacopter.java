@@ -7,6 +7,7 @@ import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.entity.EntityAluminiumStrongOctacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityWoodStrongOctacopter;
+import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.inventory.InventoryType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -18,8 +19,8 @@ public class ItemAluminiumStrongHexacopter extends ItemDrone {
 		entityClass = EntityAluminiumStrongOctacopter.class;
 		modelClass = null; //TODO this
 		
-		ItemStack hexaAluminiumFrame = new ItemStack(DroneMod.hexaAluminiumFrameItem);
-		ItemStack strongMotor = new ItemStack(DroneMod.strongMotorItem);
+		ItemStack hexaAluminiumFrame = new ItemStack(MMDItems.hexaAluminiumFrameItem);
+		ItemStack strongMotor = new ItemStack(MMDItems.strongMotorItem);
 
 		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaAluminiumFrame, 'y', strongMotor);
 	}

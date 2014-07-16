@@ -1,20 +1,13 @@
 package sfschouten.dronemod.item.copter;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.entity.EntityAluminiumMediumHexacopter;
-import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
 import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
-import sfschouten.dronemod.entity.EntityWoodMediumHexacopter;
+import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.inventory.InventoryType;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemAluminiumMediumHexacopter extends ItemDrone {
 	
@@ -24,8 +17,8 @@ public class ItemAluminiumMediumHexacopter extends ItemDrone {
 		entityClass = EntityAluminiumMediumHexacopter.class;
 		modelClass = null; //TODO this
 		
-		ItemStack hexaAluminiumFrame = new ItemStack(DroneMod.hexaAluminiumFrameItem);
-		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);
+		ItemStack hexaAluminiumFrame = new ItemStack(MMDItems.hexaAluminiumFrameItem);
+		ItemStack mediumMotor = new ItemStack(MMDItems.mediumMotorItem);
 		
 		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaAluminiumFrame, 'y', mediumMotor);
 	}

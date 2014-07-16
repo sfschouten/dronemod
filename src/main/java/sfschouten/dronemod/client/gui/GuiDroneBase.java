@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.inventory.ContainerDroneBase;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.network.DroneReturnMessage;
@@ -65,7 +66,7 @@ public class GuiDroneBase extends GuiContainer {
 		message.setX(tileEntity.xCoord);
 		message.setY(tileEntity.yCoord);
 		message.setZ(tileEntity.zCoord);
-		DroneMod.networkWrapper.sendToServer(message);
+		MMDPackets.networkWrapper.sendToServer(message);
 	}
 
 	private void returnHome() {
@@ -76,7 +77,7 @@ public class GuiDroneBase extends GuiContainer {
 		message.setX(tileEntity.xCoord);
 		message.setY(tileEntity.yCoord);
 		message.setZ(tileEntity.zCoord);
-		DroneMod.networkWrapper.sendToServer(message);
+		MMDPackets.networkWrapper.sendToServer(message);
 	}
 
 	@Override

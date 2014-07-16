@@ -16,6 +16,7 @@ import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
 import sfschouten.dronemod.entity.EntityWoodMediumQuadcopter;
+import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.inventory.InventoryType;
 
 public class ItemAluminiumMediumQuadcopter extends ItemDrone {
@@ -26,8 +27,8 @@ public class ItemAluminiumMediumQuadcopter extends ItemDrone {
 		entityClass = EntityAluminiumMediumQuadcopter.class;
 		modelClass = ModelQuadcopter.class;
 		
-		ItemStack quadAluminiumFrame = new ItemStack(DroneMod.quadAluminiumFrameItem);
-		ItemStack mediumMotor = new ItemStack(DroneMod.mediumMotorItem);
+		ItemStack quadAluminiumFrame = new ItemStack(MMDItems.quadAluminiumFrameItem);
+		ItemStack mediumMotor = new ItemStack(MMDItems.mediumMotorItem);
 		
 		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadAluminiumFrame, 'y', mediumMotor);
 	}

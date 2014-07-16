@@ -2,11 +2,12 @@ package sfschouten.dronemod.tileentity;
 
 import java.util.Random;
 
-import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.entity.EntityDroneFX;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import sfschouten.dronemod.entity.EntityDroneFX;
+import sfschouten.dronemod.init.MMDBlocks;
+import sfschouten.dronemod.init.MMDItems;
 
 public class TileEntityMarker extends TileEntity{
 	private String name;
@@ -129,16 +130,16 @@ public class TileEntityMarker extends TileEntity{
 				currentZ -= radius2 - (t % radius2);
 			}
 			
-			if(worldObj.getBlock(currentX, currentY, currentZ) == DroneMod.markerBarrier){
+			if(worldObj.getBlock(currentX, currentY, currentZ) == MMDBlocks.markerBarrier){
 				worldObj.setBlock(currentX, currentY, currentZ, Blocks.air);
 			}else if(worldObj.getBlock(currentX, currentY, currentZ) == Blocks.air){
-				worldObj.setBlock(currentX, currentY, currentZ, DroneMod.markerBarrier);
+				worldObj.setBlock(currentX, currentY, currentZ, MMDBlocks.markerBarrier);
 			}
 			
-			if(worldObj.getBlock(currentX, currentY+1, currentZ) == DroneMod.markerBarrier){
+			if(worldObj.getBlock(currentX, currentY+1, currentZ) == MMDBlocks.markerBarrier){
 				worldObj.setBlock(currentX, currentY+1, currentZ, Blocks.air);
 			}else if(worldObj.getBlock(currentX, currentY+1, currentZ) == Blocks.air){
-				worldObj.setBlock(currentX, currentY+1, currentZ, DroneMod.markerBarrier);
+				worldObj.setBlock(currentX, currentY+1, currentZ, MMDBlocks.markerBarrier);
 			}
 		}
 	}

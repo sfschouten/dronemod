@@ -1,11 +1,8 @@
 package sfschouten.dronemod.entity;
 
-import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.item.copter.ItemCaneWeakQuadcopter;
-import sfschouten.dronemod.item.copter.ItemDrone;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import sfschouten.dronemod.init.MMDItems;
+import sfschouten.dronemod.item.copter.ItemDrone;
 
 public class EntityAluminiumMediumOctacopter extends EntityDrone {
 	
@@ -16,7 +13,7 @@ public class EntityAluminiumMediumOctacopter extends EntityDrone {
 	}
 	
 	public ItemDrone getItem(){
-		return DroneMod.aluminiumMediumOctacopterItem;
+		return MMDItems.aluminiumMediumOctacopterItem;
 	}
 
 	@Override

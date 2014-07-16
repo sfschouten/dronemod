@@ -1,20 +1,14 @@
 package sfschouten.dronemod.item.copter;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
-import sfschouten.dronemod.entity.EntityCaneWeakHexacopter;
-import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
+import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.inventory.InventoryType;
-import sfschouten.dronemod.inventory.SimpleInventory;
-import sfschouten.dronemod.item.module.ItemTaskModule;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemCaneWeakQuadcopter extends ItemDrone {
 	
@@ -24,8 +18,8 @@ public class ItemCaneWeakQuadcopter extends ItemDrone {
 		entityClass = EntityCaneWeakQuadcopter.class;
 		modelClass = ModelQuadcopter.class;
 		
-		ItemStack quadCaneFrame = new ItemStack(DroneMod.quadCaneFrameItem);
-		ItemStack weakMotor = new ItemStack(DroneMod.weakMotorItem);
+		ItemStack quadCaneFrame = new ItemStack(MMDItems.quadCaneFrameItem);
+		ItemStack weakMotor = new ItemStack(MMDItems.weakMotorItem);
 		
 		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadCaneFrame, 'y', weakMotor);
 	}
