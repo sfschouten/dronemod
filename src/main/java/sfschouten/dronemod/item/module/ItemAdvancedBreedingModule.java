@@ -92,8 +92,8 @@ public class ItemAdvancedBreedingModule extends ItemAdvancedTaskModule{
 	}
 
 	@Override
-	public void applyProperties(EntityDrone e) {
+	public EntityDrone initEntity(EntityDrone drone) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 }

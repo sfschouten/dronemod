@@ -31,6 +31,8 @@ public class ItemTillModule extends ItemTaskModule {
 	}
 
 	@Override
-	public void applyProperties(EntityDrone e) {
+	public EntityDrone initEntity(EntityDrone drone) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

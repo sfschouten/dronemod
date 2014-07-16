@@ -6,7 +6,7 @@ import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class ItemFertilizeModule extends ItemTaskModule {
+public class ItemFertilizeModule extends ItemBasicTaskModule {
 
 	public ItemFertilizeModule(){
 		super();
@@ -32,8 +32,8 @@ public class ItemFertilizeModule extends ItemTaskModule {
 	}
 
 	@Override
-	public void applyProperties(EntityDrone e) {
+	public EntityDrone initEntity(EntityDrone drone) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 }

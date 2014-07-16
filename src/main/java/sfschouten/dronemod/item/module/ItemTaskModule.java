@@ -6,14 +6,7 @@ import sfschouten.dronemod.init.MMDCreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public abstract class ItemTaskModule extends Item {
-	boolean hasDepth = false;
-	
-	public ItemTaskModule() {
-		super();
-		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
-        this.setMaxStackSize(1);
-	}
+public abstract class ItemTaskModule extends ItemModule {
 
 	protected Item restockItem;
 	protected int restockItemDamageValue = 0;
@@ -26,11 +19,5 @@ public abstract class ItemTaskModule extends Item {
 
 	public int getRestockItemDamageValue() {
 		return restockItemDamageValue;
-	} 
-	
-	public abstract void applyProperties(EntityDrone e);
-	
-	public boolean hasDepth(){
-		return hasDepth; 
 	}
 }

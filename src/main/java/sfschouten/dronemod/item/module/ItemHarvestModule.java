@@ -7,7 +7,7 @@ import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class ItemHarvestModule extends ItemTaskModule {
+public class ItemHarvestModule extends ItemBasicTaskModule {
 
 	public ItemHarvestModule( ){
 		super();
@@ -34,8 +34,10 @@ public class ItemHarvestModule extends ItemTaskModule {
 		
 		return result;
 	}
+
 	@Override
-	public void applyProperties(EntityDrone e) {
-		e.setCanPickUpLoot(true);
+	public EntityDrone initEntity(EntityDrone drone) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

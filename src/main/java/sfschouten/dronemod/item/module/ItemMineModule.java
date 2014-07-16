@@ -9,7 +9,7 @@ import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class ItemMineModule extends ItemTaskModule {
+public class ItemMineModule extends ItemBasicTaskModule {
 
 	public ItemMineModule(){
 		super();
@@ -29,7 +29,8 @@ public class ItemMineModule extends ItemTaskModule {
 	}	
 
 	@Override
-	public void applyProperties(EntityDrone e) {
+	public EntityDrone initEntity(EntityDrone drone) {
 		// TODO Auto-generated method stub
+		return null;
 	}
 }

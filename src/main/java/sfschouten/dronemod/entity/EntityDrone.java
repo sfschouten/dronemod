@@ -22,6 +22,7 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import sfschouten.dronemod.entity.ai.DroneAdvancedTaskAI;
 import sfschouten.dronemod.entity.ai.DroneBasicTaskAI;
 import sfschouten.dronemod.entity.ai.DroneHomingAI;
@@ -60,6 +61,8 @@ public abstract class EntityDrone extends EntityFlying {
 	/** A sleep timer, the amount of ticks left to let the drone sleep.	 */
 	private int sleep;
 	
+	private Ticket chunkloadingTicket;
+	
 	/**
 	 * A HashMap containing a different sets of items. For every type of
 	 * expansion a drone can have there is an array. The array' size is
@@ -78,9 +81,9 @@ public abstract class EntityDrone extends EntityFlying {
 		sleep = -1;
 		
 		// TODO move task AI's to individual drones.
-		//this.tasks.addTask(0, new EntityWanderFlyingAI(this, 1.0D));
 		tasks.addTask(0, new DroneRestockAI(this));
 		tasks.addTask(1, new DroneBasicTaskAI(this));
+		tasks.addTask(2, new DroneAdvancedTaskAI());
 
 		// TODO move line below to each individual drone because size of
 		// actualInventory should be based upon type of drone.
@@ -93,7 +96,10 @@ public abstract class EntityDrone extends EntityFlying {
 
 		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new PathNavigate3D(this, worldObj, 75), new String[]{"navigator", "field_70699_by"});
 		ReflectionHelper.setPrivateValue(EntityLiving.class, this, new DroneMoveHelper(this), new String[]{"moveHelper", "field_70765_h"});
+		
+		
 	}
+	
 	public abstract int getEnergyUse();
 
 	public abstract ItemDrone getItem();
@@ -292,15 +298,14 @@ public abstract class EntityDrone extends EntityFlying {
 	 * to the collection with the inventories for the numerous
 	 * expansions(batteries, modules, chest, etc.)
 	 * 
-	 * @param m
-	 *            Module to be added.
+	 * @param m Module to be added.
 	 */
 	public void addModule(ItemTaskModule m) {
 		// Add to modules list
 		modules.add(m);
 
 		// Apply any task specific properties to this entity.
-		m.applyProperties(this);
+		m.initEntity(this);
 
 		// Make new ItemStack to be added to the inventory of the entity
 		ItemStack newStack = new ItemStack(m, 1, 0);

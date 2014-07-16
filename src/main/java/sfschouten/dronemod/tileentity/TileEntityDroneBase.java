@@ -208,7 +208,7 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		//Make new drone
 		NBTTagCompound droneItemNBTdata = inv[0].getTagCompound();
    		EntityDrone e = droneItem.getNewEntity(worldObj, droneItemNBTdata);
-   		e.setPosition(xCoord, yCoord+1, zCoord);
+   		e.setPosition(xCoord+0.5, yCoord+1.5, zCoord+0.5);
 		e.setBase(this);
 		e.setEnergy(droneItem.getEnergyStored(inv[0]));
 		worldObj.spawnEntityInWorld(e);
@@ -219,19 +219,16 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		Registration r = markers.get(0);
 		
 		//Add marker to drone
-   		if(r.marker == null){
+   		if(r.marker != null){
+   			e.addWorkMarker(r.marker);
    			Logger.log("marker is nulllllll");
    		}else{
    			Logger.log("NOT NULL");
    		}
-   		
-		e.addWorkMarker(r.marker);
 		
 		setDrone(e);
 		lock();
-		
 		setInventorySlotContents(0, null);
-		
 		setSpawnOnCharged(false);
 	}
 	
