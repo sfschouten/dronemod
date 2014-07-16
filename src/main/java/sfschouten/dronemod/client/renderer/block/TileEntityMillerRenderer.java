@@ -12,8 +12,9 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.client.model.ModelMilling;
+import sfschouten.dronemod.reference.General;
 
 public class TileEntityMillerRenderer extends TileEntitySpecialRenderer {
 	private final ModelMilling model;
@@ -32,7 +33,7 @@ public class TileEntityMillerRenderer extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 2.25F, (float) z + 0.5F);
 		
-		ResourceLocation textures = new ResourceLocation(DroneMod.modID, "textures/blocks/millingmachine.png");
+		ResourceLocation textures = new ResourceLocation(General.modID, "textures/blocks/millingmachine.png");
 		Minecraft.getMinecraft().renderEngine.bindTexture(textures);
 		
 		GL11.glPushMatrix();

@@ -11,7 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.init.MMDCreativeTabs;
+import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityMiller;
 import sfschouten.dronemod.util.Logger;
 
@@ -19,7 +21,7 @@ public class BlockMiller extends BlockContainer {
 
 	public BlockMiller() {
 		super(Material.iron);
-		setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
 		setBlockName("miller");
 	}
 
@@ -44,7 +46,7 @@ public class BlockMiller extends BlockContainer {
 
 	@Override
 	public void registerBlockIcons(IIconRegister icon) {
-		this.blockIcon = icon.registerIcon(DroneMod.modID+":miller_icon");
+		this.blockIcon = icon.registerIcon(General.modID+":miller_icon");
 	}
 	
 	@Override
@@ -60,7 +62,7 @@ public class BlockMiller extends BlockContainer {
 			return false;
 		}
 		
-		player.openGui(DroneMod.instance, 3, world, x, y, z);
+		player.openGui(ModularMulticopterDrones.instance, 3, world, x, y, z);
 		return true;
 	}
 }

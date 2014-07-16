@@ -1,7 +1,8 @@
 package sfschouten.dronemod.item.module;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.init.MMDCreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -10,7 +11,7 @@ public abstract class ItemTaskModule extends Item {
 	
 	public ItemTaskModule() {
 		super();
-        this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
         this.setMaxStackSize(1);
 	}
 

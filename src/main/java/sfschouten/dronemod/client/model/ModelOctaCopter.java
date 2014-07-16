@@ -1,18 +1,12 @@
 package sfschouten.dronemod.client.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.util.Logger;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import sfschouten.dronemod.reference.General;
 
 public class ModelOctaCopter extends ModelCopter {
-	public static final ResourceLocation woodOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/woodocta.png");
-	public static final ResourceLocation aluminiumOctaTextureLocation = new ResourceLocation(DroneMod.modID, "textures/entity/aluminiumocta.png");
+	public static final ResourceLocation woodOctaTextureLocation = new ResourceLocation(General.modID, "textures/entity/woodocta.png");
+	public static final ResourceLocation aluminiumOctaTextureLocation = new ResourceLocation(General.modID, "textures/entity/aluminiumocta.png");
 	
 	@Override
 	protected void initPositions(){

@@ -3,7 +3,7 @@ package sfschouten.dronemod.client.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.network.ChangeMarkerMessage;
 import sfschouten.dronemod.tileentity.TileEntityMarker;

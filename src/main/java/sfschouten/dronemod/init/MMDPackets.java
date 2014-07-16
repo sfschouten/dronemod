@@ -1,6 +1,6 @@
 package sfschouten.dronemod.init;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.network.ChangeMarkerMessage;
 import sfschouten.dronemod.network.ChangeMarkerMessageHandler;
 import sfschouten.dronemod.network.DroneReturnMessage;

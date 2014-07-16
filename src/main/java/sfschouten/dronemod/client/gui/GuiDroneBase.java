@@ -12,12 +12,13 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.inventory.ContainerDroneBase;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.network.DroneReturnMessage;
 import sfschouten.dronemod.network.LaunchDroneMessage;
+import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 
 public class GuiDroneBase extends GuiContainer {
@@ -91,9 +92,9 @@ public class GuiDroneBase extends GuiContainer {
 		// draw your Gui here, only thing you need to change is the path
 		ResourceLocation guiTrap = null;
 		if (tileEntity.getDrone() == null) {
-			guiTrap = new ResourceLocation(DroneMod.modID + ":textures/gui/dronebase_nodrone.png");
+			guiTrap = new ResourceLocation(General.modID + ":textures/gui/dronebase_nodrone.png");
 		} else {
-			guiTrap = new ResourceLocation(DroneMod.modID + ":textures/gui/dronebase.png");
+			guiTrap = new ResourceLocation(General.modID + ":textures/gui/dronebase.png");
 		}
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(guiTrap);

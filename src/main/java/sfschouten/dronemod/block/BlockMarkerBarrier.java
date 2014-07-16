@@ -1,24 +1,20 @@
 package sfschouten.dronemod.block;
 
 import java.util.List;
-import java.util.Random;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.entity.EntityDroneFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.entity.EntityDroneFX;
+import sfschouten.dronemod.reference.General;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMarkerBarrier extends Block{
 	@SideOnly(Side.CLIENT)
@@ -43,7 +39,7 @@ public class BlockMarkerBarrier extends Block{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		this.icon = icon.registerIcon(DroneMod.modID + ":markerbarrier");
+		this.icon = icon.registerIcon(General.modID + ":markerbarrier");
 	}
 	
 	@Override

@@ -3,7 +3,8 @@ package sfschouten.dronemod.client.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.reference.General;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -11,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ModelCaneOctaCopter extends ModelCopter {
 
-	public static final ResourceLocation caneOctaTextureLocation = new ResourceLocation(DroneMod.modID + ":textures/entity/caneocta.png");
+	public static final ResourceLocation caneOctaTextureLocation = new ResourceLocation(General.modID + ":textures/entity/caneocta.png");
 
 	public ModelCaneOctaCopter(float scale) {
 		super(scale);

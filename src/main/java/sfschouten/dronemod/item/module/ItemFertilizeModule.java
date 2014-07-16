@@ -2,8 +2,8 @@ package sfschouten.dronemod.item.module;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemDye;
-import sfschouten.dronemod.DroneMod;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
 public class ItemFertilizeModule extends ItemTaskModule {
@@ -11,7 +11,7 @@ public class ItemFertilizeModule extends ItemTaskModule {
 	public ItemFertilizeModule(){
 		super();
 		this.setUnlocalizedName("fertilizeModuleItem");
-		this.setTextureName(DroneMod.modID + ":basic_fertilize_icon");
+		this.setTextureName(General.modID + ":basic_fertilize_icon");
 		this.restockItem = Items.dye;
 		this.restockItemDamageValue = 15;
 	}

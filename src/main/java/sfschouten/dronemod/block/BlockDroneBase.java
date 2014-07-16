@@ -4,7 +4,9 @@ import java.util.Random;
 
 import javax.print.attribute.standard.MediaSize.Other;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.init.MMDCreativeTabs;
+import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -37,15 +39,15 @@ public class BlockDroneBase extends BlockContainer{
 		super(Material.iron);
 		this.setHardness(4F);
 		this.setBlockName("droneBase");
-		this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		topIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top");
+		topIcon = icon.registerIcon(General.modID + ":dronebase_top");
 		//topTakenIcon = icon.registerIcon(DroneMod.modID + ":dronebase_top_taken");
-		otherIcon = icon.registerIcon(DroneMod.modID + ":dronebase");
+		otherIcon = icon.registerIcon(General.modID + ":dronebase");
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class BlockDroneBase extends BlockContainer{
 			return false;
 		}
 		
-		player.openGui(DroneMod.instance, 0, world, x, y, z);
+		player.openGui(ModularMulticopterDrones.instance, 0, world, x, y, z);
 		return true;
 	}
 

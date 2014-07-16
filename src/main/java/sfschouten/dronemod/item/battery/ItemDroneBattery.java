@@ -3,7 +3,8 @@ package sfschouten.dronemod.item.battery;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.init.MMDCreativeTabs;
 import cofh.api.energy.IEnergyContainerItem;
 
 public abstract class ItemDroneBattery extends Item implements IEnergyContainerItem {
@@ -13,7 +14,7 @@ public abstract class ItemDroneBattery extends Item implements IEnergyContainerI
 
 	public ItemDroneBattery() {
 		super();
-		this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
 		this.setMaxStackSize(16);
 	}
 

@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.client.model.ModelOctaCopter;
 import sfschouten.dronemod.client.model.ModelQuadcopter;
 import sfschouten.dronemod.entity.EntityAluminiumMediumQuadcopter;

@@ -1,14 +1,11 @@
 package sfschouten.dronemod.item.module;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import sfschouten.dronemod.DroneMod;
-import sfschouten.dronemod.entity.EntityDrone;
-import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
+import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.reference.General;
+import sfschouten.dronemod.tileentity.TileEntityMarker;
 
 public class ItemPlantModule extends ItemTaskModule {
 
@@ -16,7 +13,7 @@ public class ItemPlantModule extends ItemTaskModule {
 		super();
 		this.restockItem = Items.wheat_seeds;
 		this.setUnlocalizedName("plantModuleItem");
-		this.setTextureName(DroneMod.modID + ":basic_planting_icon");
+		this.setTextureName(General.modID + ":basic_planting_icon");
 	}
 	
 	@Override

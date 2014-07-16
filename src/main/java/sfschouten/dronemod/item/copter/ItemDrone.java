@@ -3,8 +3,9 @@ package sfschouten.dronemod.item.copter;
 import java.util.HashMap;
 
 import cofh.api.energy.IEnergyContainerItem;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.init.MMDCreativeTabs;
 import sfschouten.dronemod.inventory.InventoryType;
 import sfschouten.dronemod.inventory.SimpleInventory;
 import sfschouten.dronemod.item.module.ItemTaskModule;
@@ -30,7 +31,7 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 	
     public ItemDrone() {
         super();
-        this.setCreativeTab(DroneMod.tabDroneMod);
+        this.setCreativeTab(MMDCreativeTabs.tabGeneral);
         this.setMaxStackSize(1);
     }
     
@@ -43,7 +44,7 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
     	int y = (int)par3EntityPlayer.posY;
     	int z = (int)par3EntityPlayer.posZ;
     	
-		par3EntityPlayer.openGui(DroneMod.instance, 1, par2World, x, y, z);
+		par3EntityPlayer.openGui(ModularMulticopterDrones.instance, 1, par2World, x, y, z);
 
         return par1ItemStack;
     }

@@ -1,14 +1,13 @@
 package sfschouten.dronemod.item.motor;
 
-import sfschouten.dronemod.DroneMod;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import sfschouten.dronemod.reference.General;
 
 public class ItemStrongMotor extends ItemDroneMotor {
 
 	public ItemStrongMotor( ) {
 		super();
 		this.setUnlocalizedName("strongMotorItem");
-		this.setTextureName(DroneMod.modID + ":strong_motor_icon");
+		this.setTextureName(General.modID + ":strong_motor_icon");
 	}
 
 }

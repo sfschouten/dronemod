@@ -1,17 +1,17 @@
 package sfschouten.dronemod.item;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import sfschouten.dronemod.DroneMod;
 import net.minecraft.item.Item;
 import net.minecraftforge.oredict.OreDictionary;
+import sfschouten.dronemod.init.MMDCreativeTabs;
+import sfschouten.dronemod.reference.General;
 
 public class ItemAluminiumIngot extends Item{
 
 	public ItemAluminiumIngot() {
 		super();
 		OreDictionary.registerOre("ingotAluminum", this);
-		this.setTextureName(DroneMod.modID + ":ingot_aluminium");
-		this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setTextureName(General.modID + ":ingot_aluminium");
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
         this.setMaxStackSize(64);
         this.setUnlocalizedName("aluminiumIngotItem");
 	}

@@ -1,6 +1,6 @@
 package sfschouten.dronemod.item.module;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.entity.EntityDrone;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;

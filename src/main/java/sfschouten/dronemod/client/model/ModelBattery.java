@@ -1,6 +1,7 @@
 package sfschouten.dronemod.client.model;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.reference.General;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -15,7 +16,7 @@ public class ModelBattery extends ModelExpansion {
 		textureWidth = 32;
 		textureHeight = 32;
 
-		texture = new ResourceLocation(DroneMod.modID, "textures/entity/battery.png");
+		texture = new ResourceLocation(General.modID, "textures/entity/battery.png");
 		
 		Body = new ModelRenderer(this, 0, 0);
 		Body.addBox(0F, 0F, 0F, 6, 4, 4);

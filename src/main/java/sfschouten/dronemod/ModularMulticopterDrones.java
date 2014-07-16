@@ -15,6 +15,7 @@ import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.init.MMDTileEntities;
 import sfschouten.dronemod.proxy.CommonProxy;
+import sfschouten.dronemod.reference.General;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,18 +25,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid = DroneMod.modID, name = "Modular Multicopter Drones", version = "dev")
-public class DroneMod implements LoadingCallback{
-	public static final String modID = "schoutendronemod";
-	public static CreativeTabs tabDroneMod = new CreativeTabs("tabDroneMod") {
-		@Override
-		public Item getTabIconItem() {
-			return MMDItems.aluminiumStrongOctacopterItem;
-		}
-	};
+@Mod(modid = General.modID, name = General.modName, version = General.modVersion)
+public class ModularMulticopterDrones implements LoadingCallback{
 
-	@Instance(value = DroneMod.modID)
-	public static DroneMod instance;
+	@Instance(value = General.modID)
+	public static ModularMulticopterDrones instance;
 
 	@SidedProxy(clientSide = "sfschouten.dronemod.proxy.ClientProxy", serverSide = "sfschouten.dronemod.proxy.CommonProxy")
 	public static CommonProxy proxy;

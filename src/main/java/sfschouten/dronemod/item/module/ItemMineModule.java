@@ -4,7 +4,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityMarker;

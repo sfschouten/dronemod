@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import org.apache.logging.log4j.Level;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.reference.General;
 import cpw.mods.fml.common.FMLLog;
 
 public class Logger {
@@ -35,11 +35,11 @@ public class Logger {
 	}
 
 	public static void log(Object object) {
-		FMLLog.log(DroneMod.modID, Level.DEBUG, String.valueOf(object));
+		FMLLog.log(General.modID, Level.DEBUG, String.valueOf(object));
 	}
 
 	public static void log(Level level, Object object) {
-		FMLLog.log(DroneMod.modID, level, String.valueOf(object));
+		FMLLog.log(General.modID, level, String.valueOf(object));
 	}
 
 	public static void all(Object object) {

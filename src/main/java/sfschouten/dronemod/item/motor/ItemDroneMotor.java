@@ -1,13 +1,14 @@
 package sfschouten.dronemod.item.motor;
 
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.init.MMDCreativeTabs;
 import net.minecraft.item.Item;
 
 public abstract class ItemDroneMotor extends Item{
 
 	public ItemDroneMotor( ) {
 		super();
-		this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
         this.setMaxStackSize(16);
 	}
 }

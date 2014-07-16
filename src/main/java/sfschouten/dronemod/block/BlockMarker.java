@@ -5,7 +5,9 @@ import java.util.List;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import sfschouten.dronemod.DroneMod;
+import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.init.MMDCreativeTabs;
+import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.registry.MarkerRegistry;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 import net.minecraft.block.Block;
@@ -29,7 +31,7 @@ public class BlockMarker extends Block implements ITileEntityProvider{
 	
 	public BlockMarker() {
 		super(Material.sponge);
-		this.setCreativeTab(DroneMod.tabDroneMod);
+		this.setCreativeTab(MMDCreativeTabs.tabGeneral);
 		this.setBlockName("marker");
 	}
 
@@ -51,8 +53,8 @@ public class BlockMarker extends Block implements ITileEntityProvider{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon) {
-		topIcon = icon.registerIcon(DroneMod.modID + ":marker_top");
-		otherIcon = icon.registerIcon(DroneMod.modID + ":dronebase");
+		topIcon = icon.registerIcon(General.modID + ":marker_top");
+		otherIcon = icon.registerIcon(General.modID + ":dronebase");
 	}
 	
 	@Override
@@ -62,7 +64,7 @@ public class BlockMarker extends Block implements ITileEntityProvider{
 			return false;
 		}
 		
-		player.openGui(DroneMod.instance, 2, world, x, y, z);
+		player.openGui(ModularMulticopterDrones.instance, 2, world, x, y, z);
 		return super.onBlockActivated(world, x, y, z, player, par6, par7, par8, par9);
 	}
 
