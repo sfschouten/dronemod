@@ -166,6 +166,41 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 		this.drone = drone;
 	}
 
+	public void spawnDrone(){
+		if(!(inv[0].getItem() instanceof ItemDrone)){
+			return;
+		}
+   		
+		//See which drone is in inventory
+		ItemDrone droneItem = (ItemDrone) inv[0].getItem();
+		
+		//Make new drone
+		NBTTagCompound droneItemNBTdata = inv[0].getTagCompound();
+		
+   		EntityDrone e = droneItem.getNewEntity(worldObj, droneItemNBTdata, xCoord+0.5, yCoord+1.5, zCoord+0.5);
+		e.setBase(this);
+		e.setEnergy(droneItem.getEnergyStored(inv[0]));
+		worldObj.spawnEntityInWorld(e);
+		
+		//TEMP get first marker from MarkerRegistry to test.
+		MarkerRegistry m = MarkerRegistry.forWorld(worldObj);
+		List<Registration> markers = m.getRegisteredMarkers();
+		Registration r = markers.get(0);
+		
+		//Add marker to drone
+   		if(r.marker != null){
+   			e.addWorkMarker(r.marker);
+   			Logger.log("marker is nulllllll");
+   		}else{
+   			Logger.log("NOT NULL");
+   		}
+		
+		setDrone(e);
+		lock();
+		setInventorySlotContents(0, null);
+		setSpawnOnCharged(false);
+	}
+	
 	public boolean storeDrone(EntityDrone e){
 		if(drone == null){
 			drone = e;
@@ -195,41 +230,6 @@ public class TileEntityDroneBase extends TileEntity implements IPeripheral, IInv
 	
 	public void unLock(){
 		locked = false;
-	}
-	
-	public void spawnDrone(){
-		if(!(inv[0].getItem() instanceof ItemDrone)){
-			return;
-		}
-   		
-		//See which drone is in inventory
-		ItemDrone droneItem = (ItemDrone) inv[0].getItem();
-		
-		//Make new drone
-		NBTTagCompound droneItemNBTdata = inv[0].getTagCompound();
-   		EntityDrone e = droneItem.getNewEntity(worldObj, droneItemNBTdata);
-   		e.setPosition(xCoord+0.5, yCoord+1.5, zCoord+0.5);
-		e.setBase(this);
-		e.setEnergy(droneItem.getEnergyStored(inv[0]));
-		worldObj.spawnEntityInWorld(e);
-				
-		//TEMP get first marker from MarkerRegistry to test.
-		MarkerRegistry m = MarkerRegistry.forWorld(worldObj);
-		List<Registration> markers = m.getRegisteredMarkers();
-		Registration r = markers.get(0);
-		
-		//Add marker to drone
-   		if(r.marker != null){
-   			e.addWorkMarker(r.marker);
-   			Logger.log("marker is nulllllll");
-   		}else{
-   			Logger.log("NOT NULL");
-   		}
-		
-		setDrone(e);
-		lock();
-		setInventorySlotContents(0, null);
-		setSpawnOnCharged(false);
 	}
 	
 	public IInventory getAdjacentInventory(){

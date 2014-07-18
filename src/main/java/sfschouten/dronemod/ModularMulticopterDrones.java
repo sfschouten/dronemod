@@ -11,6 +11,7 @@ import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import sfschouten.dronemod.client.gui.GuiHandler;
 import sfschouten.dronemod.init.MMDBlocks;
 import sfschouten.dronemod.init.MMDEntities;
+import sfschouten.dronemod.init.MMDEvents;
 import sfschouten.dronemod.init.MMDItems;
 import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.init.MMDTileEntities;
@@ -45,6 +46,7 @@ public class ModularMulticopterDrones implements LoadingCallback{
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, this);
 
+		MMDEvents.init();
 		MMDPackets.init();
 		MMDItems.init();
 		MMDBlocks.init();

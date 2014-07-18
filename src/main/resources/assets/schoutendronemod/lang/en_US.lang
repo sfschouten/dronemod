@@ -9,6 +9,7 @@ item.harvestModuleItem.name=Harvest Module
 item.mineModuleItem.name=Mining Module
 item.plantModuleItem.name=Planting Module
 item.tillModuleItem.name=Tilling Module
+item.chunkLoaderModuleItem.name=Chunk Loader Module (Passive)
 
 item.mediumMotorItem.name=Medium Motor
 item.strongMotorItem.name=Strong Motor

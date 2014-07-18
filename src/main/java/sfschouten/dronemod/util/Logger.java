@@ -35,7 +35,7 @@ public class Logger {
 	}
 
 	public static void log(Object object) {
-		FMLLog.log(General.modID, Level.DEBUG, String.valueOf(object));
+		FMLLog.log(General.modID, Level.INFO, String.valueOf(object));
 	}
 
 	public static void log(Level level, Object object) {

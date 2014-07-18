@@ -5,6 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.util.Logger;
 
@@ -33,8 +34,8 @@ public class DroneRestockAI extends EntityAIBase {
 			drone.getNavigator().tryMoveToXYZ(base.xCoord, base.yCoord+1, base.zCoord, 1.0D);
 		}else{
 			Logger.log("drone is at base");
-			Item restockItem = drone.getModules().get(0).getRestockItem();
-			int restockItemDamage = drone.getModules().get(0).getRestockItemDamageValue();
+			Item restockItem = drone.getTaskModules().get(0).getRestockItem();
+			int restockItemDamage = drone.getTaskModules().get(0).getRestockItemDamageValue();
 			
 			IInventory adjInv = drone.getBase().getAdjacentInventory();
 			if (adjInv == null){

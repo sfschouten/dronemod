@@ -21,9 +21,13 @@ public class DroneMoveHelper extends EntityMoveHelper {
 		this.z = this.entity.posZ;
 	}
 
+	/**
+	 * Adds 0.5D to the y level to make the default pathnavigate work.
+	 */
 	public void setMoveTo(double x, double y, double z, double speed) {
+		Logger.info("setMoveTo: "+x+", "+y+"(+0.5), "+z);
 		this.x = x;
-		this.y = y;
+		this.y = y + 0.5D;
 		this.z = z;
 		this.speed = speed;
 	}
@@ -34,7 +38,6 @@ public class DroneMoveHelper extends EntityMoveHelper {
 		double motionZ = 0;
 		
 		double speed = this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue();
-		//Logger.logOut("move" + x + "|" + y + "|" + z);
 		if (this.x - 0.1D > this.entity.posX) {
 			motionX = speed;
 		} else if (this.x + 0.1D < this.entity.posX) {

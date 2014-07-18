@@ -28,6 +28,7 @@ import sfschouten.dronemod.item.frame.ItemQuadAluminiumFrame;
 import sfschouten.dronemod.item.frame.ItemQuadCaneFrame;
 import sfschouten.dronemod.item.frame.ItemQuadWoodFrame;
 import sfschouten.dronemod.item.module.ItemAdvancedBreedingModule;
+import sfschouten.dronemod.item.module.ItemChunkloaderModule;
 import sfschouten.dronemod.item.module.ItemFertilizeModule;
 import sfschouten.dronemod.item.module.ItemHarvestModule;
 import sfschouten.dronemod.item.module.ItemMineModule;
@@ -39,6 +40,7 @@ import sfschouten.dronemod.item.motor.ItemWeakMotor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MMDItems {
+	//Frames
 	public final static ItemHexaAluminiumFrame hexaAluminiumFrameItem = new ItemHexaAluminiumFrame();
 	public final static ItemHexaCaneFrame hexaCaneFrameItem = new ItemHexaCaneFrame();
 	public final static ItemHexaWoodFrame hexaWoodFrameItem = new ItemHexaWoodFrame();
@@ -48,16 +50,18 @@ public class MMDItems {
 	public final static ItemQuadCaneFrame quadCaneFrameItem = new ItemQuadCaneFrame();
 	public final static ItemQuadWoodFrame quadWoodFrameItem = new ItemQuadWoodFrame();
 
+	//Motors
 	public final static ItemWeakMotor weakMotorItem = new ItemWeakMotor();
 	public final static ItemMediumMotor mediumMotorItem = new ItemMediumMotor();
 	public final static ItemStrongMotor strongMotorItem = new ItemStrongMotor();
 
+	//Modules
 	public final static ItemFertilizeModule fertilizeModuleItem = new ItemFertilizeModule();
 	public final static ItemHarvestModule harvestModuleItem = new ItemHarvestModule();
 	public final static ItemPlantModule plantModuleItem = new ItemPlantModule();
 	public final static ItemTillModule tillModuleItem = new ItemTillModule();
 	public final static ItemMineModule mineModuleItem = new ItemMineModule();
-
+	public final static ItemChunkloaderModule chunkloaderModuleItem = new ItemChunkloaderModule();
 	public final static ItemAdvancedBreedingModule advancedBreedingModuleItem = new ItemAdvancedBreedingModule();
 
 	public final static ItemSmallDroneBattery smallDroneBatteryItem = new ItemSmallDroneBattery();
@@ -107,7 +111,7 @@ public class MMDItems {
 		GameRegistry.registerItem(plantModuleItem, "plantModuleItem");
 		GameRegistry.registerItem(tillModuleItem, "tillModuleItem");
 		GameRegistry.registerItem(mineModuleItem, "mineModuleItem");
-
+		GameRegistry.registerItem(chunkloaderModuleItem, "chunkloaderModuleItem");
 		GameRegistry.registerItem(advancedBreedingModuleItem, "advancedBreedingModuleItem");
 
 		GameRegistry.registerItem(smallDroneBatteryItem, "smallDroneBatteryItem");

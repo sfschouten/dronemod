@@ -25,13 +25,7 @@ public class ItemCaneWeakHexacopter extends ItemDrone {
 	}
 
 	@Override
-	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		NBTTagCompound config = new NBTTagCompound();
-		super.onCreated(par1ItemStack, par2World, par3EntityPlayer);
-	}
-
-	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
+	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata, double x, double y, double z) {
 		EntityCaneWeakHexacopter newEntity = new EntityCaneWeakHexacopter(world);
 
 		applySizes(newEntity, droneItemNBTdata);

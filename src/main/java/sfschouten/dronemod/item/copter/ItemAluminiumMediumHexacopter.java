@@ -22,12 +22,6 @@ public class ItemAluminiumMediumHexacopter extends ItemDrone {
 		
 		GameRegistry.addRecipe(new ItemStack(this), "y y", "yxy", "y y", 'x', hexaAluminiumFrame, 'y', mediumMotor);
 	}
-
-	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		EntityAluminiumMediumHexacopter newEntity = new EntityAluminiumMediumHexacopter(world);
-		return applySizes(newEntity, droneItemNBTdata);
-	}
 	
 	@Override
 	public int getExpSize(InventoryType type) {

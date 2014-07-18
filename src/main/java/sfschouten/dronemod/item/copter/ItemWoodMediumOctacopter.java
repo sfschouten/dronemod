@@ -23,12 +23,6 @@ public class ItemWoodMediumOctacopter extends ItemDrone {
 		
 		GameRegistry.addRecipe(new ItemStack(this), "yyy", "yxy", "yyy", 'x', octaWoodFrame, 'y', mediumMotor);
 	}
-
-	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		EntityWoodMediumOctacopter newEntity = new EntityWoodMediumOctacopter(world);
-		return applySizes(newEntity, droneItemNBTdata);
-	}
 	
 	@Override
 	public int getExpSize(InventoryType type) {

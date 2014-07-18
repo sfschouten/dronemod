@@ -6,7 +6,7 @@ import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
-public class ItemTillModule extends ItemTaskModule {
+public class ItemTillModule extends ItemBasicTaskModule {
 
 	public ItemTillModule(){
 		super();

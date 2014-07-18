@@ -83,7 +83,7 @@ public class PathFinder3D {
 
 			isPathingInWater = false;
 		} else {
-			y = MathHelper.floor_double(par1Entity.boundingBox.minY + 0.5D);
+			y = MathHelper.floor_double(par1Entity.boundingBox.minY);
 		}
 
 		// Start point
@@ -180,18 +180,12 @@ public class PathFinder3D {
 	 */
 	private int findPathOptions(Entity par1Entity, PathPoint fromPathPoint, PathPoint entityWidthPathPoint, PathPoint endPathPoint, float range) {
 		int i = 0;
-		byte b0 = 0;
-
-		int collType = doesEntityCollideAt(par1Entity, fromPathPoint.xCoord, fromPathPoint.yCoord + 1, fromPathPoint.zCoord, entityWidthPathPoint);
-		if (collType == 1) {
-			b0 = 1;
-		}
 
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			int offX = fromPathPoint.xCoord + dir.offsetX;
 			int offY = fromPathPoint.yCoord + dir.offsetY;
 			int offZ = fromPathPoint.zCoord + dir.offsetZ;
-			PathPoint safePoint = getSafePoint(par1Entity, offX, offY, offZ, entityWidthPathPoint, b0);
+			PathPoint safePoint = getSafePoint(par1Entity, offX, offY, offZ, entityWidthPathPoint);
 
 			if (safePoint != null && !safePoint.isFirst && safePoint.distanceTo(endPathPoint) < range) {
 				pathOptions[(i++)] = safePoint;
@@ -204,7 +198,7 @@ public class PathFinder3D {
 	/**
 	 * Returns a point that the entity can safely move to
 	 */
-	private PathPoint getSafePoint(Entity par1Entity, int par2, int par3, int par4, PathPoint par5PathPoint, int par6) {
+	private PathPoint getSafePoint(Entity par1Entity, int par2, int par3, int par4, PathPoint par5PathPoint) {
 		PathPoint pathpoint1 = null;
 		if (worldMap.isAirBlock(par2, par3, par4)) {
 			pathpoint1 = openPoint(par2, par3, par4);

@@ -1,13 +1,17 @@
 package sfschouten.dronemod.item.copter;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 import cofh.api.energy.IEnergyContainerItem;
 import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.client.model.ModelCopter;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.init.MMDCreativeTabs;
 import sfschouten.dronemod.inventory.InventoryType;
 import sfschouten.dronemod.inventory.SimpleInventory;
+import sfschouten.dronemod.item.module.ItemModule;
 import sfschouten.dronemod.item.module.ItemTaskModule;
 import sfschouten.dronemod.util.Logger;
 import net.minecraft.block.Block;
@@ -26,8 +30,8 @@ import net.minecraft.world.World;
 
 public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 	protected HashMap<InventoryType, Integer> amounts;
-	protected Class entityClass;
-	protected Class modelClass;
+	protected Class<? extends EntityDrone> entityClass;
+	protected Class<? extends ModelCopter> modelClass;
 	
     public ItemDrone() {
         super();
@@ -49,7 +53,41 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
         return par1ItemStack;
     }
     
-    public abstract EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata);
+    /**
+     * Used to instantiate the appropriate entity for this item.
+     * 
+     * 
+     * @param world
+     * @param droneItemNBTdata
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata, double x, double y, double z){
+    	try {
+    		Constructor c = entityClass.getConstructor(new Class[]{World.class});
+			EntityDrone drone = (EntityDrone) c.newInstance(new Object[]{world});
+			//It's important that the position is set before the sizes are applied. 
+			//This has to do with chunkloading.
+			drone.setPosition(x, y, z);
+			applySizes(drone, droneItemNBTdata);
+			return drone;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
     
     public Class getModelClass(){
     	return modelClass;
@@ -73,9 +111,9 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
 			for(int currentStackInt = 0; currentStackInt < inv.getSizeInventory(); currentStackInt++){
 				ItemStack currentStack = inv.getStackInSlot(currentStackInt);
 				if(currentStack != null){
-					if(currentStack.getItem() instanceof ItemTaskModule){
+					if(currentStack.getItem() instanceof ItemModule){
 						System.out.println("Adding Module to entitytobespawned");
-						e.addModule((ItemTaskModule) currentStack.getItem());
+						e.addModule((ItemModule) currentStack.getItem());
 						break;
 					}else if(false/*TODO implement battery stuffs*/){
 					}else if(currentStack.getItem() == Item.getItemFromBlock(Blocks.chest)){

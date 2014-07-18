@@ -25,13 +25,7 @@ public class ItemAluminiumStrongQuadcopter extends ItemDrone {
 
 		GameRegistry.addRecipe(new ItemStack(this), "y y", " x ", "y y", 'x', quadAluminiumFrame, 'y', strongMotor);
 	}
-
-	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		EntityAluminiumStrongOctacopter newEntity = new EntityAluminiumStrongOctacopter(world);
-		return applySizes(newEntity, droneItemNBTdata);
-	}
-
+	
 	@Override
 	public int getExpSize(InventoryType type) {
 		int result = 0;

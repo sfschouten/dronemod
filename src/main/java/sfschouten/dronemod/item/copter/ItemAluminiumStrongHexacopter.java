@@ -26,12 +26,6 @@ public class ItemAluminiumStrongHexacopter extends ItemDrone {
 	}
 
 	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata) {
-		EntityAluminiumStrongOctacopter newEntity = new EntityAluminiumStrongOctacopter(world);
-		return applySizes(newEntity, droneItemNBTdata);
-	}
-
-	@Override
 	public int getExpSize(InventoryType type) {
 		int result = 0;
 		switch (type) {

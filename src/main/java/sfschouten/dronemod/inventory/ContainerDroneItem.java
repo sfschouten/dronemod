@@ -43,7 +43,7 @@ public class ContainerDroneItem extends Container {
 			temp.setType(type);
 			
 			for(int t = 0; t < temp.getSizeInventory(); t++){
-				addSlotToContainer(new Slot(temp, 0, 8+(t*18), 25+(type.ordinal()*25)));
+				addSlotToContainer(new Slot(temp, t, 8+(t*18), 25+(type.ordinal()*25)));
 			}
 			
 			inventories.put(type, temp);
