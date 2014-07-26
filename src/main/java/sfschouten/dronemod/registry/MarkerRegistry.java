@@ -13,7 +13,6 @@ import sfschouten.dronemod.block.BlockMarker;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
 
 public class MarkerRegistry extends WorldSavedData {
-	
 	private static String key = "markerregistry";
 	
 	public MarkerRegistry(String par1Str) {
@@ -28,6 +27,7 @@ public class MarkerRegistry extends WorldSavedData {
 			result = new MarkerRegistry(key);
 			storage.setData(key, result);
 		}
+		result.world = world;
 		return result;
 	}
 	
@@ -37,6 +37,7 @@ public class MarkerRegistry extends WorldSavedData {
 	}
 	
 	private List<Registration> registry = new ArrayList<Registration>();
+	private World world;
 	
 	public List<Registration> getRegisteredMarkers(){
 		return registry;
@@ -71,7 +72,7 @@ public class MarkerRegistry extends WorldSavedData {
 			r.x = nbttagcompound.getInteger("x"+i);
 			r.y = nbttagcompound.getInteger("y"+i);
 			r.z = nbttagcompound.getInteger("z"+i);
-			r.marker = (TileEntityMarker) Minecraft.getMinecraft().theWorld.getTileEntity(r.x, r.y, r.z);
+			r.marker = (TileEntityMarker) world.getTileEntity(r.x, r.y, r.z);
 			registry.add(r);
 			i++;
 		}

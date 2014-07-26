@@ -69,16 +69,16 @@ public class GuiMarker extends GuiScreen {
 
 	@Override
 	public void onGuiClosed() {
-		
 		tileEntity.setName(nameField.getText());
 		String radiusString = radiusField.getText();
 		int radius = 1;
 		try{
 			radius = Integer.parseInt(radiusString);
 		}catch(NumberFormatException e){
-			System.out.println("exception???");
 		}
 		tileEntity.setRadius(radius);
+		
+		sendChangedBarrier();
 		super.onGuiClosed();
 	}
 
@@ -86,22 +86,21 @@ public class GuiMarker extends GuiScreen {
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		switch(par1GuiButton.id){
 		case 1:
-			sendToggleBarrier();
+			tileEntity.toggleBarrier();
+			sendChangedBarrier();
 			break;
 		}
 		super.actionPerformed(par1GuiButton);
 	}
 	
-	private void sendToggleBarrier(){
-		tileEntity.toggleBarrier();
-		
+	private void sendChangedBarrier(){
 		ChangeMarkerMessage p = new ChangeMarkerMessage();
 		p.setX(tileEntity.xCoord);
 		p.setY(tileEntity.yCoord);
 		p.setZ(tileEntity.zCoord);
 		p.setWorldID(tileEntity.getWorldObj().provider.dimensionId);
 		p.setRadius(tileEntity.getRadius());
-		p.setBarrier(!tileEntity.isBarrier());
+		p.setBarrier(tileEntity.isBarrier());
 		p.setName(tileEntity.getName());
 		
 		MMDPackets.networkWrapper.sendToServer(p);

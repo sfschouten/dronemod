@@ -33,9 +33,7 @@ public class DroneBasicTaskAI extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		MarkerRegistry mr = MarkerRegistry.forWorld(drone.worldObj);
-		List<Registration> markers = mr.getRegisteredMarkers();
-		return drone.isAwake() && !markers.isEmpty();
+		return drone.isAwake();
 	}
 
 	@Override
@@ -78,7 +76,7 @@ public class DroneBasicTaskAI extends EntityAIBase {
 			subject.setX(currentX);
 			subject.setY(currentY);
 			subject.setZ(currentZ);
-			
+			Logger.info(drone.getTaskModules().size());
 			for (ItemTaskModule m : drone.getTaskModules()) {
 				DroneTaskResult result = m.performTask(drone, subject);
 				
@@ -135,11 +133,7 @@ public class DroneBasicTaskAI extends EntityAIBase {
 	}
 
 	private void init(){
-		MarkerRegistry mr = MarkerRegistry.forWorld(drone.worldObj);
-		List<Registration> markers = mr.getRegisteredMarkers();
-		Registration r = markers.get(0);
-		currentWork = r.marker;
-		
+		currentWork = drone.getCurrentWork();
 		currentRadius = currentWork.getRadius();
 		
 		goingDeep = true;

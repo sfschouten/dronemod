@@ -78,12 +78,18 @@ public class TileEntityMarker extends TileEntity{
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		barrier = par1nbtTagCompound.getBoolean("barrier");
+		name = par1nbtTagCompound.getString("name");
+		radius = par1nbtTagCompound.getInteger("radius");
+		barPos = par1nbtTagCompound.getInteger("barPos");
 		super.readFromNBT(par1nbtTagCompound);
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		par1nbtTagCompound.setBoolean("barrier", barrier);
+		par1nbtTagCompound.setString("name", name);
+		par1nbtTagCompound.setInteger("radius", radius);
+		par1nbtTagCompound.setInteger("barPos", barPos);
 		super.writeToNBT(par1nbtTagCompound);
 	}
 	

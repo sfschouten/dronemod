@@ -12,15 +12,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class LaunchDroneMessageHandler implements IMessageHandler<LaunchDroneMessage, IMessage> {
 	@Override
 	public IMessage onMessage(LaunchDroneMessage message, MessageContext ctx) {
-		switch (ctx.side) {
-        case CLIENT:
-            message.executeClient(Minecraft.getMinecraft().thePlayer);
-            break;
-        case SERVER:
-            INetHandler netHandler = ctx.netHandler;
-            message.executeServer(((NetHandlerPlayServer) netHandler).playerEntity);
-            break;
-		}
+        INetHandler netHandler = ctx.netHandler;
+        message.executeServer(((NetHandlerPlayServer) netHandler).playerEntity);
 		return null;
 	}
 }

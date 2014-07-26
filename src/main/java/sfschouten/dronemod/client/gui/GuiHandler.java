@@ -5,8 +5,10 @@ import java.util.List;
 import sfschouten.dronemod.inventory.ContainerDroneBase;
 import sfschouten.dronemod.inventory.ContainerDroneItem;
 import sfschouten.dronemod.inventory.InventoryType;
+import sfschouten.dronemod.registry.MarkerRegistry;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +56,7 @@ public class GuiHandler implements IGuiHandler {
 			}
 		case 1:
 			ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
-			return new GuiDroneItem(player.inventory, stack);
+			return new GuiDroneItem(player.inventory, stack, world);
 		case 2:
 			return new GuiMarker((TileEntityMarker) tileEntity);
 		default:

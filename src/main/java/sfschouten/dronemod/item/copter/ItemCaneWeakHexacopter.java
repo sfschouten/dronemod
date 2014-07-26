@@ -25,15 +25,6 @@ public class ItemCaneWeakHexacopter extends ItemDrone {
 	}
 
 	@Override
-	public EntityDrone getNewEntity(World world, NBTTagCompound droneItemNBTdata, double x, double y, double z) {
-		EntityCaneWeakHexacopter newEntity = new EntityCaneWeakHexacopter(world);
-
-		applySizes(newEntity, droneItemNBTdata);
-		
-		return newEntity;
-	}
-
-	@Override
 	public int getExpSize(InventoryType type) {
 		int result = 0;
 		switch(type){

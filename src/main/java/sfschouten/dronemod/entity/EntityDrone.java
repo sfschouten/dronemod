@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -89,8 +90,7 @@ public abstract class EntityDrone extends EntityFlying {
 		workMarkers = new ArrayList<TileEntityMarker>();
 		modules = new ArrayList<ItemModule>();
 		sleep = -1;
-
-		// TODO move task AI's to individual drones.
+		
 		tasks.addTask(0, new DroneRestockAI(this));
 		tasks.addTask(1, new DroneBasicTaskAI(this));
 		tasks.addTask(2, new DroneAdvancedTaskAI());
@@ -117,7 +117,8 @@ public abstract class EntityDrone extends EntityFlying {
 	 * 
 	 * Only call when entity is not spawned in world yet.
 	 * 
-	 * @param m Module to be added.
+	 * @param m
+	 *            Module to be added.
 	 */
 	public void addModule(ItemModule m) {
 		if (!this.addedToChunk) {
@@ -163,32 +164,33 @@ public abstract class EntityDrone extends EntityFlying {
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
 	}
 
-	public boolean coordinateCheck(Axis a, int coord, double range){
+	public boolean coordinateCheck(Axis a, int coord, double range) {
 		return coordinateCheck(a, coord, range, range);
 	}
 
 	/**
-	 * Checks if this drone is within the range of the middle of theon the supplied axis
+	 * Checks if this drone is within the range of the middle of theon the
+	 * supplied axis
 	 * 
 	 * @param a
 	 * @param coord
 	 * @param range
 	 * @return
 	 */
-	public boolean coordinateCheck(Axis a, int coord, double lrange, double rrange){
+	public boolean coordinateCheck(Axis a, int coord, double lrange, double rrange) {
 		switch (a) {
 		case x:
-			if(coord + 0.5D - lrange < posX && coord + 0.5D + rrange > posX ){
+			if (coord + 0.5D - lrange < posX && coord + 0.5D + rrange > posX) {
 				return true;
 			}
 			break;
 		case y:
-			if(coord + 0.5D - lrange < posY && coord + 0.5D + rrange > posY ){
+			if (coord + 0.5D - lrange < posY && coord + 0.5D + rrange > posY) {
 				return true;
 			}
 			break;
 		case z:
-			if(coord + 0.5D - lrange < posZ && coord + 0.5D + rrange > posZ ){
+			if (coord + 0.5D - lrange < posZ && coord + 0.5D + rrange > posZ) {
 				return true;
 			}
 			break;
@@ -214,10 +216,6 @@ public abstract class EntityDrone extends EntityFlying {
 		} else {
 			return true;
 		}
-	}
-
-	@Override
-	protected void fall(float par1) {
 	}
 
 	public void forcedChunkChanged(int newx, int newz, int oldx, int oldz) {
@@ -262,7 +260,7 @@ public abstract class EntityDrone extends EntityFlying {
 	public HashMap<InventoryType, ItemStack[]> getExpansions() {
 		return expansions;
 	}
-	
+
 	/**
 	 * Relies on getFirstSlotForItemIDAndDamage, just uses 0 for damage value.
 	 * 
@@ -275,7 +273,7 @@ public abstract class EntityDrone extends EntityFlying {
 	public int getFirstSlotForItem(Item item) {
 		return getFirstSlotForItemAndDamage(item, 0);
 	}
-	
+
 	/**
 	 * @param itemID
 	 *            the ID of an item.
@@ -311,9 +309,9 @@ public abstract class EntityDrone extends EntityFlying {
 
 	public List<ItemTaskModule> getTaskModules() {
 		List<ItemTaskModule> result = new ArrayList<ItemTaskModule>();
-		for(ItemModule m : modules){
-			if(m instanceof ItemTaskModule){
-				result.add((ItemTaskModule)m);
+		for (ItemModule m : modules) {
+			if (m instanceof ItemTaskModule) {
+				result.add((ItemTaskModule) m);
 			}
 		}
 		return result;
@@ -336,7 +334,7 @@ public abstract class EntityDrone extends EntityFlying {
 		if (is == null || is.stackSize == 0) {
 			// Remove entity from world.
 			par1EntityPlayer.worldObj.removeEntity(this);
-			//unforce chunks.
+			// unforce chunks.
 			releaseChunkloadingTicket();
 			// Create new ItemStack with of the corresponding sort.
 			ItemStack newStack = new ItemStack(getItem());
@@ -349,7 +347,7 @@ public abstract class EntityDrone extends EntityFlying {
 			newStack.setTagCompound(tc);
 
 			if (!par1EntityPlayer.inventory.addItemStackToInventory(newStack)) {
-				//TODO handle failed addItemStackToInventory
+				// TODO handle failed addItemStackToInventory
 			}
 			return true;
 		} else {
@@ -357,10 +355,10 @@ public abstract class EntityDrone extends EntityFlying {
 		}
 	}
 
-	private void releaseChunkloadingTicket(){
+	private void releaseChunkloadingTicket() {
 		ForgeChunkManager.releaseTicket(chunkloadingTicket);
 	}
-	
+
 	@Override
 	protected boolean isAIEnabled() {
 		return true;
@@ -369,7 +367,7 @@ public abstract class EntityDrone extends EntityFlying {
 	public boolean isAwake() {
 		return sleep == -1;
 	}
-	
+
 	public boolean isGoingHome() {
 		return goingHome;
 	}
@@ -397,13 +395,10 @@ public abstract class EntityDrone extends EntityFlying {
 		if (path != null) {
 			if (!path.isFinished()) {
 				Vec3 current = path.getPosition(this);
-				Logger.info("entity: "+posX+", "+posY+", "+posZ);
-				Logger.info("current: "+current.xCoord+", "+current.yCoord+", "+current.zCoord);
 				if ((current.xCoord - 0.5 < posX && current.xCoord + 0.5 > posX) 
 						&& (current.zCoord - 0.5 < posZ && current.zCoord + 0.5 > posZ)
 						&& (current.yCoord < posY && current.yCoord + 1 > posY)) {
 					path.setCurrentPathIndex(path.getCurrentPathIndex() + 1);
-					Logger.info("NEXT!");
 				}
 			}
 		}
@@ -411,27 +406,45 @@ public abstract class EntityDrone extends EntityFlying {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
+		// read in all expansions.
 		for (InventoryType type : InventoryType.values()) {
 			NBTTagCompound typeComp = par1nbtTagCompound.getCompoundTag(type.name());
-			SimpleInventory inv = new SimpleInventory(typeComp.getInteger("InventoryLength"));
+			SimpleInventory inv = new SimpleInventory(getItem().getExpSize(type));
 			inv.readFromNBT(typeComp);
 			expansions.put(type, inv.getInv());
+
+			for (int currentStackInt = 0; currentStackInt < inv.getSizeInventory(); currentStackInt++) {
+				ItemStack currentStack = inv.getStackInSlot(currentStackInt);
+				if (currentStack != null) {
+					if (currentStack.getItem() instanceof ItemModule) {
+						System.out.println("Adding Module to entitytobespawned");
+						this.addModule((ItemModule) currentStack.getItem());
+						break;
+					} else if (false/* TODO implement battery stuffs */) {
+					} else if (currentStack.getItem() == Item.getItemFromBlock(Blocks.chest)) {
+						this.setActualInventory(new SimpleInventory(this.getActualInventory().getSizeInventory() + 1));
+					}
+				}
+			}
 		}
 
-		NBTTagCompound cwTag = par1nbtTagCompound.getCompoundTag("currentWork");
-		int cqX = cwTag.getInteger("x");
-		int cqY = cwTag.getInteger("y");
-		int cqZ = cwTag.getInteger("z");
+		energy = par1nbtTagCompound.getInteger("Energy");
 
+		// Read in the currentWork.
+		NBTTagCompound cwTag = par1nbtTagCompound.getCompoundTag("Marker");
+		currentWork = (TileEntityMarker) TileEntity.createAndLoadEntity(cwTag);
+		Logger.info(currentWork.xCoord + ", " + currentWork.yCoord + ", " + currentWork.zCoord);
+		
+		// Read in the base.
 		NBTTagCompound baseComp = par1nbtTagCompound.getCompoundTag("Base");
 		base = (TileEntityDroneBase) TileEntity.createAndLoadEntity(baseComp);
-		
-		super.readFromNBT(par1nbtTagCompound);
+
+		super.readEntityFromNBT(par1nbtTagCompound);
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
 		// Loop through each type of inventory: batteries, modules, chests, free
 		// slots.
 		for (Entry<InventoryType, ItemStack[]> entry : expansions.entrySet()) {
@@ -450,19 +463,16 @@ public abstract class EntityDrone extends EntityFlying {
 
 		if (currentWork != null) {
 			NBTTagCompound currentWorkComp = new NBTTagCompound();
-			currentWorkComp.setInteger("x", currentWork.xCoord);
-			currentWorkComp.setInteger("y", currentWork.yCoord);
-			currentWorkComp.setInteger("z", currentWork.zCoord);
-			par1nbtTagCompound.setTag("currentWork", currentWorkComp);
+			currentWork.writeToNBT(currentWorkComp);
+			par1nbtTagCompound.setTag("Marker", currentWorkComp);
 		}
-		
-		if(base != null){
+
+		if (base != null) {
 			NBTTagCompound baseComp = new NBTTagCompound();
 			base.writeToNBT(baseComp);
 			par1nbtTagCompound.setTag("Base", baseComp);
 		}
-		
-		super.writeToNBT(par1nbtTagCompound);
+		super.writeEntityToNBT(par1nbtTagCompound);
 	}
 	
 	public void setActualInventory(SimpleInventory actualInventory) {
@@ -502,5 +512,4 @@ public abstract class EntityDrone extends EntityFlying {
 	public void sleep(int sleepTime) {
 		this.sleep = sleepTime;
 	}
-
 }

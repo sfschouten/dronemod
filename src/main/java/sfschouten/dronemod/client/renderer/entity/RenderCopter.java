@@ -9,6 +9,7 @@ import sfschouten.dronemod.client.model.ModelBattery;
 import sfschouten.dronemod.client.model.ModelCopter;
 import sfschouten.dronemod.client.model.ModelExpansion;
 import sfschouten.dronemod.entity.EntityDrone;
+import sfschouten.dronemod.entity.EntityDroneFX;
 import sfschouten.dronemod.inventory.InventoryType;
 import sfschouten.dronemod.item.copter.ItemDrone;
 import sfschouten.dronemod.util.ExpansionHelper;
@@ -31,6 +32,9 @@ public abstract class RenderCopter extends RenderLiving{
 	@Override
 	public void doRender(EntityLiving par1EntityLiving, double x, double y, double z, float par8, float par9) {
 		super.doRender(par1EntityLiving, x, y, z, par8, par9);
+		if(par1EntityLiving instanceof EntityDroneFX){
+			return;
+		}
 		EntityDrone drone = (EntityDrone) par1EntityLiving;
 		HashMap<InventoryType, ItemStack[]> expansions = ExpansionHelper.divideExpansions(drone.getExpansions());
 		

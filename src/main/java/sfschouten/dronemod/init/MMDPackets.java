@@ -1,6 +1,8 @@
 package sfschouten.dronemod.init;
 
 import sfschouten.dronemod.ModularMulticopterDrones;
+import sfschouten.dronemod.network.AddMarkerToItemMessage;
+import sfschouten.dronemod.network.AddMarkerToItemMessageHandler;
 import sfschouten.dronemod.network.ChangeMarkerMessage;
 import sfschouten.dronemod.network.ChangeMarkerMessageHandler;
 import sfschouten.dronemod.network.DroneReturnMessage;
@@ -18,6 +20,7 @@ public class MMDPackets {
 		networkWrapper.registerMessage(ChangeMarkerMessageHandler.class, ChangeMarkerMessage.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(DroneReturnMessageHandler.class, DroneReturnMessage.class, 1, Side.SERVER);
 		networkWrapper.registerMessage(LaunchDroneMessageHandler.class, LaunchDroneMessage.class, 2, Side.SERVER);
+		networkWrapper.registerMessage(AddMarkerToItemMessageHandler.class, AddMarkerToItemMessage.class, 3, Side.SERVER);
 	}
 
 }

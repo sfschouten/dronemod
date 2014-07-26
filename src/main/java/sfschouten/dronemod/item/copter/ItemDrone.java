@@ -68,10 +68,10 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
     	try {
     		Constructor c = entityClass.getConstructor(new Class[]{World.class});
 			EntityDrone drone = (EntityDrone) c.newInstance(new Object[]{world});
-			//It's important that the position is set before the sizes are applied. 
+			//It's important that the position is set before the nbt is read. 
 			//This has to do with chunkloading.
 			drone.setPosition(x, y, z);
-			applySizes(drone, droneItemNBTdata);
+			drone.readEntityFromNBT(droneItemNBTdata);
 			return drone;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -98,32 +98,6 @@ public abstract class ItemDrone extends Item implements IEnergyContainerItem{
     }
     
     public abstract int getExpSize(InventoryType type);
-    
-    protected EntityDrone applySizes(EntityDrone e, NBTTagCompound droneItemNBTdata){
-		for(InventoryType it : InventoryType.values()){
-			SimpleInventory inv = new SimpleInventory(getExpSize(it));
-			NBTTagCompound NBTTagComp = droneItemNBTdata.getCompoundTag(it.name());
-			if(NBTTagComp == null){
-				NBTTagComp = new NBTTagCompound();
-			}
-			
-			inv.readFromNBT(NBTTagComp);
-			for(int currentStackInt = 0; currentStackInt < inv.getSizeInventory(); currentStackInt++){
-				ItemStack currentStack = inv.getStackInSlot(currentStackInt);
-				if(currentStack != null){
-					if(currentStack.getItem() instanceof ItemModule){
-						System.out.println("Adding Module to entitytobespawned");
-						e.addModule((ItemModule) currentStack.getItem());
-						break;
-					}else if(false/*TODO implement battery stuffs*/){
-					}else if(currentStack.getItem() == Item.getItemFromBlock(Blocks.chest)){
-						e.setActualInventory(new SimpleInventory(e.getActualInventory().getSizeInventory()+1));
-					}
-				}
-			}
-		}
-		return e;
-    }
 
     /* IEnergyContainerItem */
 	@Override

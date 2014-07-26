@@ -10,6 +10,7 @@ import sfschouten.dronemod.init.MMDCreativeTabs;
 import sfschouten.dronemod.reference.General;
 import sfschouten.dronemod.registry.MarkerRegistry;
 import sfschouten.dronemod.tileentity.TileEntityMarker;
+import sfschouten.dronemod.util.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

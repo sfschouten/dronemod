@@ -9,11 +9,11 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class ChangeMarkerMessageHandler implements IMessageHandler<ChangeMarkerMessage, IMessage> {
+public class AddMarkerToItemMessageHandler implements IMessageHandler<AddMarkerToItemMessage, IMessage> {
 	@Override
-	public IMessage onMessage(ChangeMarkerMessage message, MessageContext ctx) {
-		INetHandler netHandler = ctx.netHandler;
-		message.executeServer(((NetHandlerPlayServer) netHandler).playerEntity);
+	public IMessage onMessage(AddMarkerToItemMessage message, MessageContext ctx) {
+        INetHandler netHandler = ctx.netHandler;
+        message.executeServer(((NetHandlerPlayServer) netHandler).playerEntity);
 		return null;
 	}
 }
