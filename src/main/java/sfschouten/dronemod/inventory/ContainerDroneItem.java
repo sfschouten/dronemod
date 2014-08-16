@@ -7,30 +7,33 @@ import java.util.List;
 import cofh.api.energy.IEnergyContainerItem;
 import sfschouten.dronemod.entity.EntityDrone;
 import sfschouten.dronemod.entity.EntityCaneWeakQuadcopter;
+import sfschouten.dronemod.init.MMDPackets;
 import sfschouten.dronemod.item.copter.ItemDrone;
+import sfschouten.dronemod.network.MarkersToPlayerMessage;
+import sfschouten.dronemod.registry.MarkerRegistry;
 import sfschouten.dronemod.tileentity.TileEntityDroneBase;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagEnd;
+import net.minecraft.world.World;
 
 public class ContainerDroneItem extends Container {
 	//Stack with drone.
 	ItemStack stack;
 	HashMap<InventoryType, SimpleInventory> inventories = new HashMap<InventoryType, SimpleInventory>();
 	
-	public ContainerDroneItem(InventoryPlayer inventoryPlayer, ItemStack stack) {
+	public ContainerDroneItem(EntityPlayer player, ItemStack stack) {
 		this.stack = stack;
 		
 		NBTTagCompound stackNBT = stack.getTagCompound();
 		if(stackNBT == null){
 			stackNBT = new NBTTagCompound();
-			System.out.println("stacknbt is null");
-		}else{
-			System.out.println("stacknbt is not null");
 		}
 		
 		for(InventoryType type : InventoryType.values()){
@@ -49,12 +52,21 @@ public class ContainerDroneItem extends Container {
 			inventories.put(type, temp);
 		}
 		
-		//commonly used vanilla code that adds the player's inventory
-		bindPlayerInventory(inventoryPlayer);
+		bindPlayerInventory(player.inventory);
+		if(!(player instanceof EntityClientPlayerMP)){
+			sendMarkerRegistry((EntityPlayerMP) player);
+		}
 	}
 
+	private void sendMarkerRegistry(EntityPlayerMP player){
+		MarkerRegistry m = MarkerRegistry.forWorld(player.worldObj);
+		MarkersToPlayerMessage message = new MarkersToPlayerMessage(m);
+		//TODO MMDPackets.networkWrapper.sendTo(message, player);
+	}
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
+		//TODO add some system were there is ownership.
 		return true;
 	}
 
@@ -63,7 +75,7 @@ public class ContainerDroneItem extends Container {
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
-
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
 		//TODO Implement Shift Click in/out of drone
@@ -72,7 +84,6 @@ public class ContainerDroneItem extends Container {
 
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		System.out.println( "container closed" );
 		NBTTagCompound stackNBT = par1EntityPlayer.inventory.getCurrentItem().getTagCompound();
 		if(stackNBT == null){
 			stackNBT = new NBTTagCompound();
@@ -101,8 +112,6 @@ public class ContainerDroneItem extends Container {
 		stackNBT.setInteger("EnergyCapacity", totalEnergyCapacity);
 		stackNBT.setInteger("EnergyMaxReceive", 50);
 		stackNBT.setInteger("EnergyMaxExtract", 50);
-		System.out.println("totalEnergy: "+totalEnergy);
-		System.out.println("totalEnergyCapacity: "+totalEnergyCapacity);
 		
 		par1EntityPlayer.inventory.getCurrentItem().setTagCompound(stackNBT);
 		super.onContainerClosed(par1EntityPlayer);

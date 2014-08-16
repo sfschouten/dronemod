@@ -14,7 +14,7 @@ public class DroneRestockAI extends EntityAIBase {
 	
 	public DroneRestockAI(EntityDrone drone){
 		this.drone = drone;
-		this.setMutexBits(2);
+		this.setMutexBits(1);
 	}
 	
 	@Override

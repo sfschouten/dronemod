@@ -101,5 +101,8 @@ public class DroneAdvancedTaskAI extends EntityAIBase {
 		super.startExecuting();
 	}
 	
-	
+	@Override
+    public boolean isInterruptible(){
+        return false;
+    }
 }

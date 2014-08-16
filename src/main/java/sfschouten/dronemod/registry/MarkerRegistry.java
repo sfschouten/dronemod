@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
@@ -15,8 +16,12 @@ import sfschouten.dronemod.tileentity.TileEntityMarker;
 public class MarkerRegistry extends WorldSavedData {
 	private static String key = "markerregistry";
 	
-	public MarkerRegistry(String par1Str) {
-		super(par1Str);
+	public MarkerRegistry() {
+		super(key);
+	}
+	
+	public MarkerRegistry(String key) {
+		super(key);
 	}
 	
 	public static MarkerRegistry forWorld(World world) {
@@ -24,7 +29,7 @@ public class MarkerRegistry extends WorldSavedData {
 		MapStorage storage = world.perWorldStorage;
 		MarkerRegistry result = (MarkerRegistry)storage.loadData(MarkerRegistry.class, key);
 		if (result == null) {
-			result = new MarkerRegistry(key);
+			result = new MarkerRegistry();
 			storage.setData(key, result);
 		}
 		result.world = world;
@@ -67,12 +72,16 @@ public class MarkerRegistry extends WorldSavedData {
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		int i = 0;
-		while(nbttagcompound.hasKey("x"+i)){
+		this.registry = new ArrayList<Registration>();
+		
+		while(nbttagcompound.hasKey("sub"+i)){
 			Registration r = new Registration();
-			r.x = nbttagcompound.getInteger("x"+i);
-			r.y = nbttagcompound.getInteger("y"+i);
-			r.z = nbttagcompound.getInteger("z"+i);
-			r.marker = (TileEntityMarker) world.getTileEntity(r.x, r.y, r.z);
+			NBTTagCompound subTag = nbttagcompound.getCompoundTag("sub"+i);
+			TileEntityMarker marker = new TileEntityMarker();
+			r.marker = marker;
+			r.x = marker.xCoord;
+			r.y = marker.yCoord;
+			r.z = marker.zCoord;
 			registry.add(r);
 			i++;
 		}
@@ -81,9 +90,9 @@ public class MarkerRegistry extends WorldSavedData {
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		for(int i = 0; i < registry.size(); i++){
-			nbttagcompound.setInteger("x"+i, registry.get(i).x);
-			nbttagcompound.setInteger("y"+i, registry.get(i).y);
-			nbttagcompound.setInteger("z"+i, registry.get(i).z);
+			NBTTagCompound newTag = new NBTTagCompound();
+			registry.get(i).marker.writeToNBT(newTag);
+			nbttagcompound.setTag("sub"+i, newTag);
 		}
 	}
 }

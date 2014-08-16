@@ -434,7 +434,7 @@ public abstract class EntityDrone extends EntityFlying {
 		// Read in the currentWork.
 		NBTTagCompound cwTag = par1nbtTagCompound.getCompoundTag("Marker");
 		currentWork = (TileEntityMarker) TileEntity.createAndLoadEntity(cwTag);
-		Logger.info(currentWork.xCoord + ", " + currentWork.yCoord + ", " + currentWork.zCoord);
+		//Logger.info(currentWork.xCoord + ", " + currentWork.yCoord + ", " + currentWork.zCoord);
 		
 		// Read in the base.
 		NBTTagCompound baseComp = par1nbtTagCompound.getCompoundTag("Base");

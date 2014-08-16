@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,15 +31,17 @@ import sfschouten.dronemod.registry.MarkerRegistry.Registration;
 import sfschouten.dronemod.util.Logger;
 
 public class GuiDroneItem extends GuiContainer {
+	public static GuiDroneItem currentInstance;
+	MarkerRegistry registery;
 	ItemStack stack;
 	GuiScrollList scrollList;
-	MarkerRegistry registery;
 	World world;
 	
-	public GuiDroneItem(InventoryPlayer inventoryPlayer, ItemStack stack, World w) {
-		super(new ContainerDroneItem(inventoryPlayer, stack));
+	public GuiDroneItem(EntityPlayer player, ItemStack stack, World w) {
+		super(new ContainerDroneItem(player, stack));
 		this.stack = stack;
 		this.world = w;
+		currentInstance = this;
 		
 		WorldServer[] servers = MinecraftServer.getServer().worldServers;
         WorldServer server = null;
@@ -47,8 +50,6 @@ public class GuiDroneItem extends GuiContainer {
         		server = s;
         	}
         }
-		
-        this.registery = MarkerRegistry.forWorld(server);
 	}
 
 	@Override
@@ -70,36 +71,45 @@ public class GuiDroneItem extends GuiContainer {
 		int y = markerTag.getInteger("y");
 		int z = markerTag.getInteger("z");
 
-		List<Registration> markers = this.registery.getRegisteredMarkers();
+		Logger.info("initGUI");
 		
-		for(int i = 0; i < markers.size(); i++){
-			Registration r = markers.get(i);
-			String s;
-			if(r.marker.getName() == null){
-				s = r.marker.getName();
-			}else{
-				s = r.x + ", " + r.y + ", " + r.z;
-			}
-			this.scrollList.addItem(s);
+		if(this.registery != null){
+			Logger.info("registry is not null");
+			List<Registration> markers = this.registery.getRegisteredMarkers();
 			
-			if(r.x == x && r.y == y && r.z == z){
-				this.scrollList.setSelected(i);
+			for(int i = 0; i < markers.size(); i++){
+				Logger.info("Marker " + i);
+				Registration r = markers.get(i);
+				String s;
+				if(r.marker.getName() == null || r.marker.getName().isEmpty()){
+					s = r.x + ", " + r.y + ", " + r.z;
+				}else{
+					s = r.marker.getName();
+				}
+				this.scrollList.addItem(s);
+				
+				if(r.x == x && r.y == y && r.z == z){
+					this.scrollList.setSelected(i);
+				}
 			}
 		}
+		Logger.info("\n");
 	}
 	
 	@Override
 	public void onGuiClosed() {
-		List<Registration> markers = registery.getRegisteredMarkers();
-		int selected = scrollList.getSelected();
-		if(selected != -1 && selected < markers.size()){
-			Registration r = markers.get(selected);
-			AddMarkerToItemMessage message = new AddMarkerToItemMessage();
-			message.setWorldID(world.provider.dimensionId);
-			message.setX(r.x);
-			message.setY(r.y);
-			message.setZ(r.z);
-			MMDPackets.networkWrapper.sendToServer(message);
+		if(this.registery != null){
+			List<Registration> markers = this.registery.getRegisteredMarkers();
+			int selected = scrollList.getSelected();
+			if(selected != -1 && selected < markers.size()){
+				Registration r = markers.get(selected);
+				AddMarkerToItemMessage message = new AddMarkerToItemMessage();
+				message.setWorldID(world.provider.dimensionId);
+				message.setX(r.x);
+				message.setY(r.y);
+				message.setZ(r.z);
+				MMDPackets.networkWrapper.sendToServer(message);
+			}
 		}
 		super.onGuiClosed();
 	}
@@ -149,5 +159,9 @@ public class GuiDroneItem extends GuiContainer {
 		}
 		
 		scrollList.drawScrollList();
+	}
+	
+	public void setRegistry(MarkerRegistry registry){
+		this.registery = registry;
 	}
 }

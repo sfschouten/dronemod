@@ -9,6 +9,8 @@ import sfschouten.dronemod.network.DroneReturnMessage;
 import sfschouten.dronemod.network.DroneReturnMessageHandler;
 import sfschouten.dronemod.network.LaunchDroneMessage;
 import sfschouten.dronemod.network.LaunchDroneMessageHandler;
+import sfschouten.dronemod.network.MarkersToPlayerMessage;
+import sfschouten.dronemod.network.MarkersToPlayerMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 
@@ -21,6 +23,6 @@ public class MMDPackets {
 		networkWrapper.registerMessage(DroneReturnMessageHandler.class, DroneReturnMessage.class, 1, Side.SERVER);
 		networkWrapper.registerMessage(LaunchDroneMessageHandler.class, LaunchDroneMessage.class, 2, Side.SERVER);
 		networkWrapper.registerMessage(AddMarkerToItemMessageHandler.class, AddMarkerToItemMessage.class, 3, Side.SERVER);
+		networkWrapper.registerMessage(MarkersToPlayerMessageHandler.class, MarkersToPlayerMessage.class, 4, Side.CLIENT);
 	}
-
 }

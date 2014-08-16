@@ -22,7 +22,6 @@ import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
-	// returns an instance of the Container you made earlier
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
@@ -35,7 +34,7 @@ public class GuiHandler implements IGuiHandler {
 			}
 		case 1:
 			ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
-			return new ContainerDroneItem(player.inventory, stack);
+			return new ContainerDroneItem(player, stack);
 		case 2:
 			return null;
 		default:
@@ -43,7 +42,6 @@ public class GuiHandler implements IGuiHandler {
 		}
 	}
 
-	// returns an instance of the Gui you made earlier
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
@@ -56,7 +54,7 @@ public class GuiHandler implements IGuiHandler {
 			}
 		case 1:
 			ItemStack stack = player.inventory.getStackInSlot(player.inventory.currentItem);
-			return new GuiDroneItem(player.inventory, stack, world);
+			return new GuiDroneItem(player, stack, world);
 		case 2:
 			return new GuiMarker((TileEntityMarker) tileEntity);
 		default:
